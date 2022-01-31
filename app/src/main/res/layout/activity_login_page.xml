@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.LoginPage"
+    android:background="@color/white">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/welcome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/thirty"
+                android:text="Welcome Back !"
+                android:textColor="@color/black"
+                android:textSize="@dimen/twenty_size"
+                android:fontFamily="@font/avenirlt65medium">
+
+            </TextView>
+
+            <ImageView
+                android:id="@+id/loginImage"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/two_hundred"
+                android:layout_below="@+id/welcome"
+                android:layout_marginTop="@dimen/twenty"
+                android:scaleType="fitXY"
+                android:src="@drawable/login_signin">
+
+            </ImageView>
+
+            <LinearLayout
+                android:id="@+id/value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/loginImage"
+                android:layout_marginTop="@dimen/twenty"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/edit_MobileNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/twenty_five"
+                    android:layout_marginTop="@dimen/twenty"
+                    android:layout_marginRight="@dimen/twenty_five"
+                    android:layout_marginBottom="@dimen/twenty"
+                    android:drawablePadding="@dimen/twenty_five"
+                    android:drawableLeft="@drawable/group85"
+                    android:ems="10"
+                    android:hint="Mobile no / email id"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:textColor="#25297A"
+                    android:textSize="@dimen/twenty_size"
+                    android:textStyle="normal"
+                    android:fontFamily="@font/avenir_lt_w01_55_roman"/>
+
+                <EditText
+                    android:id="@+id/edit_Password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/edit_MobileNumber"
+                    android:layout_marginLeft="@dimen/twenty_five"
+                    android:layout_marginRight="@dimen/twenty_five"
+                    android:layout_marginBottom="@dimen/twenty"
+                    android:drawableLeft="@drawable/password"
+                    android:drawableRight="@drawable/visibility1"
+                    android:drawablePadding="@dimen/twenty_five"
+                    android:ems="10"
+                    android:hint="Password"
+                    android:imeOptions="actionDone"
+                    android:inputType="textPassword"
+                    android:textColor="#0C0C0C"
+                    android:textSize="@dimen/twenty_size"
+                    android:textStyle="normal"
+                    android:fontFamily="@font/avenir_lt_w01_55_roman"/>
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/text_ForgotPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/value"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/fifteen"
+                android:text="Forgot Password ?"
+                android:textColor="#25297A"
+                android:textSize="@dimen/edittextsize">
+
+            </TextView>
+
+            <Button
+                android:id="@+id/btn_signin"
+                android:layout_width="@dimen/two_hundred"
+                android:layout_height="@dimen/forty_five"
+                android:layout_below="@+id/text_ForgotPassword"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/twenty_five"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/loginback"
+                android:text="LOGIN"
+                android:fontFamily="@font/avenirlt65medium"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                ></Button>
+
+            <TextView
+                android:id="@+id/text_viaotp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btn_signin"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="@dimen/ten"
+                android:text="Login via OTP"
+                android:textColor="#25297A"
+                android:textSize="@dimen/edittextsize">
+
+            </TextView>
+
+            <RelativeLayout
+                android:id="@+id/sociallogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text_viaotp"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="@dimen/fifteen">
+
+                <RelativeLayout
+                    android:id="@+id/facebooksignInButton"
+                    android:layout_width="@dimen/fifty"
+                    android:layout_height="@dimen/fifty"
+                    android:layout_marginTop="@dimen/ten"
+                    android:background="@drawable/textcountshape1">
+
+                    <ImageView
+                        android:layout_width="@dimen/thirty_five"
+                        android:layout_height="@dimen/thirty_five"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/facebook_logo"></ImageView>
+
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/signInButton"
+                    android:layout_width="@dimen/fifty"
+                    android:layout_height="@dimen/fifty"
+                    android:layout_marginTop="@dimen/ten"
+                    android:background="@drawable/textcountshape1"
+                    android:layout_toRightOf="@id/facebooksignInButton">
+
+                    <ImageView
+                        android:layout_width="@dimen/thirty"
+                        android:layout_height="@dimen/thirty"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/google"></ImageView>
+
+
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/r1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/sociallogin"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/twenty">
+
+                <TextView
+                    android:id="@+id/login2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Don't Have an account?"
+                    android:textColor="#817F7F"
+                    android:textSize="@dimen/textsize"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/avenir_lt_w01_55_roman"/>
+
+                <TextView
+                    android:id="@+id/text_signUp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/login2"
+                    android:text=" Sign Up"
+                    android:textColor="#B203A9F4"
+                    android:textSize="@dimen/textsize"
+                    android:fontFamily="@font/avenir_lt_w01_55_roman"/>
+
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

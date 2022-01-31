@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.Booking">
+
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="@dimen/thirty"
+        android:layout_height="@dimen/forty"
+        android:layout_marginLeft="@dimen/twenty"
+        android:layout_marginTop="@dimen/twenty"
+        android:scaleType="fitXY"
+        android:src="@drawable/left_arrowh"></ImageView>
+
+    <RelativeLayout
+        android:id="@+id/heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/thirty">
+
+        <TextView
+            android:id="@+id/textName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/twenty"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Booking"
+            android:textColor="#000000"
+            android:textSize="@dimen/twenty_size"
+            android:textStyle="bold">
+
+        </TextView>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/price"
+        android:layout_below="@id/heading">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/twenty"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/PersonalDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/twenty"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Personal Details"
+                android:textColor="#000000"
+                android:textSize="@dimen/twenty_size"
+                android:textStyle="bold">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/edit_Address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="@dimen/twenty"
+                android:hint="Show Address Details"
+                android:gravity="start"
+                android:padding="@dimen/ten"
+                android:background="@drawable/box"
+                android:textColor="#25297A"
+                android:textSize="18dp"
+                android:paddingLeft="20dp" />
+
+            <Button
+                android:id="@+id/btn_AddAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/forty"
+                android:layout_marginRight="@dimen/twenty"
+                android:text="Add Address"
+                android:textColor="@color/white"
+                android:layout_gravity="right"
+                android:padding="@dimen/ten"
+                android:textSize="@dimen/twelve_size"
+                android:textStyle="bold"
+                android:background="@drawable/bookingbtn_bg"
+                android:fontFamily="@font/montserrat_semibold"></Button>
+
+
+
+            <TextView
+                android:id="@+id/orderDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/twenty"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Order Details"
+                android:textColor="#000000"
+                android:textSize="@dimen/twenty_size"
+                android:textStyle="bold">
+
+            </TextView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/recyclerBooking"
+                android:layout_marginTop="@dimen/ten">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/btn"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/forty">
+
+        <RelativeLayout
+            android:id="@+id/r8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten"
+            android:layout_marginRight="@dimen/ten">
+
+            <TextView
+                android:id="@+id/igst"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/twelve"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="sub Total:"
+                android:textColor="#595656"
+                android:textSize="@dimen/edittextsize"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/priceSymbol4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/seventy"
+                android:layout_toRightOf="@+id/igst"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="Rs"
+                android:textColor="#595656"
+                android:textSize="@dimen/textsize"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/subTotalPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/ten"
+                android:layout_toRightOf="@id/priceSymbol4"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="145.00"
+                android:textColor="#595656"
+                android:textSize="@dimen/edittextsize"
+                android:textStyle="bold"></TextView>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/r7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/r8"
+            android:layout_marginTop="@dimen/fifteen"
+            android:layout_marginRight="@dimen/ten">
+
+            <TextView
+                android:id="@+id/subTotal2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/thirty"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="TOTAL :"
+                android:textColor="#000000"
+                android:textSize="@dimen/edittextsize"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/priceSymbol3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/seventy"
+                android:layout_toRightOf="@+id/subTotal2"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Rs"
+                android:textColor="#000000"
+                android:textSize="@dimen/textsize"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/TotalPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/ten"
+                android:layout_toRightOf="@id/priceSymbol3"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="145.00"
+                android:textColor="#000000"
+                android:textSize="@dimen/edittextsize"
+                android:textStyle="bold"></TextView>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:weightSum="2"
+        android:layout_marginBottom="@dimen/fifteen">
+
+        <Button
+            android:id="@+id/btn_payonvisit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal|center"
+            android:layout_margin="@dimen/ten"
+            android:layout_weight="1"
+            android:background="@drawable/bookingbtn_bg"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="Pay On Visit"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/edittextsize"
+            android:textStyle="bold"></Button>
+
+        <Button
+            android:id="@+id/btn_paynow"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal|center"
+            android:layout_margin="@dimen/ten"
+            android:layout_weight="1"
+            android:background="@drawable/bookingbtn_bg"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="Pay Now"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/edittextsize"
+            android:textStyle="bold"></Button>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

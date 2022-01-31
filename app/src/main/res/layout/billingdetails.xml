@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="@dimen/thirty"
+        android:layout_height="@dimen/forty"
+        android:layout_marginLeft="@dimen/twenty"
+        android:layout_marginTop="@dimen/twenty"
+        android:scaleType="fitXY"
+        android:src="@drawable/left_arrowh"></ImageView>
+
+    <RelativeLayout
+        android:id="@+id/heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/thirty">
+
+        <TextView
+            android:id="@+id/textName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/twenty"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Billing"
+            android:textColor="#000000"
+            android:textSize="@dimen/twenty_size"
+            android:textStyle="bold">
+
+        </TextView>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/heading"
+        android:layout_above="@id/total"
+        android:scrollbars="none"
+        android:layout_marginTop="@dimen/ten">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/heading"
+            android:layout_marginTop="@dimen/fifteen"
+            android:background="#F4F4F4">
+
+            <TextView
+                android:id="@+id/text1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/twenty"
+                android:layout_marginTop="@dimen/ten"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Delivery Address"
+                android:textColor="#000000"
+                android:textSize="@dimen/twenty_size"
+                android:textStyle="bold">
+
+            </TextView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card1"
+                android:layout_width="@dimen/three_hundred"
+                android:layout_height="@dimen/hundred_eighty"
+                android:layout_marginLeft="@dimen/ten"
+                android:layout_marginRight="@dimen/fifteen"
+                app:cardCornerRadius="@dimen/ten"
+                app:cardElevation="@dimen/five"
+                android:layout_marginBottom="@dimen/ten"
+                android:layout_below="@+id/text1"
+                android:layout_marginTop="@dimen/ten">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="Shaileshree vihar home"
+                        android:textColor="#000000"
+                        android:layout_marginLeft="@dimen/twenty"
+                        android:layout_marginTop="@dimen/five"
+                        android:textSize="@dimen/sixteen"
+                        android:textStyle="bold">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/mobileno"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="Shaileshree vihar home"
+                        android:textColor="#000000"
+                        android:layout_marginLeft="@dimen/twenty"
+                        android:layout_marginTop="@dimen/five"
+                        android:textSize="@dimen/sixteen"
+                        android:textStyle="bold">
+
+                    </TextView>
+
+                  <!--  <TextView
+                        android:id="@+id/Workingcity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="Shaileshree vihar home"
+                        android:textColor="#000000"
+                        android:layout_marginLeft="@dimen/twenty"
+                        android:layout_marginTop="@dimen/five"
+                        android:textSize="@dimen/sixteen"
+                        android:textStyle="bold">
+
+                    </TextView>-->
+
+                    <TextView
+                        android:id="@+id/CompleteAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/hundred"
+                        android:layout_marginLeft="@dimen/thirty"
+                        android:layout_marginRight="@dimen/ten"
+                        android:layout_marginTop="@dimen/ten"
+                        android:layout_marginBottom="@dimen/ten"
+                        android:gravity="start"
+                        android:paddingTop="@dimen/ten"
+                        android:background="@drawable/box"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/textsize"
+                        android:paddingLeft="20dp" />
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+           <!-- <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/addressRecycler"
+                android:layout_below="@+id/text1"
+                android:layout_marginTop="@dimen/ten">
+
+            </androidx.recyclerview.widget.RecyclerView>-->
+
+            <TextView
+                android:id="@+id/text2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/twenty"
+                android:layout_marginTop="@dimen/fifteen"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Order Details"
+                android:textColor="#000000"
+                android:textSize="@dimen/twenty_size"
+                android:textStyle="bold"
+                android:layout_below="@+id/card1">
+
+            </TextView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/orderDetailsRecycler"
+                android:layout_below="@+id/text2"
+                android:layout_marginTop="@dimen/ten">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="2.5dp"
+                android:layout_below="@+id/orderDetailsRecycler"
+                android:layout_marginTop="@dimen/five"
+                android:background="@color/white" />
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_above="@+id/pay"
+        android:layout_marginBottom="@dimen/fifteen">
+
+
+        <RelativeLayout
+            android:id="@+id/r5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/five"
+            android:layout_marginRight="@dimen/eight">
+
+            <TextView
+                android:id="@+id/subTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="Sub Total :"
+                android:textColor="#595656"
+                android:textSize="@dimen/edittextsize"
+                android:layout_marginLeft="@dimen/ten"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/priceSymbol1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/seventy"
+                android:layout_toRightOf="@+id/subTotal"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="Rs"
+                android:textColor="#595656"
+                android:textSize="@dimen/textsize"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/subTotalPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/ten"
+                android:layout_toRightOf="@id/priceSymbol1"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="145.00"
+                android:textColor="#595656"
+                android:textSize="@dimen/edittextsize"
+                android:textStyle="bold"></TextView>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/r6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/r5"
+            android:layout_marginTop="@dimen/ten"
+            android:layout_marginRight="@dimen/ten">
+
+            <TextView
+                android:id="@+id/CGST"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/eight"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="CGST 18% :"
+                android:textColor="#595656"
+                android:textSize="@dimen/edittextsize"
+                android:visibility="gone"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/priceSymbol2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/seventy"
+                android:layout_toRightOf="@+id/CGST"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="Rs"
+                android:visibility="gone"
+                android:textColor="#595656"
+                android:textSize="@dimen/textsize"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/subTotalPrice1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/ten"
+                android:layout_toRightOf="@id/priceSymbol2"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="0.00"
+                android:visibility="gone"
+                android:textColor="#595656"
+                android:textSize="@dimen/edittextsize"
+                android:textStyle="bold"></TextView>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/r8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/r6"
+            android:layout_marginTop="@dimen/ten"
+            android:visibility="gone"
+            android:layout_marginRight="@dimen/ten">
+
+            <TextView
+                android:id="@+id/igst"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/twelve"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="IGST 18% :"
+                android:textColor="#595656"
+                android:textSize="@dimen/edittextsize"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/priceSymbol4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/seventy"
+                android:layout_toRightOf="@+id/igst"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="Rs"
+                android:textColor="#595656"
+                android:textSize="@dimen/textsize"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/subTotalPrice4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/ten"
+                android:layout_toRightOf="@id/priceSymbol4"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="0.00"
+                android:textColor="#595656"
+                android:textSize="@dimen/edittextsize"
+                android:textStyle="bold"></TextView>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/r7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/r8"
+            android:layout_marginTop="@dimen/fifteen"
+            android:layout_marginRight="@dimen/ten">
+
+            <TextView
+                android:id="@+id/subTotal2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/thirty"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="TOTAL :"
+                android:textColor="#000000"
+                android:textSize="@dimen/edittextsize"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/priceSymbol3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/seventy"
+                android:layout_toRightOf="@+id/subTotal2"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Rs"
+                android:textColor="#000000"
+                android:textSize="@dimen/textsize"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/TotalPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/ten"
+                android:layout_toRightOf="@id/priceSymbol3"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="145.00"
+                android:textColor="#000000"
+                android:textSize="@dimen/edittextsize"
+                android:textStyle="bold"></TextView>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/pay"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sixty"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/btn_paynow"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/forty_five"
+            android:layout_below="@+id/password"
+            android:layout_gravity="center_horizontal|center"
+            android:layout_weight="1"
+            android:background="@drawable/loginback"
+            android:layout_marginLeft="@dimen/ten"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="Pay Now"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/edittextsize"
+            android:textStyle="bold"></Button>
+
+        <TextView
+            android:id="@+id/signup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center"
+            android:layout_weight="1"
+            android:fontFamily="@font/montserrat_semibold"
+            android:gravity="center"
+            android:text="Pay On Visit"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textsize"
+            android:textStyle="bold">
+
+        </TextView>
+
+    </LinearLayout>
+
+</RelativeLayout>

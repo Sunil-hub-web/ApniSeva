@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/service"
+        android:layout_width="@dimen/hundred_fifty"
+        android:layout_height="@dimen/hundred_twenty"
+        android:background="@drawable/homeback"
+        android:padding="@dimen/sixteen"
+        android:elevation="@dimen/ten">
+
+        <ImageView
+            android:id="@+id/image_ServicesImage"
+            android:layout_width="@dimen/forty"
+            android:layout_height="@dimen/forty"
+            android:src="@drawable/pest_control"
+            android:layout_centerHorizontal="true"></ImageView>
+
+        <TextView
+            android:id="@+id/text_ServicesName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/twenty"
+            android:fontFamily="@font/avenirlt65medium"
+            android:text="Home Cleaning"
+            android:textColor="#3A3A3A"
+            android:textSize="@dimen/twelve"
+            android:layout_below="@id/image_ServicesImage"
+            android:gravity="center"></TextView>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

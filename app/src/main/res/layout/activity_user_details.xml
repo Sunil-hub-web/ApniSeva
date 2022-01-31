@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#16308E"
+    tools:context=".activity.UserDetails">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                android:id="@+id/img_close"
+                android:layout_width="@dimen/twenty_five"
+                android:layout_height="@dimen/twenty_five"
+                android:src="@drawable/close"
+                android:layout_margin="@dimen/twenty">
+
+            </ImageView>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/hundred"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/avenir_lt_w01_55_roman"
+                    android:text="Akash Rautaray"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/twenty_size"
+                    android:textStyle="bold">
+
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/five"
+                    android:fontFamily="@font/avenir_lt_w01_55_roman"
+                    android:text="+91 900000001"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/textsize"
+                    android:textStyle="bold">
+
+                </TextView>
+
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/profile_image"
+                        android:layout_width="@dimen/two_hundred"
+                        android:layout_height="@dimen/two_hundred"
+                        android:elevation="@dimen/ten"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/image"
+                        android:layout_marginTop="@dimen/twenty">
+
+                    </com.google.android.material.imageview.ShapeableImageView>
+<!--
+                   <ImageView
+                        android:layout_width="@dimen/fifty"
+                        android:layout_height="@dimen/fifty"
+                        android:src="@drawable/edit"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="@dimen/hundred_eighty"
+                        android:layout_marginTop="@dimen/ten">
+
+                    </ImageView>-->
+-->
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/fifty"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/text_UserProfile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/avenir_lt_w01_55_roman"
+                        android:text="Profile"
+                        android:textAllCaps="true"
+                        android:textColor="#FFFFFF"
+                        android:textSize="@dimen/twenty_size"
+                        android:textStyle="bold">
+
+                    </TextView>
+
+                    <View
+                        android:layout_width="@dimen/hundred_fifty"
+                        android:layout_height="2dp"
+                        android:layout_below="@+id/text1"
+                        android:layout_marginTop="@dimen/twenty"
+                        android:background="@color/view" />
+
+                    <TextView
+                        android:id="@+id/text_BookingDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/twenty"
+                        android:fontFamily="@font/avenir_lt_w01_55_roman"
+                        android:text="Booking"
+                        android:textAllCaps="true"
+                        android:textColor="#FFFFFF"
+                        android:textSize="@dimen/twenty_size"
+                        android:textStyle="bold">
+
+                    </TextView>
+
+                    <View
+                        android:layout_width="@dimen/hundred_fifty"
+                        android:layout_height="2dp"
+                        android:layout_below="@+id/text1"
+                        android:layout_marginTop="@dimen/twenty"
+                        android:background="@color/view" />
+
+                 <!--   <TextView
+                        android:id="@+id/text_PaymentOption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/twenty"
+                        android:fontFamily="@font/avenir_lt_w01_55_roman"
+                        android:text="Payments"
+                        android:textAllCaps="true"
+                        android:textColor="#FFFFFF"
+                        android:textSize="@dimen/twenty_size"
+                        android:textStyle="bold">
+
+                    </TextView>
+
+                    <View
+                        android:id="@+id/view"
+                        android:layout_width="@dimen/hundred_fifty"
+                        android:layout_height="2dp"
+                        android:layout_below="@+id/text1"
+                        android:layout_marginTop="@dimen/twenty"
+                        android:background="@color/view" />-->
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/twenty"
+                        android:fontFamily="@font/avenir_lt_w01_55_roman"
+                        android:text="RATE OUT APP"
+                        android:textColor="#FFFFFF"
+                        android:textSize="@dimen/twenty_size"
+                        android:textStyle="bold">
+
+                    </TextView>
+
+                    <View
+                        android:layout_width="@dimen/hundred_fifty"
+                        android:layout_height="2dp"
+                        android:layout_below="@+id/text1"
+                        android:layout_marginTop="@dimen/twenty"
+                        android:background="@color/view" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/twenty"
+                        android:fontFamily="@font/avenir_lt_w01_55_roman"
+                        android:text="Account Settings"
+                        android:textAllCaps="true"
+                        android:textColor="#FFFFFF"
+                        android:textSize="@dimen/twenty_size"
+                        android:textStyle="bold">
+
+                    </TextView>
+
+                    <View
+                        android:layout_width="@dimen/hundred_fifty"
+                        android:layout_height="2dp"
+                        android:layout_below="@+id/text1"
+                        android:layout_marginTop="@dimen/twenty"
+                        android:background="@color/view" />
+
+                    <TextView
+                        android:id="@+id/text_Logout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/twenty"
+                        android:fontFamily="@font/avenir_lt_w01_55_roman"
+                        android:text="Logout"
+                        android:textAllCaps="true"
+                        android:textColor="#FFFFFF"
+                        android:textSize="@dimen/twenty_size"
+                        android:textStyle="bold">
+
+                    </TextView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+
+    </ScrollView>
+
+
+</RelativeLayout>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/thirty">
+
+        <TextView
+            android:id="@+id/textName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/twenty"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="AC Service &amp; Repair"
+            android:textColor="#000000"
+            android:textSize="@dimen/twenty_size">
+
+        </TextView>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/looking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" What are you looking for ?"
+        android:textColor="#000000"
+        android:textSize="@dimen/edittextsize"
+        android:fontFamily="@font/montserrat_bold"
+        android:textStyle="bold"
+        android:layout_marginLeft="@dimen/fifteen"
+        android:layout_marginTop="@dimen/fifty"
+        android:layout_below="@id/heading"></TextView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/looking"
+        android:layout_marginTop="@dimen/ten">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/recyclerSubCategory">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </LinearLayout>
+
+</RelativeLayout>

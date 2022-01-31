@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.PaymentOption">
+
+
+    <ImageView
+        android:id="@+id/img_back"
+        android:layout_width="@dimen/thirty"
+        android:layout_height="@dimen/forty"
+        android:layout_marginLeft="@dimen/twenty"
+        android:layout_marginTop="@dimen/twenty"
+        android:scaleType="fitXY"
+        android:src="@drawable/left_arrowh"></ImageView>
+
+    <RelativeLayout
+        android:id="@+id/heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/thirty">
+
+        <TextView
+            android:id="@+id/textName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/twenty"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Payment"
+            android:textColor="#000000"
+            android:textSize="@dimen/twenty_size"
+            android:textStyle="bold">
+
+        </TextView>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/pay"
+        android:layout_below="@+id/heading">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/text2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/twenty"
+                android:layout_marginTop="@dimen/fifty"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Payment Method"
+                android:textColor="#000000"
+                android:textSize="@dimen/textsize"
+                android:textStyle="bold">
+
+            </TextView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text2"
+                android:layout_marginLeft="@dimen/fifteen"
+                android:layout_marginTop="@dimen/twenty"
+                android:layout_marginRight="@dimen/fifteen"
+                app:cardCornerRadius="@dimen/ten"
+                app:cardElevation="@dimen/five">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/recyclerPaymentOption">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+          <!--  <TextView
+                android:id="@+id/text3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/card1"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="@dimen/twenty"
+                android:layout_marginTop="@dimen/fifty"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="MOCK PAYMENT PAGE"
+                android:textColor="#E31E25"
+                android:textSize="@dimen/twenty_size"
+                android:textStyle="bold">
+
+            </TextView>-->
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/pay"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sixty"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:weightSum="2">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center"
+            android:layout_marginLeft="@dimen/fifteen"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center"
+                android:layout_marginLeft="@dimen/ten"
+                android:layout_marginTop="@dimen/two"
+                android:layout_toRightOf="@id/rs"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="2,593.64"
+                android:textColor="#4A4949"
+                android:textSize="@dimen/textsize"
+                android:textStyle="bold">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/rs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center"
+                android:layout_marginLeft="@dimen/ten"
+                android:layout_marginTop="@dimen/two"
+                android:layout_toRightOf="@id/signup"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="Rs"
+                android:textColor="#4A4949"
+                android:textSize="@dimen/textsize"
+                android:textStyle="bold">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/signup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Total :"
+                android:textColor="@color/black"
+                android:textSize="@dimen/edittextsize"
+                android:textStyle="bold">
+
+            </TextView>
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btn_paid"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/forty_five"
+            android:layout_below="@+id/password"
+            android:layout_gravity="center_horizontal|center"
+            android:layout_marginLeft="@dimen/ten"
+            android:layout_weight="1"
+            android:background="@drawable/paymentback"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="Paid"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/edittextsize"
+            android:textStyle="bold"></Button>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

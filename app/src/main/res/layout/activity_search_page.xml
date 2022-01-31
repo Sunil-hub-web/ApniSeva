@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.SearchPage">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="@dimen/fifty"
+            android:layout_height="@dimen/fifty"
+            android:layout_margin="@dimen/ten"
+            android:padding="@dimen/ten"
+            android:src="@drawable/left_arrowh" />
+
+        <TextView
+            android:id="@+id/textName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/twenty"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Serach"
+            android:textColor="#000000"
+            android:textSize="@dimen/twenty_size">
+
+        </TextView>
+
+        <EditText
+            android:id="@+id/serach"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/back"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/ten"
+            android:background="@drawable/serachback"
+            android:drawableRight="@drawable/search_1"
+            android:drawablePadding="@dimen/fifteen"
+            android:hint="Serach"
+            android:padding="@dimen/nine"></EditText>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/serachRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/serach"
+            android:layout_marginTop="@dimen/ten"></androidx.recyclerview.widget.RecyclerView>
+    </RelativeLayout>
+
+
+</RelativeLayout>

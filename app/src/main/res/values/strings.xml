@@ -1,0 +1,17 @@
+<resources>
+
+    <string name="app_name">ApniSeva</string>
+    <string name="entername">Enter Your Name</string>
+    <string name="entercontact">Enter Your Mobile Number(Only number)</string>
+    <string name="enteremail">Enter Your EmailId</string>
+    <string name="enterpassword">Enter Correct Password</string>
+
+
+    <string name="facebook_app_id">337091035083415</string>
+    <string name="fb_login_protocol_scheme">fb337091035083415</string>
+
+    <string name="api_key">AIzaSyAgnF-9tZdMkkpRi8VVYzdFQ4tgQKIX0U8</string>
+    <string name="title_activity_maps">Map</string>
+
+
+</resources>

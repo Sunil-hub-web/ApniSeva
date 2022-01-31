@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card1"
+        android:layout_width="@dimen/three_hundred"
+        android:layout_height="@dimen/two_hundred"
+        android:layout_margin="@dimen/ten"
+        android:layout_marginLeft="@dimen/ten"
+        android:layout_marginRight="@dimen/five"
+        app:cardCornerRadius="@dimen/fifteen"
+        app:cardElevation="@dimen/five">
+
+        <ImageView
+            android:id="@+id/bannerImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/mage1"
+            android:scaleType="fitXY"></ImageView>
+
+      <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/two_hundred"
+          android:gravity="bottom">
+
+          <TextView
+              android:id="@+id/text_ServicesName"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="@dimen/ten"
+              android:layout_marginTop="@dimen/fifteen"
+              android:fontFamily="@font/avenirlt65medium"
+              android:text=" AC Installation/Removal"
+              android:textColor="@color/teal_200"
+              android:textSize="@dimen/twenty_size"
+              android:textStyle="bold"></TextView>
+
+          <TextView
+              android:id="@+id/text_servicesPrice"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="@dimen/ten"
+              android:layout_marginTop="@dimen/fifteen"
+              android:fontFamily="@font/avenirlt65medium"
+              android:layout_below="@id/text_ServicesName"
+              android:text="199"
+              android:layout_toRightOf="@id/symbol"
+              android:textColor="@color/teal_200"
+              android:textSize="@dimen/twenty_size"
+              android:textStyle="bold"
+              android:layout_marginBottom="@dimen/fifteen"></TextView>
+
+          <TextView
+              android:id="@+id/symbol"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="@dimen/ten"
+              android:layout_marginTop="@dimen/fifteen"
+              android:fontFamily="@font/avenirlt65medium"
+              android:layout_below="@id/text_ServicesName"
+              android:text=" @Rs"
+              android:textColor="@color/teal_200"
+              android:textSize="@dimen/twenty_size"
+              android:textStyle="bold"
+              android:layout_marginBottom="@dimen/fifteen"></TextView>
+
+      </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>

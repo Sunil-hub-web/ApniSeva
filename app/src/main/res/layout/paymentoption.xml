@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/fifteen"
+        android:layout_marginTop="@dimen/twenty"
+        android:layout_marginRight="@dimen/fifteen"
+        app:cardCornerRadius="@dimen/ten"
+        app:cardElevation="@dimen/five">
+
+
+    </androidx.cardview.widget.CardView>
+
+
+    <RelativeLayout
+        android:id="@+id/real_WalletUPI"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/eighty">
+
+        <TextView
+            android:id="@+id/text_PaymentName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/twenty"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="Wallet/UPI"
+            android:textColor="@color/black">
+
+        </TextView>
+
+        <RadioButton
+            android:id="@+id/radio_CheckOut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/twenty"
+            android:button="@xml/custom_check_box"
+            android:checked="false"
+            android:paddingLeft="10dp"
+            android:textSize="@dimen/textsize"></RadioButton>
+
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/text"
+        android:layout_below="@+id/real_WalletUPI"/>
+
+</RelativeLayout>

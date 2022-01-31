@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.SearchLocation">
+
+    <ImageView
+        android:layout_width="@dimen/forty"
+        android:layout_height="@dimen/forty"
+        android:src="@drawable/left_arrowh"
+        android:layout_marginLeft="@dimen/twenty"
+        android:layout_marginTop="@dimen/twenty"
+        android:id="@+id/image_back"
+        android:scaleType="fitXY"></ImageView>
+
+    <EditText
+        android:id="@+id/edit_serach"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/image_back"
+        android:layout_centerHorizontal="true"
+        android:layout_marginRight="@dimen/twenty_five"
+        android:layout_marginBottom="@dimen/five"
+        android:fontFamily="@font/avenirnextltpro_regular"
+        android:gravity="center"
+        android:hint="Search for society,landmark,locality..."
+        android:imeOptions="actionDone"
+        android:inputType="text"
+        android:textColor="#25297A"
+        android:textSize="@dimen/textsize"
+        android:textStyle="normal"
+        android:focusable="false"/>
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_below="@+id/edit_serach"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/avenirnextltpro_regular"
+        android:text="eg. Marina Road or Redfern or DLF Phase 4"
+        android:textColor="#979393"
+        android:textSize="@dimen/textsize"
+        android:textStyle="bold">
+
+    </TextView>
+
+    <Button
+        android:id="@+id/btn_Yourlocation"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/fifty"
+        android:layout_below="@+id/text"
+        android:gravity="center_vertical"
+        android:drawablePadding="@dimen/thirty"
+        android:layout_marginTop="@dimen/forty"
+        android:layout_marginLeft="@dimen/twenty_five"
+        android:layout_marginRight="@dimen/twenty_five"
+        android:drawableLeft="@drawable/my_location"
+        android:background="@drawable/loginback"
+        android:paddingLeft="@dimen/seventy"
+        android:text="Your Current Location"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
+    <!--<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_Yourlocation"
+        android:layout_marginTop="@dimen/ten"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_below="@+id/edit_serach"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/avenirnextltpro_regular"
+            android:text="eg. Marina Road or Redfern or DLF Phase 4"
+            android:textColor="#979393"
+            android:textSize="@dimen/textsize"
+            android:textStyle="bold"
+            android:layout_margin="@dimen/five">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/text2"
+            android:layout_below="@+id/edit_serach"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/avenirnextltpro_regular"
+            android:text="eg. Marina Road or Redfern or DLF Phase 4"
+            android:textColor="#979393"
+            android:textSize="@dimen/textsize"
+            android:textStyle="bold"
+            android:layout_margin="@dimen/five">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/text3"
+            android:layout_below="@+id/edit_serach"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/avenirnextltpro_regular"
+            android:text="eg. Marina Road or Redfern or DLF Phase 4"
+            android:textColor="#979393"
+            android:textSize="@dimen/textsize"
+            android:textStyle="bold"
+            android:layout_margin="@dimen/five">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/text4"
+            android:layout_below="@+id/edit_serach"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/avenirnextltpro_regular"
+            android:text="eg. Marina Road or Redfern or DLF Phase 4"
+            android:textColor="#979393"
+            android:textSize="@dimen/textsize"
+            android:textStyle="bold"
+            android:layout_margin="@dimen/five">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/text5"
+            android:layout_below="@+id/edit_serach"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/avenirnextltpro_regular"
+            android:text="eg. Marina Road or Redfern or DLF Phase 4"
+            android:textColor="#979393"
+            android:textSize="@dimen/textsize"
+            android:textStyle="bold"
+            android:layout_margin="@dimen/five">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/text6"
+            android:layout_below="@+id/edit_serach"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/avenirnextltpro_regular"
+            android:text="eg. Marina Road or Redfern or DLF Phase 4"
+            android:textColor="#979393"
+            android:textSize="@dimen/textsize"
+            android:textStyle="bold"
+            android:layout_margin="@dimen/five">
+
+        </TextView>
+
+
+        <TextView
+            android:id="@+id/text8"
+            android:layout_below="@+id/edit_serach"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/avenirnextltpro_regular"
+            android:text="eg. Marina Road or Redfern or DLF Phase 4"
+            android:textColor="#979393"
+            android:textSize="@dimen/textsize"
+            android:textStyle="bold"
+            android:layout_margin="@dimen/five">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/text9"
+            android:layout_below="@+id/edit_serach"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/avenirnextltpro_regular"
+            android:text="eg. Marina Road or Redfern or DLF Phase 4"
+            android:textColor="#979393"
+            android:textSize="@dimen/textsize"
+            android:textStyle="bold"
+            android:layout_margin="@dimen/five">
+
+        </TextView>
+
+
+
+    </LinearLayout>-->
+
+</RelativeLayout>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fifteen">
+
+        <TextView
+            android:id="@+id/services_Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/twelve"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="sub Total:"
+            android:textColor="#595656"
+            android:textSize="@dimen/edittextsize"
+            android:textStyle="bold"></TextView>
+
+        <TextView
+            android:id="@+id/services_Price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/twelve"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="sub Total:"
+            android:layout_alignParentRight="true"
+            android:textColor="#595656"
+            android:textSize="@dimen/edittextsize"
+            android:textStyle="bold"></TextView>
+
+    </RelativeLayout>
+
+</RelativeLayout>

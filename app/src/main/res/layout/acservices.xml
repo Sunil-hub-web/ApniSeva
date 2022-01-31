@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card4"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/ninety"
+            android:layout_marginLeft="@dimen/fifteen"
+            android:layout_marginTop="@dimen/ten"
+            android:layout_marginRight="@dimen/fifteen"
+            android:layout_marginBottom="@dimen/ten"
+            app:cardCornerRadius="@dimen/ten"
+            app:cardElevation="@dimen/ten">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/rel"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/ten"
+
+                        android:layout_marginRight="@dimen/five">
+
+                        <TextView
+                            android:id="@+id/text_ServicesName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/ten"
+                            android:layout_marginRight="@dimen/five"
+                            android:layout_toLeftOf="@id/rs"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:text="Split AC Blower"
+                            android:textColor="#000000"
+                            android:textSize="@dimen/textsize"
+                            android:textStyle="bold"></TextView>
+
+                        <TextView
+                            android:id="@+id/rs"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="@dimen/five"
+                            android:layout_toLeftOf="@+id/text_Price"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:text="Rs"
+                            android:textColor="#000000"
+                            android:textSize="@dimen/edittextsize"
+                            android:textStyle="bold"></TextView>
+
+                        <TextView
+                            android:id="@+id/text_Price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="@dimen/twelve"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:text="699"
+                            android:textColor="#000000"
+                            android:textSize="@dimen/edittextsize"
+                            android:textStyle="bold"></TextView>
+
+                    </RelativeLayout>
+
+                    <!-- <TextView
+                         android:id="@+id/text_Description"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_marginLeft="@dimen/twenty"
+                         android:layout_marginTop="@dimen/ten"
+                         android:fontFamily="@font/montserrat_light"
+                         android:text="Content area for describing service details.Content area for describing service details.Content area"
+                         android:textColor="#707070"
+                         android:textSize="@dimen/twelve_size"
+                         android:layout_marginRight="@dimen/ten"
+                         android:textStyle="bold"></TextView>-->
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true">
+
+                    <RelativeLayout
+                        android:id="@+id/rel_right"
+                        android:layout_width="@dimen/fifty"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/layouback1">
+
+                        <ImageView
+                            android:layout_width="@dimen/twenty"
+                            android:layout_height="@dimen/twenty"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/ticksign">
+
+                        </ImageView>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rel_right1"
+                        android:layout_width="@dimen/fifty"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/layoutback"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="@dimen/twenty"
+                            android:layout_height="@dimen/twenty"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/ticksign">
+
+                        </ImageView>
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+
+                <Button
+                    android:id="@+id/button_Services"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toLeftOf="@id/rel"
+                    android:background="@android:color/transparent"></Button>
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+</RelativeLayout>
