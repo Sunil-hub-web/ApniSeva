@@ -24,12 +24,14 @@
 
         <TextView
             android:id="@+id/text_productName"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_semibold"
             android:text="Split AC services"
             android:textColor="#595656"
             android:textSize="@dimen/textsize"
+            android:layout_toLeftOf="@+id/priceSymbol1"
+            android:layout_marginRight="@dimen/ten"
             android:textStyle="bold"></TextView>
 
         <TextView

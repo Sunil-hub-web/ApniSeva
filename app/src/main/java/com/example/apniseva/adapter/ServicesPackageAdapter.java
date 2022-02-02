@@ -121,9 +121,9 @@ public class ServicesPackageAdapter extends RecyclerView.Adapter<ServicesPackage
 
                     double d_totprice = Double.valueOf(tot_price);
 
-                    double d_amount = d_totprice - d_price;
+                    price = price - d_price;
 
-                    String str_amount = String.valueOf(d_amount);
+                    String str_amount = String.valueOf(price);
 
                     SubCategoryPriceDetails.price.setText(str_amount);
 

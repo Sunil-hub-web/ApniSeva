@@ -19,8 +19,11 @@ public class AppUrl {
     public static final String getCategory = "https://apniseva.com/api/getcategory";
 
     public static final String viewUserProfile = "https://apniseva.com/api/profile";
+
     public static final String ProfileUpdate = "https://apniseva.com/api/profile-update";
 
     public static final String userBooking = "https://apniseva.com/api/booknow";
+
+    public static final String updateProfileImage = "https://apniseva.com/api/profilepic-update";
 
 }

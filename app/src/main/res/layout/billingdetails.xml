@@ -139,6 +139,7 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/textsize"
                         android:paddingLeft="20dp" />
+
                 </LinearLayout>
 
 

@@ -34,8 +34,8 @@ import java.util.Map;
 public class EditProfile extends AppCompatActivity {
 
     ImageView img_back;
-    EditText edit_userName,edit_EmailId,edit_MobileNo;
-    String str_userName,str_EmailId,str_MobileNo,userid;
+    EditText edit_userName, edit_EmailId, edit_MobileNo;
+    String str_userName, str_EmailId, str_MobileNo, userid;
     Button btn_Update;
 
     @Override
@@ -50,18 +50,19 @@ public class EditProfile extends AppCompatActivity {
         btn_Update = findViewById(R.id.btn_Update);
 
         userid = SharedPrefManager.getInstance(EditProfile.this).getUser().getUserid();
-    try {
-    Log.d("Ranjeet_userId", userid);
-}catch (Exception e){
-    Log.d("Ranjeet_userId", e.toString());
 
-}
+        try {
+            Log.d("Ranjeet_userId", userid);
+        } catch (Exception e) {
+            Log.d("Ranjeet_userId", e.toString());
+
+        }
 
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(EditProfile.this,UserDetails.class);
+                Intent intent = new Intent(EditProfile.this, UserDetails.class);
                 startActivity(intent);
             }
         });
@@ -76,13 +77,13 @@ public class EditProfile extends AppCompatActivity {
                 str_EmailId = edit_EmailId.getText().toString().trim();
                 str_MobileNo = edit_MobileNo.getText().toString().trim();
 
-                updateProfile("1",userid,str_userName,str_EmailId,str_MobileNo);
+                updateProfile("1", userid, str_userName, str_EmailId, str_MobileNo);
 
             }
         });
     }
 
-    public void viewProfile(String userId){
+    public void viewProfile(String userId) {
 
         ProgressDialog progressDialog = new ProgressDialog(EditProfile.this);
         progressDialog.setMessage("Retrive User Details Please wait...");
@@ -98,7 +99,7 @@ public class EditProfile extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     String message = jsonObject.getString("status");
 
-                    if(message.equals("ok")){
+                    if (message.equals("ok")) {
 
                         String id = jsonObject.getString("id");
                         String name = jsonObject.getString("name");
@@ -125,24 +126,24 @@ public class EditProfile extends AppCompatActivity {
                 Toast.makeText(EditProfile.this, "Your user id not found", Toast.LENGTH_SHORT).show();
 
             }
-        }){
+        }) {
 
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
 
-                Map<String,String> params = new HashMap<>();
-                params.put("user_id",userId);
+                Map<String, String> params = new HashMap<>();
+                params.put("user_id", userId);
                 return params;
             }
         };
 
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(30000,3,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(30000, 3, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         RequestQueue requestQueue = Volley.newRequestQueue(EditProfile.this);
         requestQueue.add(stringRequest);
 
     }
 
-    public void updateProfile(String image,String userid,String name,String email,String mobileno){
+    public void updateProfile(String image, String userid, String name, String email, String mobileno) {
 
         ProgressDialog progressDialog = new ProgressDialog(EditProfile.this);
         progressDialog.setMessage("Update User Details Please wait...");
@@ -158,7 +159,7 @@ public class EditProfile extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     String status = jsonObject.getString("status");
 
-                    if(status.equals("ok")){
+                    if (status.equals("ok")) {
 
                         String message = jsonObject.getString("message");
 
@@ -182,24 +183,24 @@ public class EditProfile extends AppCompatActivity {
                 Toast.makeText(EditProfile.this, "Your user id not found", Toast.LENGTH_SHORT).show();
 
             }
-        }){
+        }) {
 
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
 
 
-                Map<String,String> params = new HashMap<>();
+                Map<String, String> params = new HashMap<>();
 //                params.put("Image",image);
-                params.put("user_id",userid);
-                params.put("name",name);
-                params.put("email",email);
-                params.put("mobile",mobileno);
+                params.put("user_id", userid);
+                params.put("name", name);
+                params.put("email", email);
+                params.put("mobile", mobileno);
 
                 return params;
             }
         };
 
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(30000,3,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(30000, 3, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         RequestQueue requestQueue = Volley.newRequestQueue(EditProfile.this);
         requestQueue.add(stringRequest);
 
