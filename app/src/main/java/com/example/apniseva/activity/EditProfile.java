@@ -85,6 +85,10 @@ public class EditProfile extends AppCompatActivity {
 
     public void viewProfile(String userId) {
 
+        edit_userName.setText("");
+        edit_EmailId.setText("");
+        edit_MobileNo.setText("");
+
         ProgressDialog progressDialog = new ProgressDialog(EditProfile.this);
         progressDialog.setMessage("Retrive User Details Please wait...");
         progressDialog.show();
@@ -108,7 +112,7 @@ public class EditProfile extends AppCompatActivity {
 
                         edit_userName.setText(name);
                         edit_EmailId.setText(email);
-                        edit_MobileNo.setText("+91 " + mobile);
+                        edit_MobileNo.setText(mobile);
 
                     }
                 } catch (JSONException e) {
@@ -166,6 +170,10 @@ public class EditProfile extends AppCompatActivity {
                         Toast.makeText(EditProfile.this, message, Toast.LENGTH_SHORT).show();
 
                         viewProfile(userid);
+
+                        edit_userName.setText("");
+                        edit_EmailId.setText("");
+                        edit_MobileNo.setText("");
                     }
 
                 } catch (JSONException e) {

@@ -193,6 +193,7 @@ public class LocationActivity extends AppCompatActivity {
         //super.onBackPressed();
 
         Intent intent = new Intent(LocationActivity.this,MainActivity.class);
+        intent.putExtra("address_txt",address_txt);
         startActivity(intent);
 
     }

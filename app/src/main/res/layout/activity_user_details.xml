@@ -36,6 +36,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/text_UserName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/avenir_lt_w01_55_roman"
@@ -47,6 +48,7 @@
                 </TextView>
 
                 <TextView
+                    android:id="@+id/text_UserMobileNo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/five"
@@ -59,9 +61,11 @@
                 </TextView>
 
 
-                <RelativeLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="@dimen/fifteen"
+                    android:layout_marginTop="@dimen/twenty">
 
                     <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/profile_image"
@@ -69,8 +73,7 @@
                         android:layout_height="@dimen/two_hundred"
                         android:elevation="@dimen/ten"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/image"
-                        android:layout_marginTop="@dimen/twenty">
+                        android:src="@drawable/profileimage">
 
                     </com.google.android.material.imageview.ShapeableImageView>
 <!--
@@ -84,12 +87,12 @@
 
                     </ImageView>-->
 -->
-                </RelativeLayout>
+                </androidx.cardview.widget.CardView>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/fifty"
+                    android:layout_marginTop="@dimen/forty"
                     android:gravity="center_horizontal"
                     android:orientation="vertical">
 

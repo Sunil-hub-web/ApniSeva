@@ -319,32 +319,42 @@ public class LoginPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                str_MobileNumber = edit_MobileNumber.getText().toString().trim();
-                str_Password = edit_Password.getText().toString().trim();
+                if(edit_MobileNumber.getText().toString().trim().equals("")){
 
-                if(str_MobileNumber.matches("^[0-9]*$")){
+                    edit_MobileNumber.setError("Fill The Details");
 
-                    if(awesomeValidation.validate()){
+                }else  if(edit_Password.getText().toString().trim().equals("")){
 
-                        userlogin(str_MobileNumber, str_Password);
-                    }
-                    else{
+                    edit_Password.setError("Fill The Details");
 
-                        edit_MobileNumber.setError("Enter Valid Mobile No");
-                    }
-                }else{
+                } else{
 
-                    if(isValidEmail(str_MobileNumber)){
+                    str_MobileNumber = edit_MobileNumber.getText().toString().trim();
+                    str_Password = edit_Password.getText().toString().trim();
 
-                        userlogin(str_MobileNumber, str_Password);
-                    }
-                    else{
+                    if(str_MobileNumber.matches("^[0-9]*$")){
 
-                        edit_MobileNumber.setError("Enter Valid EmailId");
+                        if(awesomeValidation.validate()){
+
+                            userlogin(str_MobileNumber, str_Password);
+                        }
+                        else{
+
+                            edit_MobileNumber.setError("Enter Valid Mobile No");
+                        }
+                    }else{
+
+                        if(isValidEmail(str_MobileNumber)){
+
+                            userlogin(str_MobileNumber, str_Password);
+                        }
+                        else{
+
+                            edit_MobileNumber.setError("Enter Valid EmailId");
+                        }
                     }
                 }
-
-                    //userlogin(str_MobileNumber, str_Password);
+                //userlogin(str_MobileNumber, str_Password);
             }
         });
 
@@ -352,8 +362,17 @@ public class LoginPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                str_MobileNumber = edit_MobileNumber.getText().toString().trim();
-                loginviaOTP(str_MobileNumber);
+                if(edit_MobileNumber.getText().toString().trim().equals("")){
+
+                    edit_MobileNumber.setError("Fill The Field");
+
+                }else{
+
+                    str_MobileNumber = edit_MobileNumber.getText().toString().trim();
+                    loginviaOTP(str_MobileNumber);
+
+                }
+
 
                /* Intent intent = new Intent(LoginPage.this,VerificationCode.class);
                 startActivity(intent);*/
@@ -369,6 +388,98 @@ public class LoginPage extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void signIn() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    private void signOut() {
+        mGoogleSignInClient.signOut()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                        Toast.makeText(LoginPage.this, "Your Account Logout", Toast.LENGTH_SHORT).show();
+                        // ...
+                    }
+                });
+    }
+
+    private void revokeAccess() {
+        mGoogleSignInClient.revokeAccess()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        // ...
+                    }
+                });
+    }
+
+
+    /*public void googlesignin() {
+
+        // Configure sign-in to request the user's ID, email address, and basic
+         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        // Build a GoogleSignInClient with the options specified by gso.
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+    *//*    // Check for existing Google Sign In account, if the user is already signed in
+         // the GoogleSignInAccount will be non-null.
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        //updateUI(account);*//*
+    }*/
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            // The Task returned from this call is always completed, no need to attach
+            // a listener.
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+        }
+    }
+
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        try {
+            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+
+            GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(LoginPage.this);
+            if (acct != null) {
+
+                String personName = acct.getDisplayName();
+                String personGivenName = acct.getGivenName();
+                String personFamilyName = acct.getFamilyName();
+                String personEmail = acct.getEmail();
+                String personId = acct.getId();
+                Uri personPhoto = acct.getPhotoUrl();
+
+                userSociallogin(personEmail);
+
+            }
+
+            // Signed in successfully, show authenticated UI.
+            //updateUI(account);
+
+
+        } catch (ApiException e) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
+            //updateUI(null);
+        }
     }
 
     public void userlogin(String mobileNo, String password) {
@@ -514,102 +625,94 @@ public class LoginPage extends AppCompatActivity {
 
     }
 
-    private void signIn() {
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-    }
+    public void userSociallogin(String email) {
 
-    private void signOut() {
-        mGoogleSignInClient.signOut()
-                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-
-                        Toast.makeText(LoginPage.this, "Your Account Logout", Toast.LENGTH_SHORT).show();
-                        // ...
-                    }
-                });
-    }
-
-    private void revokeAccess() {
-        mGoogleSignInClient.revokeAccess()
-                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        // ...
-                    }
-                });
-    }
+        ProgressDialog progressDialog = new ProgressDialog(LoginPage.this);
+        progressDialog.setMessage("User Login Please wait...");
+        progressDialog.show();
 
 
-    /*public void googlesignin() {
+        JSONObject jsonObject = new JSONObject();
 
-        // Configure sign-in to request the user's ID, email address, and basic
-         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
-
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-
-        // Build a GoogleSignInClient with the options specified by gso.
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
-    *//*    // Check for existing Google Sign In account, if the user is already signed in
-         // the GoogleSignInAccount will be non-null.
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        //updateUI(account);*//*
-    }*/
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        callbackManager.onActivityResult(requestCode, resultCode, data);
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
-            // The Task returned from this call is always completed, no need to attach
-            // a listener.
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            handleSignInResult(task);
-        }
-    }
-
-    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
-            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
 
-            GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(LoginPage.this);
-            if (acct != null) {
+            jsonObject.put("email", email);
+            jsonObject.put("type", "social_login");
 
-                String personName = acct.getDisplayName();
-                String personGivenName = acct.getGivenName();
-                String personFamilyName = acct.getFamilyName();
-                String personEmail = acct.getEmail();
-                String personId = acct.getId();
-                Uri personPhoto = acct.getPhotoUrl();
+        } catch (Exception e) {
 
-                edit_MobileNumber.setText(personEmail);
-
-                sessionManager.setuserEmail(personEmail);
-                sessionManager.setLogin();
-
-                Intent intent = new Intent(LoginPage.this,MainActivity.class);
-                startActivity(intent);
-            }
-
-            // Signed in successfully, show authenticated UI.
-            //updateUI(account);
-
-
-        } catch (ApiException e) {
-            // The ApiException status code indicates the detailed failure reason.
-            // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
-            //updateUI(null);
+            e.printStackTrace();
         }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, AppUrl.userLogin, jsonObject, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                progressDialog.dismiss();
+                Log.d("Ranjeet_login_response",response.toString());
+
+                try {
+                    String message = response.getString("status");
+
+                    if (message.equals("NOK")) {
+
+                        String message1 = response.getString("message");
+                        Toast.makeText(LoginPage.this, message1, Toast.LENGTH_SHORT).show();
+
+                    } else if (message.equals("OK")) {
+
+                        String user_details = response.getString("user_details");
+
+                        JSONObject jsonObject_userdetails = new JSONObject(user_details);
+
+                        String user_id = jsonObject_userdetails.getString("user_id");
+                        String name = jsonObject_userdetails.getString("name");
+                        String email = jsonObject_userdetails.getString("email");
+                        String mobile = jsonObject_userdetails.getString("mobile");
+
+                        edit_MobileNumber.setText(email);
+
+                        sessionManager.setuserEmail(email);
+                        sessionManager.setLogin();
+
+                        edit_Password.setText("");
+
+                        Login_ModelClass login_modelClass = new Login_ModelClass(
+                                user_id, mobile, email, name, ""
+                        );
+
+                        SharedPrefManager.getInstance(LoginPage.this).userLogin(login_modelClass);
+
+                        Toast.makeText(LoginPage.this, "Login Successfully", Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(LoginPage.this,MainActivity.class);
+                        startActivity(intent);
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                progressDialog.dismiss();
+                error.printStackTrace();
+
+                Toast.makeText(LoginPage.this, "" + error, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(30000, 3, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueue requestQueue = Volley.newRequestQueue(LoginPage.this);
+        requestQueue.add(jsonObjectRequest);
     }
+
 
     private boolean isValidEmail(String email) {
         Pattern pattern = Patterns.EMAIL_ADDRESS;

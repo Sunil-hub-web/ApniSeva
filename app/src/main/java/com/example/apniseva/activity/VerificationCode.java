@@ -158,7 +158,9 @@ public class VerificationCode extends AppCompatActivity {
 
 
                     if(message.equals("OK")){
+
                         JSONObject jsonobject1= jsonObject.getJSONObject("user_details");
+
                         String user_id = jsonobject1.getString("user_id");
                         String name = jsonobject1.getString("name");
                         String email = jsonobject1.getString("email");

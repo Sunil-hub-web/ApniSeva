@@ -29,6 +29,7 @@ import androidx.core.content.ContextCompat;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -37,10 +38,13 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.apniseva.AppURL.AppUrl;
+import com.example.apniseva.AppURL.VolleyMultipartRequest;
 import com.example.apniseva.R;
 import com.example.apniseva.SessionManager;
 import com.example.apniseva.SharedPrefManager;
+import com.example.apniseva.SharedPreference;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,13 +55,13 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.Map;
 
 public class UserDetails extends AppCompatActivity {
 
-    private static final int MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE = 1001;
     ImageView img_close;
-    TextView text_UserProfile, text_BookingDetails, text_PaymentOption, text_Logout;
+    TextView text_UserProfile, text_BookingDetails, text_PaymentOption, text_Logout,text_UserName,text_UserMobileNo;
     ShapeableImageView profile_image;
     public static final int IMAGE_CODE = 1;
     Uri imageUri, selectedImageUri;
@@ -66,6 +70,11 @@ public class UserDetails extends AppCompatActivity {
     String ImageDecode;
 
     SessionManager sessionManager;
+
+    private static final int REQUEST_PERMISSIONS = 100;
+    private static final int PICK_IMAGE_REQUEST = 1;
+    private Bitmap bitmap;
+    private String filePath;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -88,21 +97,31 @@ public class UserDetails extends AppCompatActivity {
         //text_PaymentOption = findViewById(R.id.text_PaymentOption);
         profile_image = findViewById(R.id.profile_image);
         text_Logout = findViewById(R.id.text_Logout);
+        text_UserName = findViewById(R.id.text_UserName);
+        text_UserMobileNo = findViewById(R.id.text_UserMobileNo);
+
+        viewProfileDetails();
 
         profile_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                if ((ContextCompat.checkSelfPermission(getApplicationContext(),
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) && (ContextCompat.checkSelfPermission(getApplicationContext(),
+                        Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
+                    if ((ActivityCompat.shouldShowRequestPermissionRationale(UserDetails.this,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE)) && (ActivityCompat.shouldShowRequestPermissionRationale(UserDetails.this,
+                            Manifest.permission.READ_EXTERNAL_STORAGE))) {
 
-              /*  Intent intent = new Intent(Intent.ACTION_PICK,
-                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
-                startActivityForResult(intent, IMAGE_CODE);*/
-
-                    Intent intent = new Intent();
-                    intent.setAction(Intent.ACTION_PICK);
-                    intent.setType("image/*");
-                    startActivityForResult(Intent.createChooser(intent,"title"),IMAGE_CODE);
+                    } else {
+                        ActivityCompat.requestPermissions(UserDetails.this,
+                                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},
+                                REQUEST_PERMISSIONS);
+                    }
+                } else {
+                    Log.e("Else", "Else");
+                    showFileChooser();
+                }
 
             }
         });
@@ -151,9 +170,25 @@ public class UserDetails extends AppCompatActivity {
             public void onClick(View v) {
 
                 sessionManager.logoutUser();
+                SharedPrefManager.getInstance(UserDetails.this).logout();
 
             }
         });
+    }
+
+    public void showFileChooser() {
+
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(Intent.createChooser(intent, "title"), IMAGE_CODE);
+
+    }
+
+    public byte[] getFileDataFromDrawable(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 80, byteArrayOutputStream);
+        return byteArrayOutputStream.toByteArray();
     }
 
     @Override
@@ -180,11 +215,14 @@ public class UserDetails extends AppCompatActivity {
                 ImageDecode = cursor.getString(columnIndex);
                 f = new File(ImageDecode);
                 selectedImageUri = Uri.fromFile(f);
-                profile_image.setImageURI(selectedImageUri);
+                Log.d("selectedImageUri", selectedImageUri.toString());
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUri);
+                profile_image.setImageBitmap(bitmap);
+                //profile_image.setImageURI(selectedImageUri);
 
-                Log.d("ImageDecode",ImageDecode);
-                Log.d("ImageDecode1",f.toString());
-                Log.d("ImageDecode2",selectedImageUri.toString());
+                Log.d("ImageDecode", ImageDecode);
+                Log.d("ImageDecode1", f.toString());
+                Log.d("ImageDecode2", selectedImageUri.toString());
 
                 cursor.close();
 
@@ -194,7 +232,7 @@ public class UserDetails extends AppCompatActivity {
 
                 } else {
 
-                    profileImageUpload(f);
+                    profileImageUpload(bitmap);
                 }
             }
         } catch (Exception e) {
@@ -223,19 +261,85 @@ public class UserDetails extends AppCompatActivity {
 
     }
 
-    public void profileImageUpload(File image) {
+    public void profileImageUpload(final Bitmap bitmap) {
 
         ProgressDialog progressDialog = new ProgressDialog(UserDetails.this);
         progressDialog.setMessage("Profile Pic Upload Please wait...");
         progressDialog.show();
 
 
-        JSONObject jsonObject = new JSONObject();
+        VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST, AppUrl.updateProfileImage, new Response.Listener<NetworkResponse>() {
+            @Override
+            public void onResponse(NetworkResponse response) {
+
+                progressDialog.dismiss();
+
+                try {
+
+                    JSONObject jsonObject = new JSONObject(new String(response.data));
+
+                    String status = jsonObject.getString("status");
+
+                    String message = jsonObject.getString("message");
+
+                    if (message.equals("Profile updated successfully")) {
+
+                        Toast.makeText(UserDetails.this, message, Toast.LENGTH_SHORT).show();
+
+                        viewProfileDetails();
+
+                    } else {
+
+                        Toast.makeText(UserDetails.this, message, Toast.LENGTH_SHORT).show();
+
+                        viewProfileDetails();
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                progressDialog.dismiss();
+                error.printStackTrace();
+                Toast.makeText(UserDetails.this, "" + error.getMessage(), Toast.LENGTH_SHORT).show();
+
+
+            }
+        }) {
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("user_id", userId);
+
+                return params;
+            }
+
+            @Override
+            protected Map<String, DataPart> getByteData() {
+                Map<String, DataPart> params = new HashMap<>();
+
+                long imagename = System.currentTimeMillis();
+                params.put("image", new DataPart(imagename + ".png", getFileDataFromDrawable(bitmap)));
+
+                return params;
+            }
+        };
+        volleyMultipartRequest.setRetryPolicy(new DefaultRetryPolicy(30000, 3, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueue requestQueue = Volley.newRequestQueue(UserDetails.this);
+        requestQueue.add(volleyMultipartRequest);
+
+      /*  JSONObject jsonObject = new JSONObject();
 
         try {
 
             jsonObject.put("user_id", userId);
-            jsonObject.put("image", image);
+            jsonObject.put("image", bitmap);
 
         } catch (Exception e) {
 
@@ -280,12 +384,70 @@ public class UserDetails extends AppCompatActivity {
         });
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(30000, 3, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         RequestQueue requestQueue = Volley.newRequestQueue(UserDetails.this);
-        requestQueue.add(jsonObjectRequest);
+        requestQueue.add(jsonObjectRequest);*/
 
     }
 
-    public void mission(){
+    public void viewProfileDetails(){
 
+        ProgressDialog progressDialog = new ProgressDialog(UserDetails.this);
+        progressDialog.setMessage("Retrive User Details Please wait...");
+        progressDialog.show();
 
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppUrl.viewUserProfile, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                progressDialog.dismiss();
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String message = jsonObject.getString("status");
+
+                    if (message.equals("ok")) {
+
+                        String id = jsonObject.getString("id");
+                        String name = jsonObject.getString("name");
+                        String email = jsonObject.getString("email");
+                        String mobile = jsonObject.getString("mobile");
+                        String image = jsonObject.getString("image");
+
+                        Picasso.with(UserDetails.this).load(image)
+                                .into(profile_image);
+
+                        text_UserName.setText(name);
+                        text_UserMobileNo.setText("+91 " + mobile);
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                progressDialog.dismiss();
+                error.printStackTrace();
+
+                Toast.makeText(UserDetails.this, "Your user id not found", Toast.LENGTH_SHORT).show();
+
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> params = new HashMap<>();
+                params.put("user_id", userId);
+                return params;
+            }
+        };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(30000, 3, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueue requestQueue = Volley.newRequestQueue(UserDetails.this);
+        requestQueue.add(stringRequest);
     }
+
 }

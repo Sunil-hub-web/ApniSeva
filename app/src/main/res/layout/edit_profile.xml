@@ -187,13 +187,15 @@
                 android:id="@+id/edit_MobileNo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/twenty"
+                android:layout_marginLeft="@dimen/ten"
                 android:layout_marginBottom="@dimen/ten"
                 android:background="@color/transparent"
                 android:drawablePadding="@dimen/twenty"
-                android:layout_toRightOf="@id/image"
+                android:maxLength="10"
+                android:layout_toRightOf="@+id/image"
+                android:inputType="number"
                 android:fontFamily="@font/montserrat_medium"
-                android:text="+91 00000000"
+                android:text="00000000"
                 android:textColor="@color/black"
                 android:textStyle="bold">
 

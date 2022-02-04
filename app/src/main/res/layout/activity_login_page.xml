@@ -83,7 +83,7 @@
                     android:hint="Password"
                     android:imeOptions="actionDone"
                     android:inputType="textPassword"
-                    android:textColor="#0C0C0C"
+                    android:textColor="#25297A"
                     android:textSize="@dimen/twenty_size"
                     android:textStyle="normal"
                     android:fontFamily="@font/avenir_lt_w01_55_roman"/>

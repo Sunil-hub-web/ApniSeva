@@ -1,5 +1,6 @@
 package com.example.apniseva.activity;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -42,6 +43,8 @@ import com.example.apniseva.modelclass.AddressDetails_ModelClass;
 import com.example.apniseva.modelclass.CartItem;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+import com.razorpay.Checkout;
+import com.razorpay.PaymentResultListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,7 +54,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BillingDetails extends AppCompatActivity {
+public class BillingDetails extends AppCompatActivity implements PaymentResultListener {
 
     RecyclerView orderDetailsRecycler,addressRecycler;
     OrderDetailsAdapter orderDetailsAdapter;
@@ -68,6 +71,10 @@ public class BillingDetails extends AppCompatActivity {
     TextView subTotalPrice,TotalPrice,CompleteAddress,name,mobileno;
 
     ArrayList<String> servicesId = new ArrayList<>();
+
+    int amount;
+
+    private static final String TAG = BillingDetails.class.getSimpleName();
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -148,6 +155,8 @@ public class BillingDetails extends AppCompatActivity {
             }
         });
 
+         amount = Math.round(Float.parseFloat(str_TotalPrice) * 100);
+
     }
 
    /* public void billingDetails(String userid,String total,String subTotal,String name,String mobileNo,
@@ -223,14 +232,43 @@ public class BillingDetails extends AppCompatActivity {
 
     }*/
 
-    public void StartPayment(String price){
+    public void startPayment() {
+        /*
+          You need to pass current activity in order to let Razorpay create CheckoutActivity
+         */
+        final Activity activity = this;
 
+        final Checkout co = new Checkout();
+        co.setKeyID("rzp_test_zaz75RSgcXbsfA");
+
+        try {
+            JSONObject options = new JSONObject();
+            options.put("name", "Razorpay Corp");
+            options.put("description", "Demoing Charges");
+            options.put("send_sms_hash",true);
+            options.put("allow_rotation", true);
+            //You can omit the image option to fetch the image from dashboard
+            options.put("image", "https://s3.amazonaws.com/rzp-mobile/images/rzp.png");
+            options.put("currency", "INR");
+            options.put("amount", amount);
+
+            JSONObject preFill = new JSONObject();
+            preFill.put("email", "team.apniseva@gmail.com");
+            preFill.put("contact", str_mobileno);
+
+            options.put("prefill", preFill);
+
+            co.open(activity, options);
+
+        } catch (Exception e) {
+
+            Toast.makeText(activity, "Error in payment: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
     }
 
     public void billingDetails(String userid,String total,String subTotal,String name,String mobileNo,
                                String address,String userAddress,String CGST,String IGST) {
-
-
 
         ProgressDialog dialog = new ProgressDialog(BillingDetails.this);
         dialog.setMessage("Register Please wait...");
@@ -240,8 +278,8 @@ public class BillingDetails extends AppCompatActivity {
 
         try{
 
-            jsonObject.put("user_id","92");
-            jsonObject.put("product","11,12");
+            jsonObject.put("user_id",userid);
+            jsonObject.put("product",String.valueOf(servicesId));
             jsonObject.put("total",total);
             jsonObject.put("subtotal",subTotal);
             jsonObject.put("name",name);
@@ -252,6 +290,7 @@ public class BillingDetails extends AppCompatActivity {
             jsonObject.put("igst","0");
 
             Log.d("Ranjeet_input",userid+total+subTotal+name+mobileNo+address);
+            Log.d("input",servicesId.toString());
 
         }catch(Exception e){
 
@@ -276,9 +315,7 @@ public class BillingDetails extends AppCompatActivity {
 
                         String booking_id = response.getString("booking_id");
 
-                        Intent i = new Intent(BillingDetails.this, PaymentSuccessFully.class);
-                        startActivity(i);
-                        finish();
+                        startPayment();
 
                     }
 
@@ -306,5 +343,37 @@ public class BillingDetails extends AppCompatActivity {
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(30000,3,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         RequestQueue requestQueue = Volley.newRequestQueue(BillingDetails.this);
         requestQueue.add(jsonObjectRequest);
+    }
+
+    @Override
+    public void onPaymentSuccess(String razorpayPaymentID) {
+
+        try {
+            
+            Toast.makeText(this, "Payment Successful: " + razorpayPaymentID, Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(BillingDetails.this, PaymentSuccessFully.class);
+            startActivity(i);
+            finish();
+
+        } catch (Exception e) {
+
+            Log.e(TAG, "Exception in onPaymentSuccess", e);
+        }
+
+
+    }
+
+    @Override
+    public void onPaymentError(int code , String response) {
+
+        try {
+            Toast.makeText(this, "Payment failed: " + code + " " + response, Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, response, Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            Log.e(TAG, "Exception in onPaymentError", e);
+        }
+
+        Toast.makeText(this, response, Toast.LENGTH_LONG).show();
+
     }
 }

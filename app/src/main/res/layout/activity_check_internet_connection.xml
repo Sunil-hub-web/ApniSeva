@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.CheckInternetConnection">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/networkConnection"
+        >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="@dimen/two_hundred_fifty"
+                android:layout_height="@dimen/two_hundred"
+                android:src="@drawable/internet_access_error"
+                android:layout_gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ooops!"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:textSize="40sp"/>
+            <TextView
+                android:id="@+id/nettext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No Internet Connection found"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ON YOUR DATA OR WIFI AND HIT RESTART"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"/>
+            <Button
+                android:id="@+id/restartapp"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:text="Restart"
+                android:textSize="18sp"
+                android:textColor="#090909"
+                android:layout_marginTop="@dimen/thirty"
+                android:layout_marginBottom="@dimen/twenty"
+                android:background="@drawable/login_btn_bg"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>
