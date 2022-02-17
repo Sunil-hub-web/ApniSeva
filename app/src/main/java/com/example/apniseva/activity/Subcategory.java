@@ -3,6 +3,8 @@ package com.example.apniseva.activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +45,7 @@ public class Subcategory extends AppCompatActivity {
     TextView textName;
     String categoryid;
     SessionManager sessionManager;
+    ImageView image_back;
 
     @Override
     protected void onCreate(@Nullable  Bundle savedInstanceState) {
@@ -53,6 +56,7 @@ public class Subcategory extends AppCompatActivity {
 
         textName = findViewById(R.id.textName);
         recyclerSubCategory = findViewById(R.id.recyclerSubCategory);
+        image_back = findViewById(R.id.image_back);
 
         Intent intent = getIntent();
         categoryid = intent.getStringExtra("categoryId");
@@ -60,6 +64,16 @@ public class Subcategory extends AppCompatActivity {
         categoryid = sessionManager.getCategoryId();
 
         showSubCateGory(categoryid);
+
+        image_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(Subcategory.this,MainActivity.class);
+                startActivity(intent);
+
+            }
+        });
 
     }
 

@@ -49,7 +49,7 @@ public class Booking extends AppCompatActivity {
         TotalPrice = findViewById(R.id.TotalPrice);
         recyclerBooking = findViewById(R.id.recyclerBooking);
         btn_payonvisit = findViewById(R.id.btn_payonvisit);
-        btn_paynow = findViewById(R.id.btn_paynow);
+        //btn_paynow = findViewById(R.id.btn_paynow);
         btn_AddAddress = findViewById(R.id.btn_AddAddress);
         edit_Address = findViewById(R.id.edit_Address);
         imageviewback = findViewById(R.id.back);
@@ -83,7 +83,7 @@ public class Booking extends AppCompatActivity {
         }
 
 
-        btn_paynow.setOnClickListener(new View.OnClickListener() {
+        btn_payonvisit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -168,8 +168,6 @@ public class Booking extends AppCompatActivity {
 
             }
         });
-
-
 
         dialog.show();
         Window window = dialog.getWindow();

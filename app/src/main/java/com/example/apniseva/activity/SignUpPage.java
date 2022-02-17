@@ -188,20 +188,21 @@ public class SignUpPage extends AppCompatActivity {
                 progressDialog.dismiss();
 
                 try {
+
                     String message = response.getString("status");
 
-                    if (message.equals("OK")) {
+                    if (message.equals("NOK")) {
+
+                        String message1 = response.getString("message");
+
+                        Toast.makeText(SignUpPage.this, message1, Toast.LENGTH_SHORT).show();
+
+                    }else if(message.equals("OK")){
 
                         Toast.makeText(SignUpPage.this, "User Register Successfully", Toast.LENGTH_SHORT).show();
 
                         Intent intent1 = new Intent(SignUpPage.this, LoginPage.class);
                         startActivity(intent1);
-
-                    }else if(message.equals("NOK")){
-
-                        String message1 = jsonObject.getString("message");
-
-                        Toast.makeText(SignUpPage.this, message1, Toast.LENGTH_SHORT).show();
 
                     }
                 } catch (JSONException e) {

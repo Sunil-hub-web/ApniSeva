@@ -75,21 +75,28 @@ public class SubCategoryPriceDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(SubCategoryPriceDetails.this, Booking.class);
-                intent.putExtra("total_price",price.getText().toString().trim());
-                startActivity(intent);
+                if(price.getText().toString().trim().equals("0.0")){
 
-                servicesId = servicesPackageAdapter.getVAs();
+                    Toast.makeText(SubCategoryPriceDetails.this, "You must select one product", Toast.LENGTH_SHORT).show();
 
-                Log.d("servicesId",servicesId.toString());
+                }else{
 
-                SharedPreferences sharedPreferences_services = getSharedPreferences("shared preferences", MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences_services.edit();
-                Gson gson = new Gson();
-                String json = gson.toJson(servicesId);
-                editor.putString("task list", json);
-                editor.apply();
+                    Intent intent = new Intent(SubCategoryPriceDetails.this, Booking.class);
+                    intent.putExtra("total_price",price.getText().toString().trim());
+                    startActivity(intent);
 
+                    servicesId = servicesPackageAdapter.getVAs();
+
+                    Log.d("servicesId",servicesId.toString());
+
+                    SharedPreferences sharedPreferences_services = getSharedPreferences("shared preferences", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences_services.edit();
+                    Gson gson = new Gson();
+                    String json = gson.toJson(servicesId);
+                    editor.putString("task list", json);
+                    editor.apply();
+
+                }
             }
         });
 

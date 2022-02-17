@@ -72,6 +72,7 @@ public class SharedPreference {
 
         Log.d("RanjeetShared", String.valueOf(favorites.size()));
         if (favorites != null) {
+
             favorites.remove(beanSampleList);
 
             Log.d("RanjeetShared", String.valueOf(favorites.size()));

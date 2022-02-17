@@ -60,7 +60,7 @@
                 android:fontFamily="@font/montserrat_bold"
                 android:text="Delivery Address"
                 android:textColor="#000000"
-                android:textSize="@dimen/twenty_size"
+                android:textSize="@dimen/edittextsize"
                 android:textStyle="bold">
 
             </TextView>
@@ -163,7 +163,7 @@
                 android:fontFamily="@font/montserrat_bold"
                 android:text="Order Details"
                 android:textColor="#000000"
-                android:textSize="@dimen/twenty_size"
+                android:textSize="@dimen/edittextsize"
                 android:textStyle="bold"
                 android:layout_below="@+id/card1">
 
@@ -212,7 +212,7 @@
                 android:fontFamily="@font/montserrat_semibold"
                 android:text="Sub Total :"
                 android:textColor="#595656"
-                android:textSize="@dimen/edittextsize"
+                android:textSize="@dimen/textsize"
                 android:layout_marginLeft="@dimen/ten"
                 android:textStyle="bold"></TextView>
 
@@ -237,12 +237,12 @@
                 android:fontFamily="@font/montserrat_medium"
                 android:text="145.00"
                 android:textColor="#595656"
-                android:textSize="@dimen/edittextsize"
+                android:textSize="@dimen/textsize"
                 android:textStyle="bold"></TextView>
 
         </RelativeLayout>
 
-        <RelativeLayout
+       <!-- <RelativeLayout
             android:id="@+id/r6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -334,13 +334,13 @@
                 android:textSize="@dimen/edittextsize"
                 android:textStyle="bold"></TextView>
 
-        </RelativeLayout>
+        </RelativeLayout>-->
 
         <RelativeLayout
             android:id="@+id/r7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/r8"
+            android:layout_below="@+id/r5"
             android:layout_marginTop="@dimen/fifteen"
             android:layout_marginRight="@dimen/ten">
 
@@ -352,7 +352,7 @@
                 android:fontFamily="@font/montserrat_bold"
                 android:text="TOTAL :"
                 android:textColor="#000000"
-                android:textSize="@dimen/edittextsize"
+                android:textSize="@dimen/textsize"
                 android:textStyle="bold"></TextView>
 
             <TextView
@@ -376,7 +376,7 @@
                 android:fontFamily="@font/montserrat_bold"
                 android:text="145.00"
                 android:textColor="#000000"
-                android:textSize="@dimen/edittextsize"
+                android:textSize="@dimen/textsize"
                 android:textStyle="bold"></TextView>
 
         </RelativeLayout>
@@ -384,12 +384,10 @@
 
     </RelativeLayout>
 
-
-
     <LinearLayout
         android:id="@+id/pay"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/sixty"
+        android:layout_height="@dimen/fifty"
         android:layout_alignParentBottom="true"
         android:background="@color/white"
         android:weightSum="2">
@@ -397,7 +395,7 @@
         <Button
             android:id="@+id/btn_paynow"
             android:layout_width="0dp"
-            android:layout_height="@dimen/forty_five"
+            android:layout_height="@dimen/forty"
             android:layout_below="@+id/password"
             android:layout_gravity="center_horizontal|center"
             android:layout_weight="1"
@@ -407,11 +405,11 @@
             android:text="Pay Now"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="@dimen/edittextsize"
+            android:textSize="@dimen/textsize"
             android:textStyle="bold"></Button>
 
         <TextView
-            android:id="@+id/signup"
+            android:id="@+id/btn_payvisit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|center"

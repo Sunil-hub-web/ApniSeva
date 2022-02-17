@@ -567,7 +567,7 @@ public class LoginPage extends AppCompatActivity {
     public void loginviaOTP(String mobileNo) {
 
         ProgressDialog progressDialog = new ProgressDialog(LoginPage.this);
-        progressDialog.setMessage("OTP Sent SuccessFully");
+        progressDialog.setMessage("Processing...");
         progressDialog.show();
 
         JSONObject jsonObject = new JSONObject();
@@ -588,11 +588,18 @@ public class LoginPage extends AppCompatActivity {
                 progressDialog.dismiss();
                 Log.d("Ranjeet_login_responseO",response.toString());
 
-
+                String message;
                 try {
-                    String message = response.getString("status");
+                    message = response.getString("status");
+//                    String message1 = response.getString("message");
 
-                    if (message.equals("OK")) {
+                    Log.d("Ranjeet_message",message);
+
+                    if (message.equals("NOK")) {
+
+                        Toast.makeText(LoginPage.this, "User does not exists", Toast.LENGTH_SHORT).show();
+
+                    }else if(message.equals("OK")){
 
                         String OTP = response.getString("otp");
 
@@ -603,9 +610,12 @@ public class LoginPage extends AppCompatActivity {
                         startActivity(intent);
 
                         Toast.makeText(LoginPage.this, "Otp Send Successfully", Toast.LENGTH_SHORT).show();
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Log.d("Ranjeet_Login_otp",e.toString());
+
                 }
 
             }

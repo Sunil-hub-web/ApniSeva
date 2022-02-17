@@ -57,7 +57,7 @@
                 android:fontFamily="@font/montserrat_bold"
                 android:text="Personal Details"
                 android:textColor="#000000"
-                android:textSize="@dimen/twenty_size"
+                android:textSize="@dimen/edittextsize"
                 android:textStyle="bold">
 
             </TextView>
@@ -102,7 +102,7 @@
                 android:fontFamily="@font/montserrat_bold"
                 android:text="Order Details"
                 android:textColor="#000000"
-                android:textSize="@dimen/twenty_size"
+                android:textSize="@dimen/edittextsize"
                 android:textStyle="bold">
 
             </TextView>
@@ -142,7 +142,7 @@
                 android:fontFamily="@font/montserrat_semibold"
                 android:text="sub Total:"
                 android:textColor="#595656"
-                android:textSize="@dimen/edittextsize"
+                android:textSize="@dimen/textsize"
                 android:textStyle="bold"></TextView>
 
             <TextView
@@ -166,7 +166,7 @@
                 android:fontFamily="@font/montserrat_medium"
                 android:text="145.00"
                 android:textColor="#595656"
-                android:textSize="@dimen/edittextsize"
+                android:textSize="@dimen/textsize"
                 android:textStyle="bold"></TextView>
 
         </RelativeLayout>
@@ -187,7 +187,7 @@
                 android:fontFamily="@font/montserrat_bold"
                 android:text="TOTAL :"
                 android:textColor="#000000"
-                android:textSize="@dimen/edittextsize"
+                android:textSize="@dimen/textsize"
                 android:textStyle="bold"></TextView>
 
             <TextView
@@ -211,7 +211,7 @@
                 android:fontFamily="@font/montserrat_bold"
                 android:text="145.00"
                 android:textColor="#000000"
-                android:textSize="@dimen/edittextsize"
+                android:textSize="@dimen/textsize"
                 android:textStyle="bold"></TextView>
 
         </RelativeLayout>
@@ -223,7 +223,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:weightSum="2"
+        android:weightSum="1"
         android:layout_marginBottom="@dimen/fifteen">
 
         <Button
@@ -235,13 +235,13 @@
             android:layout_weight="1"
             android:background="@drawable/bookingbtn_bg"
             android:fontFamily="@font/montserrat_semibold"
-            android:text="Pay On Visit"
+            android:text="Book Now"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="@dimen/edittextsize"
+            android:textSize="@dimen/textsize"
             android:textStyle="bold"></Button>
 
-        <Button
+       <!-- <Button
             android:id="@+id/btn_paynow"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -253,8 +253,8 @@
             android:text="Pay Now"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="@dimen/edittextsize"
-            android:textStyle="bold"></Button>
+            android:textSize="@dimen/textsize"
+            android:textStyle="bold"></Button>-->
 
 
     </LinearLayout>

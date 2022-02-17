@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,6 +51,7 @@ public class Subcategory_Product extends AppCompatActivity {
 
     TextView textName, looking;
     String subcategoryid, category_name;
+    ImageView image_back;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,6 +62,7 @@ public class Subcategory_Product extends AppCompatActivity {
         btn_proceed = findViewById(R.id.btn_proceed);
         textName = findViewById(R.id.textName);
         looking = findViewById(R.id.looking);
+        image_back = findViewById(R.id.image_back);
 
         Intent intent = getIntent();
         subcategoryid = intent.getStringExtra("sub_category");
@@ -68,6 +71,14 @@ public class Subcategory_Product extends AppCompatActivity {
 
         showSubCateGory(subcategoryid);
 
+        image_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(Subcategory_Product.this, Subcategory.class);
+                startActivity(intent);
+            }
+        });
 
 
        /* button1.setOnClickListener(new View.OnClickListener() {
@@ -122,7 +133,7 @@ public class Subcategory_Product extends AppCompatActivity {
                         String categoryname = jsonObject.getString("category_name");
                         String item_status = jsonObject.getString("item_status");
 
-                        looking.setText(categoryname);
+                        looking.setText("What is your "+" "+ categoryname +" "+"type ?");
 
                         String result = jsonObject.getString("result");
 

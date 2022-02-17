@@ -65,10 +65,10 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
     ImageView imageBack;
 
     Button btn_paynow;
-    String str_TotalPrice,str_name,str_mobileno,str_workingcity,str_address,userid;
+    String str_TotalPrice,str_name,str_mobileno,str_workingcity,str_address,userid,services_Id,booking_id;
     SharedPreference sharedPreference;
 
-    TextView subTotalPrice,TotalPrice,CompleteAddress,name,mobileno;
+    TextView subTotalPrice,TotalPrice,CompleteAddress,name,mobileno,btn_payvisit;
 
     ArrayList<String> servicesId = new ArrayList<>();
 
@@ -85,6 +85,7 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
         orderDetailsRecycler = findViewById(R.id.orderDetailsRecycler);
        // addressRecycler = findViewById(R.id.addressRecycler);
         btn_paynow = findViewById(R.id.btn_paynow);
+        btn_payvisit = findViewById(R.id.btn_payvisit);
         subTotalPrice = findViewById(R.id.subTotalPrice);
         TotalPrice = findViewById(R.id.TotalPrice);
         CompleteAddress = findViewById(R.id.CompleteAddress);
@@ -110,6 +111,21 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
         servicesId = gson.fromJson(json, type);
 
         Log.d("servicesId1",servicesId.toString());
+
+        StringBuffer sb = new StringBuffer();
+
+        for (String s : servicesId) {
+
+            sb.append(s);
+            sb.append(" ");
+        }
+
+        services_Id = sb.toString();
+
+        // remove last character (,)
+        services_Id = services_Id.substring(0, services_Id.length() -1);
+
+        Log.d("servicesId12",services_Id);
 
         sharedPreference = new SharedPreference();
 
@@ -150,11 +166,19 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
             @Override
             public void onClick(View v) {
 
-                billingDetails(userid,str_TotalPrice,str_TotalPrice,str_name,str_mobileno,str_address,str_address,"0","0");
+                billingDetails(userid,str_TotalPrice,str_TotalPrice,str_name,str_mobileno,str_address,str_address,"0","0","PayNow");
 
             }
         });
 
+        btn_payvisit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                billingDetails(userid,str_TotalPrice,str_TotalPrice,str_name,str_mobileno,str_address,str_address,"0","0","PayVisit");
+
+            }
+        });
          amount = Math.round(Float.parseFloat(str_TotalPrice) * 100);
 
     }
@@ -268,10 +292,10 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
     }
 
     public void billingDetails(String userid,String total,String subTotal,String name,String mobileNo,
-                               String address,String userAddress,String CGST,String IGST) {
+                               String address,String userAddress,String CGST,String IGST,String paymentmethod) {
 
         ProgressDialog dialog = new ProgressDialog(BillingDetails.this);
-        dialog.setMessage("Register Please wait...");
+        dialog.setMessage("Book Now Please wait...");
         dialog.show();
 
         JSONObject jsonObject = new JSONObject();
@@ -279,7 +303,7 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
         try{
 
             jsonObject.put("user_id",userid);
-            jsonObject.put("product",String.valueOf(servicesId));
+            jsonObject.put("product",services_Id);
             jsonObject.put("total",total);
             jsonObject.put("subtotal",subTotal);
             jsonObject.put("name",name);
@@ -289,8 +313,8 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
             jsonObject.put("cgst","0");
             jsonObject.put("igst","0");
 
-            Log.d("Ranjeet_input",userid+total+subTotal+name+mobileNo+address);
-            Log.d("input",servicesId.toString());
+            Log.d("Ranjeet_input",userid+total+subTotal+name+mobileNo+address+services_Id);
+            Log.d("input",services_Id);
 
         }catch(Exception e){
 
@@ -313,9 +337,18 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
 
                         Toast.makeText(BillingDetails.this, message, Toast.LENGTH_SHORT).show();
 
-                        String booking_id = response.getString("booking_id");
+                        booking_id = response.getString("booking_id");
 
-                        startPayment();
+                        Intent intent = new Intent(BillingDetails.this,PaymentSuccessFully.class);
+                        intent.putExtra("paymentmethod",paymentmethod);
+                        intent.putExtra("booking_id",booking_id);
+                        startActivity(intent);
+
+                        if(paymentmethod.equals("PayNow")){
+
+                            startPayment();
+
+                        }
 
                     }
 
@@ -351,8 +384,10 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
         try {
             
             Toast.makeText(this, "Payment Successful: " + razorpayPaymentID, Toast.LENGTH_SHORT).show();
-            Intent i = new Intent(BillingDetails.this, PaymentSuccessFully.class);
-            startActivity(i);
+            Intent intent = new Intent(BillingDetails.this,PaymentSuccessFully.class);
+            intent.putExtra("paymentmethod","PayNow");
+            intent.putExtra("booking_id",booking_id);
+            startActivity(intent);
             finish();
 
         } catch (Exception e) {

@@ -1,3 +1,4 @@
+
 package com.example.apniseva.activity;
 
 import android.Manifest;
@@ -258,7 +259,9 @@ public class UserDetails extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
 
+        finish();
     }
 
     public void profileImageUpload(final Bitmap bitmap) {

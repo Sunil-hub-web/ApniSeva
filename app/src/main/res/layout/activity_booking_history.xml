@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.BookingHistory">
+
+    <ImageView
+        android:id="@+id/image_back"
+        android:layout_width="@dimen/thirty"
+        android:layout_height="@dimen/forty"
+        android:layout_marginLeft="@dimen/twenty"
+        android:layout_marginTop="@dimen/twenty"
+        android:scaleType="fitXY"
+        android:src="@drawable/left_arrowh"></ImageView>
+
+    <RelativeLayout
+        android:id="@+id/heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/thirty">
+
+        <TextView
+            android:id="@+id/textName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/twenty"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Booking Details"
+            android:textColor="#000000"
+            android:textSize="@dimen/twenty_size"
+            android:textStyle="bold">
+
+        </TextView>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:layout_below="@+id/heading"
+        android:layout_marginTop="@dimen/fifteen">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/card1">
+
+
+                <TextView
+                    android:id="@+id/text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/fifteen"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="Booking Id"
+                    android:textColor="#595656"
+                    android:textSize="@dimen/textsize"
+                    android:textStyle="bold"></TextView>
+
+                <TextView
+                    android:id="@+id/bookingid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/text"
+                    android:layout_margin="@dimen/fifteen"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="Booking Id"
+                    android:textColor="#595656"
+                    android:textSize="@dimen/textsize"
+                    android:textStyle="bold"></TextView>
+
+                <Button
+                    android:id="@+id/btn_AddAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/forty"
+                    android:layout_margin="@dimen/fifteen"
+                    android:layout_alignParentRight="true"
+                    android:text="Order Confirmed"
+                    android:backgroundTint="#07B80E"
+                    android:textColor="@color/white"
+                    android:layout_gravity="right"
+                    android:padding="@dimen/ten"
+                    android:textSize="@dimen/twelve_size"
+                    android:textStyle="bold"
+                    android:background="@drawable/bookingbtn_bg"
+                    android:fontFamily="@font/montserrat_semibold"></Button>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/text2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/twenty"
+                android:layout_marginTop="@dimen/fifteen"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Order Details"
+                android:textColor="#000000"
+                android:textSize="@dimen/edittextsize"
+                android:textStyle="bold"
+                android:layout_below="@+id/card1">
+
+            </TextView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/orderDetailsRecycler"
+                android:layout_below="@+id/text2"
+                android:layout_marginTop="@dimen/ten">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <RelativeLayout
+                android:id="@+id/total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/orderDetailsRecycler"
+                android:layout_marginBottom="@dimen/fifteen">
+
+
+                <RelativeLayout
+                    android:id="@+id/r5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/five"
+                    android:layout_marginRight="@dimen/eight">
+
+                    <TextView
+                        android:id="@+id/subTotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:text="Sub Total :"
+                        android:textColor="#595656"
+                        android:textSize="@dimen/textsize"
+                        android:layout_marginLeft="@dimen/ten"
+                        android:textStyle="bold"></TextView>
+
+                    <TextView
+                        android:id="@+id/priceSymbol1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/fifty"
+                        android:layout_toRightOf="@+id/subTotal"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="Rs"
+                        android:textColor="#595656"
+                        android:textSize="@dimen/textsize"
+                        android:textStyle="bold"></TextView>
+
+                    <TextView
+                        android:id="@+id/subTotalPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/ten"
+                        android:layout_toRightOf="@id/priceSymbol1"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="145.00"
+                        android:textColor="#595656"
+                        android:textSize="@dimen/textsize"
+                        android:textStyle="bold"></TextView>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/r8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/r5"
+                    android:layout_marginTop="@dimen/ten"
+                    android:visibility="visible"
+                    android:layout_marginRight="@dimen/ten">
+
+                    <TextView
+                        android:id="@+id/igst"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/twelve"
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:text="Pay On visit :"
+                        android:textColor="#595656"
+                        android:textSize="@dimen/textsize"
+                        android:textStyle="bold"></TextView>
+
+                    <TextView
+                        android:id="@+id/priceSymbol4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/thirty"
+                        android:layout_toRightOf="@+id/igst"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="Rs"
+                        android:textColor="#595656"
+                        android:textSize="@dimen/textsize"
+                        android:textStyle="bold"></TextView>
+
+                    <TextView
+                        android:id="@+id/subTotalPrice4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/ten"
+                        android:layout_toRightOf="@id/priceSymbol4"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="0.00"
+                        android:textColor="#595656"
+                        android:textSize="@dimen/textsize"
+                        android:textStyle="bold"></TextView>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/r7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/r8"
+                    android:layout_marginTop="@dimen/fifteen"
+                    android:layout_marginRight="@dimen/ten">
+
+                    <TextView
+                        android:id="@+id/subTotal2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/fifteen"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="TOTAL :"
+                        android:textColor="#000000"
+                        android:textSize="@dimen/textsize"
+                        android:textStyle="bold"></TextView>
+
+                    <TextView
+                        android:id="@+id/priceSymbol3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/seventy"
+                        android:layout_toRightOf="@+id/subTotal2"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="Rs"
+                        android:textColor="#000000"
+                        android:textSize="@dimen/textsize"
+                        android:textStyle="bold"></TextView>
+
+                    <TextView
+                        android:id="@+id/TotalPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/ten"
+                        android:layout_toRightOf="@id/priceSymbol3"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="145.00"
+                        android:textColor="#000000"
+                        android:textSize="@dimen/textsize"
+                        android:textStyle="bold"></TextView>
+
+                </RelativeLayout>
+
+
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/twenty"
+                android:layout_marginTop="@dimen/fifteen"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Booking Address &amp; Contact Details Shared By You"
+                android:textColor="#000000"
+                android:textSize="@dimen/edittextsize"
+                android:textStyle="bold"
+                android:layout_below="@+id/total">
+
+            </TextView>
+
+            <RelativeLayout
+                android:id="@+id/add_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/twenty"
+                android:layout_marginTop="@dimen/twenty"
+                android:layout_below="@+id/address"
+                android:layout_marginBottom="@dimen/fifteen">
+
+
+                <RelativeLayout
+                    android:id="@+id/nameadddetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/five"
+                    android:layout_marginRight="@dimen/eight">
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:text="Name:"
+                        android:textColor="#595656"
+                        android:textSize="@dimen/textsize"
+                        android:layout_marginLeft="@dimen/ten"
+                        android:textStyle="bold"></TextView>
+
+                    <TextView
+                        android:id="@+id/text_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/seventy"
+                        android:layout_toRightOf="@+id/name"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="Sunil kumar"
+                        android:textColor="#595656"
+                        android:textSize="@dimen/textsize"
+                        android:textStyle="bold"></TextView>
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/mobileadddetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/nameadddetails"
+                    android:layout_marginTop="@dimen/ten"
+                    android:visibility="visible"
+                    android:layout_marginRight="@dimen/ten">
+
+                    <TextView
+                        android:id="@+id/mobile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/twelve"
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:text="Mobile No:"
+                        android:textColor="#595656"
+                        android:textSize="@dimen/textsize"
+                        android:textStyle="bold"></TextView>
+
+                    <TextView
+                        android:id="@+id/text_MobileNo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/forty"
+                        android:layout_toRightOf="@+id/mobile"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="1234567890"
+                        android:textColor="#595656"
+                        android:textSize="@dimen/textsize"
+                        android:textStyle="bold"></TextView>
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/adddetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cityadddetails"
+                    android:layout_marginTop="@dimen/ten"
+                    android:layout_marginRight="@dimen/ten">
+
+                    <TextView
+                        android:id="@+id/address_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/fifteen"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="Address :"
+                        android:textColor="#595656"
+                        android:textSize="@dimen/textsize"
+                        android:textStyle="bold"></TextView>
+
+                    <TextView
+                        android:id="@+id/text_address_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/fifty"
+                        android:layout_toRightOf="@+id/address_details"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="Bhubanesware"
+                        android:textColor="#595656"
+                        android:textSize="@dimen/textsize"
+                        android:textStyle="bold"></TextView>
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/cityadddetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/mobileadddetails"
+                    android:layout_marginTop="@dimen/ten"
+                    android:layout_marginRight="@dimen/ten">
+
+                    <TextView
+                        android:id="@+id/city"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/fifteen"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="City :"
+                        android:textColor="#595656"
+                        android:textSize="@dimen/textsize"
+                        android:textStyle="bold"></TextView>
+
+                    <TextView
+                        android:id="@+id/text_city"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/eighty"
+                        android:layout_toRightOf="@+id/city"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="Bhubanesware"
+                        android:textColor="#595656"
+                        android:textSize="@dimen/textsize"
+                        android:textStyle="bold"></TextView>
+
+
+                </RelativeLayout>
+
+
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+
+
+
+
+</RelativeLayout>

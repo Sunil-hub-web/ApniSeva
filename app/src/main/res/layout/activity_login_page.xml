@@ -104,21 +104,21 @@
 
             </TextView>
 
-            <Button
-                android:id="@+id/btn_signin"
-                android:layout_width="@dimen/two_hundred"
-                android:layout_height="@dimen/forty_five"
-                android:layout_below="@+id/text_ForgotPassword"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/twenty_five"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/loginback"
-                android:text="LOGIN"
-                android:fontFamily="@font/avenirlt65medium"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                ></Button>
+                <Button
+                    android:id="@+id/btn_signin"
+                    android:layout_width="@dimen/two_hundred"
+                    android:layout_height="@dimen/forty_five"
+                    android:layout_below="@+id/text_ForgotPassword"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/twenty_five"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/loginback"
+                    android:text="LOGIN"
+                    android:fontFamily="@font/avenirlt65medium"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    ></Button>
 
             <TextView
                 android:id="@+id/text_viaotp"

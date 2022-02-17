@@ -193,34 +193,34 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        bottomNavigation.setSelectedItemId(R.id.home);
+            bottomNavigation.setSelectedItemId(R.id.home);
 
-        bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                switch (item.getItemId()) {
+                    switch (item.getItemId()) {
 
-                    case R.id.home:
-                        return true;
+                        case R.id.home:
+                            return true;
 
-                    case R.id.profile:
+                        case R.id.profile:
 
-                        startActivity(new Intent(getApplicationContext(), UserDetails.class));
-                        overridePendingTransition(0, 0);
-                        return true;
+                            startActivity(new Intent(getApplicationContext(), UserDetails.class));
+                            overridePendingTransition(0, 0);
+                            return true;
 
-                    case R.id.orders:
+                        case R.id.orders:
 
-                        startActivity(new Intent(getApplicationContext(), BookingDetails.class));
-                        overridePendingTransition(0, 0);
-                        return true;
+                            startActivity(new Intent(getApplicationContext(), BookingDetails.class));
+                            overridePendingTransition(0, 0);
+                            return true;
 
+                    }
+
+                    return false;
                 }
-
-                return false;
-            }
-        });
+            });
 
         img_editLocation.setOnClickListener(new View.OnClickListener() {
             @Override
