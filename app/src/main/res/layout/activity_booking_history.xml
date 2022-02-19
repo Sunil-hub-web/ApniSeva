@@ -77,8 +77,8 @@
                     android:textSize="@dimen/textsize"
                     android:textStyle="bold"></TextView>
 
-                <Button
-                    android:id="@+id/btn_AddAddress"
+                <TextView
+                    android:id="@+id/text_orderConfirmed"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/forty"
                     android:layout_margin="@dimen/fifteen"
@@ -91,7 +91,7 @@
                     android:textSize="@dimen/twelve_size"
                     android:textStyle="bold"
                     android:background="@drawable/bookingbtn_bg"
-                    android:fontFamily="@font/montserrat_semibold"></Button>
+                    android:fontFamily="@font/montserrat_semibold"></TextView>
 
             </RelativeLayout>
 
@@ -113,7 +113,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/orderDetailsRecycler"
+                android:id="@+id/recyclerBookingHistory"
                 android:layout_below="@+id/text2"
                 android:layout_marginTop="@dimen/ten">
 
@@ -124,7 +124,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_below="@+id/orderDetailsRecycler"
+                android:layout_below="@+id/recyclerBookingHistory"
                 android:layout_marginBottom="@dimen/fifteen">
 
 
@@ -205,7 +205,7 @@
                         android:textStyle="bold"></TextView>
 
                     <TextView
-                        android:id="@+id/subTotalPrice4"
+                        android:id="@+id/payonvisite"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/ten"

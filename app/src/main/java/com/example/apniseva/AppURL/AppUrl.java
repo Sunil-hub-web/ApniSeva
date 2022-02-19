@@ -26,4 +26,8 @@ public class AppUrl {
 
     public static final String updateProfileImage = "https://apniseva.com/api/profilepic-update";
 
+    public static final String bookingDetails = "https://apniseva.com/api/bookDetails";
+
+    public static final String bookingHistory = "https://apniseva.com/api/bookhistory";
+
 }

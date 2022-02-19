@@ -56,23 +56,26 @@ import java.util.Map;
 
 public class BillingDetails extends AppCompatActivity implements PaymentResultListener {
 
-    RecyclerView orderDetailsRecycler,addressRecycler;
+    RecyclerView orderDetailsRecycler, addressRecycler;
     OrderDetailsAdapter orderDetailsAdapter;
     AddressDetailsAdapter addressDetailsAdapter;
     ArrayList<CartItem> order = new ArrayList<>();
     ArrayList<AddressDetails_ModelClass> address = new ArrayList<>();
-    LinearLayoutManager linearLayoutManager,linearLayoutManager1;
+    LinearLayoutManager linearLayoutManager, linearLayoutManager1;
     ImageView imageBack;
 
     Button btn_paynow;
-    String str_TotalPrice,str_name,str_mobileno,str_workingcity,str_address,userid,services_Id,booking_id;
+    String str_TotalPrice, str_name, str_mobileno, str_workingcity, str_address, userid, services_Id,
+            booking_id, int_totalamount,str_Email;
     SharedPreference sharedPreference;
 
-    TextView subTotalPrice,TotalPrice,CompleteAddress,name,mobileno,btn_payvisit;
+    TextView subTotalPrice, TotalPrice, CompleteAddress, name, mobileno, btn_payvisit;
 
     ArrayList<String> servicesId = new ArrayList<>();
 
     int amount;
+
+    double subtotal = 0, total = 0, totalAmount = 0;
 
     private static final String TAG = BillingDetails.class.getSimpleName();
 
@@ -83,7 +86,7 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
         setContentView(R.layout.billingdetails);
 
         orderDetailsRecycler = findViewById(R.id.orderDetailsRecycler);
-       // addressRecycler = findViewById(R.id.addressRecycler);
+        // addressRecycler = findViewById(R.id.addressRecycler);
         btn_paynow = findViewById(R.id.btn_paynow);
         btn_payvisit = findViewById(R.id.btn_payvisit);
         subTotalPrice = findViewById(R.id.subTotalPrice);
@@ -107,25 +110,26 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
         SharedPreferences sharedPreferences_services = getSharedPreferences("shared preferences", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences_services.getString("task list", null);
-        Type type = new TypeToken<ArrayList<String>>() {}.getType();
+        Type type = new TypeToken<ArrayList<String>>() {
+        }.getType();
         servicesId = gson.fromJson(json, type);
 
-        Log.d("servicesId1",servicesId.toString());
+        Log.d("servicesId1", servicesId.toString());
 
         StringBuffer sb = new StringBuffer();
 
         for (String s : servicesId) {
 
             sb.append(s);
-            sb.append(" ");
+            sb.append(",");
         }
 
         services_Id = sb.toString();
 
         // remove last character (,)
-        services_Id = services_Id.substring(0, services_Id.length() -1);
+        services_Id = services_Id.substring(0, services_Id.length() - 1);
 
-        Log.d("servicesId12",services_Id);
+        Log.d("servicesId12", services_Id);
 
         sharedPreference = new SharedPreference();
 
@@ -138,20 +142,39 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
         str_address = intent.getStringExtra("address");
         str_workingcity = intent.getStringExtra("workingcity");
         str_TotalPrice = intent.getStringExtra("subtotal");
+        str_Email = SharedPrefManager.getInstance(BillingDetails.this).getUser().getEmailId();
+
+        subtotal = Float.valueOf(str_TotalPrice);
+        total = (subtotal / 100) * 5;
+        totalAmount = subtotal + total;
+        int_totalamount = String.valueOf(totalAmount);
+
+        btn_payvisit.setText("Pay On Visit"+" "+int_totalamount);
+        btn_paynow.setText("Pay Now"+" "+str_TotalPrice);
+
 
         name.setText(str_name);
-        TotalPrice.setText(str_TotalPrice +"("+"gst inclucded"+")");
+        TotalPrice.setText(str_TotalPrice + "(" + "gst inclucded" + ")");
         subTotalPrice.setText(str_TotalPrice);
         mobileno.setText(str_mobileno);
         CompleteAddress.setText(str_address);
 
         userid = SharedPrefManager.getInstance(BillingDetails.this).getUser().getUserid();
 
-        linearLayoutManager = new LinearLayoutManager(BillingDetails.this,LinearLayoutManager.VERTICAL,false);
-        orderDetailsAdapter = new OrderDetailsAdapter(BillingDetails.this,order);
-        orderDetailsRecycler.setLayoutManager(linearLayoutManager);
-        orderDetailsRecycler.setHasFixedSize(true);
-        orderDetailsRecycler.setAdapter(orderDetailsAdapter);
+        if(order.size() != 0){
+
+            linearLayoutManager = new LinearLayoutManager(BillingDetails.this, LinearLayoutManager.VERTICAL, false);
+            orderDetailsAdapter = new OrderDetailsAdapter(BillingDetails.this, order);
+            orderDetailsRecycler.setLayoutManager(linearLayoutManager);
+            orderDetailsRecycler.setHasFixedSize(true);
+            orderDetailsRecycler.setAdapter(orderDetailsAdapter);
+
+        }else{
+
+            Toast.makeText(this, "Data Not Found", Toast.LENGTH_SHORT).show();
+        }
+
+
 
 
 /*
@@ -166,8 +189,8 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
             @Override
             public void onClick(View v) {
 
-                billingDetails(userid,str_TotalPrice,str_TotalPrice,str_name,str_mobileno,str_address,str_address,"0","0","PayNow");
-
+                amount = Math.round(Float.parseFloat(str_TotalPrice) * 100);
+                startPayment(amount);
             }
         });
 
@@ -175,88 +198,15 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
             @Override
             public void onClick(View v) {
 
-                billingDetails(userid,str_TotalPrice,str_TotalPrice,str_name,str_mobileno,str_address,str_address,"0","0","PayVisit");
+                billingDetails(userid, int_totalamount, str_TotalPrice, str_name, str_mobileno, str_address, str_address, "0", "0", "PayVisit", "false");
 
             }
         });
-         amount = Math.round(Float.parseFloat(str_TotalPrice) * 100);
+
 
     }
 
-   /* public void billingDetails(String userid,String total,String subTotal,String name,String mobileNo,
-                               String address,String userAddress,String CGST,String IGST){
-
-
-        ProgressDialog progressDialog = new ProgressDialog(BillingDetails.this);
-        progressDialog.setMessage("Update User Details Please wait...");
-        progressDialog.show();
-
-
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppUrl.viewUserProfile, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-
-                progressDialog.dismiss();
-
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    String success = jsonObject.getString("success");
-
-                    if(success.equals("true")){
-
-                        String message = jsonObject.getString("message");
-
-                        Toast.makeText(BillingDetails.this, message, Toast.LENGTH_SHORT).show();
-
-                        String booking_id = jsonObject.getString("booking_id");
-
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                progressDialog.dismiss();
-                error.printStackTrace();
-
-                Toast.makeText(BillingDetails.this, "Your user id not found", Toast.LENGTH_SHORT).show();
-
-            }
-        }){
-
-            @Override
-            protected Map<String, Object> getParams() throws AuthFailureError {
-
-                Map<String,Object> params = new HashMap<>();
-
-                params.put("user_id",userid);
-                params.put("product[0]",servicesId);
-                params.put("total",total);
-                params.put("subtotal",subTotal);
-                params.put("name",name);
-                params.put("mobile",mobileNo);
-                params.put("address",address);
-                params.put("useraddress",userAddress);
-                params.put("cgst",CGST);
-                params.put("igst",IGST);
-
-                return params;
-            }
-        };
-
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(30000,3,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        RequestQueue requestQueue = Volley.newRequestQueue(BillingDetails.this);
-        requestQueue.add(stringRequest);
-
-    }*/
-
-    public void startPayment() {
+    public void startPayment(int amount) {
         /*
           You need to pass current activity in order to let Razorpay create CheckoutActivity
          */
@@ -269,7 +219,7 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
             JSONObject options = new JSONObject();
             options.put("name", "Razorpay Corp");
             options.put("description", "Demoing Charges");
-            options.put("send_sms_hash",true);
+            options.put("send_sms_hash", true);
             options.put("allow_rotation", true);
             //You can omit the image option to fetch the image from dashboard
             options.put("image", "https://s3.amazonaws.com/rzp-mobile/images/rzp.png");
@@ -277,7 +227,7 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
             options.put("amount", amount);
 
             JSONObject preFill = new JSONObject();
-            preFill.put("email", "team.apniseva@gmail.com");
+            preFill.put("email", str_Email);
             preFill.put("contact", str_mobileno);
 
             options.put("prefill", preFill);
@@ -291,8 +241,8 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
         }
     }
 
-    public void billingDetails(String userid,String total,String subTotal,String name,String mobileNo,
-                               String address,String userAddress,String CGST,String IGST,String paymentmethod) {
+    public void billingDetails(String userid, String total, String subTotal, String name, String mobileNo,
+                               String address, String userAddress, String CGST, String IGST, String paymentmethod, String paymentId) {
 
         ProgressDialog dialog = new ProgressDialog(BillingDetails.this);
         dialog.setMessage("Book Now Please wait...");
@@ -300,23 +250,24 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
 
         JSONObject jsonObject = new JSONObject();
 
-        try{
+        try {
 
-            jsonObject.put("user_id",userid);
-            jsonObject.put("product",services_Id);
-            jsonObject.put("total",total);
-            jsonObject.put("subtotal",subTotal);
-            jsonObject.put("name",name);
-            jsonObject.put("mobile",mobileNo);
-            jsonObject.put("address",address);
-            jsonObject.put("useraddress",userAddress);
-            jsonObject.put("cgst","0");
-            jsonObject.put("igst","0");
+            jsonObject.put("user_id", userid);
+            jsonObject.put("product", services_Id);
+            jsonObject.put("total", total);
+            jsonObject.put("subtotal", subTotal);
+            jsonObject.put("name", name);
+            jsonObject.put("mobile", mobileNo);
+            jsonObject.put("address", address);
+            jsonObject.put("useraddress", userAddress);
+            jsonObject.put("cgst", "0");
+            jsonObject.put("igst", "0");
+            jsonObject.put("online_pay_id", paymentId);
 
-            Log.d("Ranjeet_input",userid+total+subTotal+name+mobileNo+address+services_Id);
-            Log.d("input",services_Id);
+            Log.d("Ranjeet_input", userid + total + subTotal + name + mobileNo + address + services_Id);
+            Log.d("input", services_Id);
 
-        }catch(Exception e){
+        } catch (Exception e) {
 
             e.printStackTrace();
         }
@@ -331,7 +282,7 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
 
                     String success = response.getString("success");
 
-                    if(success.equals("true")){
+                    if (success.equals("true")) {
 
                         String message = response.getString("message");
 
@@ -339,22 +290,18 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
 
                         booking_id = response.getString("booking_id");
 
-                        Intent intent = new Intent(BillingDetails.this,PaymentSuccessFully.class);
-                        intent.putExtra("paymentmethod",paymentmethod);
-                        intent.putExtra("booking_id",booking_id);
-                        startActivity(intent);
 
-                        if(paymentmethod.equals("PayNow")){
-
-                            startPayment();
-
-                        }
+                            Intent intent = new Intent(BillingDetails.this, PaymentSuccessFully.class);
+                            intent.putExtra("paymentmethod", paymentmethod);
+                            intent.putExtra("booking_id", booking_id);
+                            startActivity(intent);
+                            finish();
 
                     }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Log.d("Ranjeet",e.toString());
+                    Log.d("Ranjeet", e.toString());
                 }
 
 
@@ -367,13 +314,13 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
 
                 error.printStackTrace();
 
-                Toast.makeText(BillingDetails.this, ""+error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(BillingDetails.this, "" + error, Toast.LENGTH_SHORT).show();
 
-                Log.d("error",error.toString());
+                Log.d("error", error.toString());
 
             }
         });
-        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(30000,3,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(30000, 3, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         RequestQueue requestQueue = Volley.newRequestQueue(BillingDetails.this);
         requestQueue.add(jsonObjectRequest);
     }
@@ -382,13 +329,10 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
     public void onPaymentSuccess(String razorpayPaymentID) {
 
         try {
-            
+
             Toast.makeText(this, "Payment Successful: " + razorpayPaymentID, Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(BillingDetails.this,PaymentSuccessFully.class);
-            intent.putExtra("paymentmethod","PayNow");
-            intent.putExtra("booking_id",booking_id);
-            startActivity(intent);
-            finish();
+
+            billingDetails(userid, str_TotalPrice, str_TotalPrice, str_name, str_mobileno, str_address, str_address, "0", "0", "PayNow", razorpayPaymentID);
 
         } catch (Exception e) {
 
@@ -399,7 +343,7 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
     }
 
     @Override
-    public void onPaymentError(int code , String response) {
+    public void onPaymentError(int code, String response) {
 
         try {
             Toast.makeText(this, "Payment failed: " + code + " " + response, Toast.LENGTH_LONG).show();

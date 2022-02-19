@@ -88,94 +88,18 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/fifteen">
+                android:layout_below="@+id/text_Services">
 
-                <TextView
-                    android:id="@+id/text_ProductName"
-                    android:layout_width="wrap_content"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/fifteen"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:text="Split AC services"
-                    android:textColor="#717070"
-                    android:textSize="@dimen/edittextsize">
+                    android:id="@+id/recyclerBookingHistory"
+                    android:layout_margin="@dimen/ten">
 
-                </TextView>
-
-                <TextView
-                    android:id="@+id/text_Symbol"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/ten"
-                    android:layout_toLeftOf="@id/text_Price"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:text="Rs"
-                    android:textColor="#717070"
-                    android:textSize="@dimen/textsize">
-
-                </TextView>
-
-                <TextView
-                    android:id="@+id/text_Price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginLeft="@dimen/ten"
-                    android:layout_marginRight="@dimen/twenty"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:text="599.00"
-                    android:textColor="#717070"
-                    android:textSize="@dimen/textsize">
-
-                </TextView>
+                </androidx.recyclerview.widget.RecyclerView>
 
             </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/ten">
-
-                <TextView
-                    android:id="@+id/text_ProductName1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/fifteen"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:text="Split AC services"
-                    android:textColor="#717070"
-                    android:textSize="@dimen/edittextsize">
-
-                </TextView>
-
-                <TextView
-                    android:id="@+id/text_Symbol1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/ten"
-                    android:layout_toLeftOf="@id/text_Price1"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:text="Rs"
-                    android:textColor="#717070"
-                    android:textSize="@dimen/textsize">
-
-                </TextView>
-
-                <TextView
-                    android:id="@+id/text_Price1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginLeft="@dimen/ten"
-                    android:layout_marginRight="@dimen/twenty"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:text="599.00"
-                    android:textColor="#717070"
-                    android:textSize="@dimen/textsize">
-
-                </TextView>
-
-            </RelativeLayout>
 
 
             <LinearLayout
@@ -183,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:weightSum="2"
                 android:layout_gravity="bottom"
-                android:layout_marginTop="@dimen/twenty_five">
+                android:layout_marginTop="@dimen/five">
 <!--
                 <Button
                     android:id="@+id/btn_Rate"

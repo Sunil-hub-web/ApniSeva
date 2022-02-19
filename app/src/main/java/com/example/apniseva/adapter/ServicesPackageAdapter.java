@@ -127,11 +127,12 @@ public class ServicesPackageAdapter extends RecyclerView.Adapter<ServicesPackage
 
                     SubCategoryPriceDetails.price.setText(str_amount);
 
-                    sharedPreference.removeFavorite(context, position);
+                    //sharedPreference.removeFavorite(context, position);
 
                     servicesItem.remove(position);
 
                     servicesid.remove(position);
+
                     notifyDataSetChanged();
 
                     Log.d("servicesid", servicesid.toString());

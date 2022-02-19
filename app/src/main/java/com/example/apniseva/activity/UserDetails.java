@@ -415,7 +415,8 @@ public class UserDetails extends AppCompatActivity {
                         String mobile = jsonObject.getString("mobile");
                         String image = jsonObject.getString("image");
 
-                        Picasso.with(UserDetails.this).load(image)
+                        Picasso.with(UserDetails.this).load(image).
+                                 placeholder(R.drawable.profileimage)
                                 .into(profile_image);
 
                         text_UserName.setText(name);

@@ -1,6 +1,7 @@
 package com.example.apniseva.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,10 +10,15 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.apniseva.R;
+import com.example.apniseva.activity.BillingDetails;
+import com.example.apniseva.activity.BookingHistory;
+import com.example.apniseva.activity.PaymentSuccessFully;
 import com.example.apniseva.modelclass.BookingDetails_ModelClass;
+import com.example.apniseva.modelclass.OrderItem_ModelClass;
 
 import java.util.ArrayList;
 
@@ -20,6 +26,9 @@ public class BookingDetailsAdapter extends RecyclerView.Adapter<BookingDetailsAd
 
        Context context;
        ArrayList<BookingDetails_ModelClass> bookingDetails;
+       OrderItemAdapter orderItemAdapter;
+       ArrayList<OrderItem_ModelClass> orderitem;
+       String booking_ad = "BookingAdapter";
 
     public BookingDetailsAdapter(Context context, ArrayList<BookingDetails_ModelClass> bookingDetails) {
 
@@ -41,22 +50,31 @@ public class BookingDetailsAdapter extends RecyclerView.Adapter<BookingDetailsAd
 
         BookingDetails_ModelClass booking = bookingDetails.get(position);
 
-        holder.text_BookingId.setText(booking.getBookingId());
-        holder.text_Services.setText(booking.getServicesType());
-        holder.text_ProductName.setText(booking.getServicesName());
-        holder.text_Price.setText(booking.getPrice());
+        holder.text_BookingId.setText("#"+booking.getOrder_id());
 
-        holder.text_bookingStatues.setText(booking.getBookingStatues());
+        holder.text_bookingStatues.setText(booking.getWork_status());
 
-        if(booking.getBookingStatues().equals("canceled")){
+        orderitem = new ArrayList<>();
+        orderitem = booking.getOrderitem();
 
-            holder.text_bookingStatues.setTextColor(Color.RED);
-        }
-        else if(booking.getBookingStatues().equals("booked")){
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+        orderItemAdapter = new OrderItemAdapter(context, orderitem,booking_ad);
+        holder.recyclerBookingHistory.setLayoutManager(linearLayoutManager);
+        holder.recyclerBookingHistory.setHasFixedSize(true);
+        holder.recyclerBookingHistory.setAdapter(orderItemAdapter);
 
-            holder.text_bookingStatues.setTextColor(Color.BLUE);
 
-        }
+
+        holder.btn_Reorder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent1 = new Intent(context, BookingHistory.class);
+                intent1.putExtra("booking_id",booking.getOrder_id());
+                context.startActivity(intent1);
+            }
+        });
+
 
     }
 
@@ -67,18 +85,17 @@ public class BookingDetailsAdapter extends RecyclerView.Adapter<BookingDetailsAd
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView text_BookingId,text_Services,text_ProductName,text_Price,text_bookingStatues;
-        Button btn_Rate,btn_Reorder;
+        TextView text_BookingId,text_bookingStatues;
+        Button btn_Reorder;
+        RecyclerView recyclerBookingHistory;
 
         public ViewHolder(@NonNull  View itemView) {
             super(itemView);
 
             text_BookingId = itemView.findViewById(R.id.text_BookingId);
-            text_Services = itemView.findViewById(R.id.text_Services);
-            text_ProductName = itemView.findViewById(R.id.text_ProductName);
-            text_Price = itemView.findViewById(R.id.text_Price);
             text_bookingStatues = itemView.findViewById(R.id.text_bookingStatues);
             btn_Reorder = itemView.findViewById(R.id.btn_Reorder);
+            recyclerBookingHistory = itemView.findViewById(R.id.recyclerBookingHistory);
         }
     }
 }

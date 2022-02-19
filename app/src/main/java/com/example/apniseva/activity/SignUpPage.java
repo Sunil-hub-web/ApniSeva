@@ -173,7 +173,7 @@ public class SignUpPage extends AppCompatActivity {
             jsonObject.put("name", userName);
             jsonObject.put("email", email);
             jsonObject.put("mobile", mobileNo);
-            jsonObject.put("Password", password);
+            jsonObject.put("password", password);
 
         } catch (Exception e) {
 

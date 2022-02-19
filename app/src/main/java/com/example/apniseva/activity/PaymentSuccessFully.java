@@ -45,6 +45,7 @@ public class PaymentSuccessFully extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent1 = new Intent(PaymentSuccessFully.this,BookingHistory.class);
+                intent1.putExtra("booking_id",booking_id);
                 startActivity(intent1);
             }
         });

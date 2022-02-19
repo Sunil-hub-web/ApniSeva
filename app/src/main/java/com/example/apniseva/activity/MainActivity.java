@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.text.Html;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -47,6 +48,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.apniseva.AppURL.AppUrl;
 import com.example.apniseva.R;
+import com.example.apniseva.SharedPrefManager;
 import com.example.apniseva.adapter.BannerAdapter;
 import com.example.apniseva.adapter.CustomerReviewAdapter;
 import com.example.apniseva.adapter.OurServicesAdapter;
@@ -101,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
     LocationManager locationManager;
     FusedLocationProviderClient fusedLocationProviderClient;
     Double latitude, longitude;
-    String YourAddress;
+    String YourAddress,username,password;
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -131,6 +133,11 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         YourAddress = intent.getStringExtra("YourAddress");
+
+        username = SharedPrefManager.getInstance(MainActivity.this).getUser().getMobileNo();
+        password = SharedPrefManager.getInstance(MainActivity.this).getUser().getPassword();
+
+        Log.d("password",password + username);
 
         if (YourAddress != null) {
 
