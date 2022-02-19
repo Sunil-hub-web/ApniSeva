@@ -162,6 +162,8 @@ public class BookingDetails extends AppCompatActivity {
                         }else{
 
                             linearLayoutManager = new LinearLayoutManager(BookingDetails.this,LinearLayoutManager.VERTICAL,false);
+                            linearLayoutManager.setReverseLayout(true);
+                            linearLayoutManager.setStackFromEnd(true);
                             bookingDetailsAdapter = new BookingDetailsAdapter(BookingDetails.this,bookingDetails);
                             recyclerBookingDetails.setLayoutManager(linearLayoutManager);
                             recyclerBookingDetails.setHasFixedSize(true);
