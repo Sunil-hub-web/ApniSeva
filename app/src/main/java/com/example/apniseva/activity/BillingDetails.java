@@ -154,7 +154,7 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
 
 
         name.setText(str_name);
-        TotalPrice.setText(str_TotalPrice + "(" + "gst inclucded" + ")");
+        TotalPrice.setText(str_TotalPrice + "(" + "GST included" + ")");
         subTotalPrice.setText(str_TotalPrice);
         mobileno.setText(str_mobileno);
         CompleteAddress.setText(str_address);
@@ -198,7 +198,7 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
             @Override
             public void onClick(View v) {
 
-                billingDetails(userid, int_totalamount, str_TotalPrice, str_name, str_mobileno, str_address, str_address, "0", "0", "PayVisit", "false");
+                billingDetails(userid, int_totalamount, str_TotalPrice, str_name, str_mobileno,str_workingcity, str_address, "0", "0", "PayVisit", "false");
 
             }
         });

@@ -78,7 +78,7 @@ public class BookingHistory extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(BookingHistory.this,MainActivity.class);
+                Intent intent = new Intent(BookingHistory.this,BookingDetails.class);
                 startActivity(intent);
             }
         });
@@ -91,13 +91,13 @@ public class BookingHistory extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
 
-        Intent intent = new Intent(BookingHistory.this,MainActivity.class);
+        Intent intent = new Intent(BookingHistory.this,BookingDetails.class);
         startActivity(intent);
 
-        finish();
+        //finish();
     }
 
-    public void orderDetails(String orderId){
+    public void orderDetails(String orderId) {
 
         ProgressDialog dialog = new ProgressDialog(BookingHistory.this);
         dialog.setMessage("Show Booking History");
@@ -112,7 +112,7 @@ public class BookingHistory extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     String status = jsonObject.getString("status");
-                    if(status.equals("OK")){
+                    if (status.equals("OK")) {
 
                         String order_id = jsonObject.getString("order_id");
                         String price = jsonObject.getString("price");
@@ -133,7 +133,7 @@ public class BookingHistory extends AppCompatActivity {
 
                         JSONArray jsonArray_item = new JSONArray(Order_item);
 
-                        for(int j=0;j<jsonArray_item.length();j++){
+                        for (int j = 0; j < jsonArray_item.length(); j++) {
 
                             JSONObject jsonObject_item = jsonArray_item.getJSONObject(j);
 
@@ -142,7 +142,7 @@ public class BookingHistory extends AppCompatActivity {
                             String Amount = jsonObject_item.getString("Amount");
 
                             OrderItem_ModelClass orderItem_modelClass = new OrderItem_ModelClass(
-                                    categoryname,Product,Amount
+                                    categoryname, Product, Amount
                             );
 
                             orderitem.add(orderItem_modelClass);
@@ -150,7 +150,7 @@ public class BookingHistory extends AppCompatActivity {
                         }
 
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(BookingHistory.this, LinearLayoutManager.VERTICAL, false);
-                        OrderItemAdapter orderItemAdapter = new OrderItemAdapter(BookingHistory.this, orderitem,booking);
+                        OrderItemAdapter orderItemAdapter = new OrderItemAdapter(BookingHistory.this, orderitem, booking);
                         recyclerBookingHistory.setLayoutManager(linearLayoutManager);
                         recyclerBookingHistory.setHasFixedSize(true);
                         recyclerBookingHistory.setAdapter(orderItemAdapter);
@@ -159,8 +159,8 @@ public class BookingHistory extends AppCompatActivity {
                         text_MobileNo.setText(mobile);
                         text_city.setText(address);
                         text_address_details.setText(address1);
-                        bookingid.setText("#"+order_id);
-                        text_orderConfirmed.setText("Order"+" "+work_status);
+                        bookingid.setText("#" + order_id);
+                        text_orderConfirmed.setText("Order" + " " + work_status);
                         TotalPrice.setText(price);
                         subTotalPrice.setText(subtotal);
 
@@ -190,18 +190,18 @@ public class BookingHistory extends AppCompatActivity {
                 Log.d("error", error.toString());
 
             }
-        }){
+        }) {
 
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
 
-                Map<String,String> params = new HashMap<>();
-                params.put("order_id",orderId);
+                Map<String, String> params = new HashMap<>();
+                params.put("order_id", orderId);
                 return params;
             }
         };
 
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(30000,1,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(30000, 1, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         RequestQueue requestQueue = Volley.newRequestQueue(BookingHistory.this);
         requestQueue.add(stringRequest);
     }

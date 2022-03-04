@@ -48,6 +48,7 @@ public class BookingDetails extends AppCompatActivity {
     RelativeLayout rel_product;
 
     ImageView img_back;
+    String categoryname;
 
     String userId;
 
@@ -134,7 +135,7 @@ public class BookingDetails extends AppCompatActivity {
 
                                     JSONObject jsonObject_item = jsonArray_item.getJSONObject(j);
 
-                                    String categoryname = jsonObject_item.getString("categoryname");
+                                    categoryname = jsonObject_item.getString("categoryname");
                                     String Product = jsonObject_item.getString("Product");
                                     String Amount = jsonObject_item.getString("Amount");
 
@@ -148,10 +149,11 @@ public class BookingDetails extends AppCompatActivity {
 
 
                                 BookingDetails_ModelClass bookingDetails_modelClass = new BookingDetails_ModelClass(
-                                        order_id,"",subtotal,name,address,address1,mobile,create_user_id,work_status,book_pay_status,orderitem
+                                        order_id,"",subtotal,name,address,address1,mobile,create_user_id,work_status,book_pay_status,orderitem,categoryname
                                 );
 
                                 bookingDetails.add(bookingDetails_modelClass);
+                                Log.d("bookingDetails",bookingDetails.toString());
                             }
                         }
 

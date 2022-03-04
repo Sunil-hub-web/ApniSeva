@@ -3,6 +3,7 @@ package com.example.apniseva.modelclass;
 public class ServicesPackage_ModelClass {
 
     String servicesId,servicescategoryId,servicesName,servicesPrice,servicesDescription;
+    private boolean isSelected = false;
 
     public ServicesPackage_ModelClass(String servicesId, String servicescategoryId, String servicesName,
                                       String servicesPrice, String servicesDescription) {
@@ -51,5 +52,13 @@ public class ServicesPackage_ModelClass {
 
     public void setServicesDescription(String servicesDescription) {
         this.servicesDescription = servicesDescription;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 }

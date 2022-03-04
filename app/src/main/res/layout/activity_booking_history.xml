@@ -39,9 +39,9 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="none"
         android:layout_below="@+id/heading"
-        android:layout_marginTop="@dimen/fifteen">
+        android:layout_marginTop="@dimen/fifteen"
+        android:scrollbars="none">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -49,9 +49,9 @@
 
 
             <RelativeLayout
+                android:id="@+id/card1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/card1">
+                android:layout_height="wrap_content">
 
 
                 <TextView
@@ -69,8 +69,8 @@
                     android:id="@+id/bookingid"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/text"
                     android:layout_margin="@dimen/fifteen"
+                    android:layout_toRightOf="@id/text"
                     android:fontFamily="@font/montserrat_semibold"
                     android:text="Booking Id"
                     android:textColor="#595656"
@@ -81,17 +81,17 @@
                     android:id="@+id/text_orderConfirmed"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/forty"
-                    android:layout_margin="@dimen/fifteen"
                     android:layout_alignParentRight="true"
-                    android:text="Order Confirmed"
-                    android:backgroundTint="#07B80E"
-                    android:textColor="@color/white"
                     android:layout_gravity="right"
-                    android:padding="@dimen/ten"
-                    android:textSize="@dimen/twelve_size"
-                    android:textStyle="bold"
+                    android:layout_margin="@dimen/fifteen"
                     android:background="@drawable/bookingbtn_bg"
-                    android:fontFamily="@font/montserrat_semibold"></TextView>
+                    android:backgroundTint="#07B80E"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:padding="@dimen/ten"
+                    android:text="Order Confirmed"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/twelve_size"
+                    android:textStyle="bold"></TextView>
 
             </RelativeLayout>
 
@@ -99,21 +99,21 @@
                 android:id="@+id/text2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/card1"
                 android:layout_marginLeft="@dimen/twenty"
                 android:layout_marginTop="@dimen/fifteen"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="Order Details"
                 android:textColor="#000000"
                 android:textSize="@dimen/edittextsize"
-                android:textStyle="bold"
-                android:layout_below="@+id/card1">
+                android:textStyle="bold">
 
             </TextView>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerBookingHistory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/recyclerBookingHistory"
                 android:layout_below="@+id/text2"
                 android:layout_marginTop="@dimen/ten">
 
@@ -123,8 +123,8 @@
                 android:id="@+id/total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
                 android:layout_below="@+id/recyclerBookingHistory"
+                android:layout_alignParentRight="true"
                 android:layout_marginBottom="@dimen/fifteen">
 
 
@@ -139,11 +139,11 @@
                         android:id="@+id/subTotal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/ten"
                         android:fontFamily="@font/montserrat_semibold"
                         android:text="Sub Total :"
                         android:textColor="#595656"
                         android:textSize="@dimen/textsize"
-                        android:layout_marginLeft="@dimen/ten"
                         android:textStyle="bold"></TextView>
 
                     <TextView
@@ -178,8 +178,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/r5"
                     android:layout_marginTop="@dimen/ten"
-                    android:visibility="visible"
-                    android:layout_marginRight="@dimen/ten">
+                    android:layout_marginRight="@dimen/ten"
+                    android:visibility="visible">
 
                     <TextView
                         android:id="@+id/igst"
@@ -264,21 +264,20 @@
                 </RelativeLayout>
 
 
-
             </RelativeLayout>
 
             <TextView
                 android:id="@+id/address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/total"
                 android:layout_marginLeft="@dimen/twenty"
                 android:layout_marginTop="@dimen/fifteen"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="Booking Address &amp; Contact Details Shared By You"
                 android:textColor="#000000"
                 android:textSize="@dimen/edittextsize"
-                android:textStyle="bold"
-                android:layout_below="@+id/total">
+                android:textStyle="bold">
 
             </TextView>
 
@@ -286,9 +285,9 @@
                 android:id="@+id/add_details"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/address"
                 android:layout_marginLeft="@dimen/twenty"
                 android:layout_marginTop="@dimen/twenty"
-                android:layout_below="@+id/address"
                 android:layout_marginBottom="@dimen/fifteen">
 
 
@@ -303,11 +302,11 @@
                         android:id="@+id/name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/ten"
                         android:fontFamily="@font/montserrat_semibold"
                         android:text="Name:"
                         android:textColor="#595656"
                         android:textSize="@dimen/textsize"
-                        android:layout_marginLeft="@dimen/ten"
                         android:textStyle="bold"></TextView>
 
                     <TextView
@@ -331,8 +330,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/nameadddetails"
                     android:layout_marginTop="@dimen/ten"
-                    android:visibility="visible"
-                    android:layout_marginRight="@dimen/ten">
+                    android:layout_marginRight="@dimen/ten"
+                    android:visibility="visible">
 
                     <TextView
                         android:id="@+id/mobile"
@@ -429,17 +428,444 @@
                 </RelativeLayout>
 
 
-
             </RelativeLayout>
+
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/add_details">
+
+                <RelativeLayout
+                    android:id="@+id/track"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/ten">
+
+                    <View
+                        android:id="@+id/view_order_BookingConfirm"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginLeft="30dp"
+                        android:background="@drawable/check1" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/fifteen"
+                        android:layout_toRightOf="@id/view_order_BookingConfirm">
+
+                        <TextView
+                            android:id="@+id/text1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:text="Booking ConFirmed And Allocating a Technician"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textsize">
+
+                        </TextView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/text1"
+                            android:drawableLeft="@drawable/check_mark2"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:text="We are Allocating a Technician to reach soon"
+                            android:textColor="@color/text"
+                            android:textSize="@dimen/twelve_size">
+
+                        </TextView>
+                    </RelativeLayout>
+
+                    <View
+                        android:id="@+id/placed_divider"
+                        android:layout_width="2dp"
+                        android:layout_height="@dimen/hundred_fifty"
+                        android:layout_below="@id/view_order_BookingConfirm"
+                        android:layout_marginLeft="@dimen/forty"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:background="@color/button1" />
+
+                    <View
+                        android:id="@+id/view_order_TechniciamAiiocat"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_below="@id/placed_divider"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginLeft="30dp"
+                        android:background="@drawable/check1" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/placed_divider"
+                        android:layout_marginLeft="@dimen/fifteen"
+                        android:layout_toRightOf="@id/view_order_TechniciamAiiocat">
+
+                        <TextView
+                            android:id="@+id/tex"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:text="Technicians Allocated"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textsize">
+
+                        </TextView>
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tex"
+                            android:layout_marginTop="@dimen/ten">
+
+                            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                                android:id="@+id/profile_image"
+                                android:layout_width="@dimen/sixty"
+                                android:layout_height="@dimen/sixty"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/profileimage"
+                                app:civ_border_color="#FF000000"
+                                app:civ_border_width="2dp" />
+
+
+                            <RelativeLayout
+                                android:id="@+id/details"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/fifteen"
+                                android:layout_toRightOf="@+id/profile_image"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/text_id"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Testing id2"
+                                    android:textColor="#505151"
+                                    android:textSize="@dimen/twenty_size"></TextView>
+
+                                <TextView
+                                    android:id="@+id/text_designation"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/text_id"
+                                    android:layout_gravity="center"
+                                    android:drawableRight="@drawable/telephone"
+                                    android:text="Plember"
+                                    android:textColor="#505151"
+                                    android:textSize="@dimen/textsize"></TextView>
+
+                                <TextView
+                                    android:id="@+id/text_Reating"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/text_designation"
+                                    android:layout_gravity="center"
+                                    android:text="4.6"
+                                    android:textColor="#505151"
+                                    android:textSize="@dimen/textsize"></TextView>
+
+                                <TextView
+                                    android:id="@+id/textpin"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/text_Reating"
+                                    android:layout_gravity="center"
+                                    android:text="PIN : "
+                                    android:textColor="#505151"
+                                    android:textSize="@dimen/textsize"></TextView>
+
+                                <TextView
+                                    android:id="@+id/text_Pin"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/text_Reating"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="@dimen/five"
+                                    android:layout_toRightOf="@+id/textpin"
+                                    android:text="1234"
+                                    android:textColor="#505151"
+                                    android:textSize="@dimen/textsize"></TextView>
+
+
+                            </RelativeLayout>
+
+
+                        </RelativeLayout>
+
+
+                    </RelativeLayout>
+
+                    <View
+                        android:id="@+id/placed_divider1"
+                        android:layout_width="2dp"
+                        android:layout_height="@dimen/hundred_fifty"
+                        android:layout_below="@id/view_order_TechniciamAiiocat"
+                        android:layout_marginLeft="@dimen/forty"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:background="@color/button1" />
+
+                    <View
+                        android:id="@+id/view_order_WorkInProgress"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_below="@id/placed_divider1"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginLeft="30dp"
+                        android:background="@drawable/check1" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/placed_divider1"
+                        android:layout_marginLeft="@dimen/fifteen"
+                        android:layout_toRightOf="@id/view_order_WorkInProgress"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tex2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:text="Work In Progress"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textsize">
+
+                        </TextView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tex2"
+                            android:drawableLeft="@drawable/check_mark2"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:text="Technician reached at your place"
+                            android:textColor="@color/text"
+                            android:textSize="@dimen/twelve_size">
+
+                        </TextView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/text2"
+                            android:drawableLeft="@drawable/check_mark2"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:text="Pin Verified"
+                            android:textColor="@color/text"
+                            android:textSize="@dimen/twelve_size">
+
+                        </TextView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/text2"
+                            android:drawableLeft="@drawable/check_mark2"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:text="Work In Progress"
+                            android:textColor="@color/text"
+                            android:textSize="@dimen/twelve_size">
+
+                        </TextView>
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:id="@+id/placed_divider2"
+                        android:layout_width="2dp"
+                        android:layout_height="@dimen/hundred_fifty"
+                        android:layout_below="@id/view_order_WorkInProgress"
+                        android:layout_marginLeft="@dimen/forty"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:background="@color/button1" />
+
+                    <View
+                        android:id="@+id/view_order_WorkCompleted"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_below="@id/placed_divider2"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginLeft="30dp"
+                        android:background="@drawable/check1" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/placed_divider2"
+                        android:layout_marginLeft="@dimen/fifteen"
+                        android:layout_toRightOf="@id/view_order_WorkCompleted"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:text="Work Completed"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textsize">
+
+                        </TextView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/text2"
+                            android:drawableLeft="@drawable/check_mark2"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:text="Your Work has been completed"
+                            android:textColor="@color/text"
+                            android:textSize="@dimen/twelve_size">
+
+                        </TextView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/text2"
+                            android:drawableLeft="@drawable/check_mark2"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:text="Final bill amount is generated below"
+                            android:textColor="@color/text"
+                            android:textSize="@dimen/twelve_size">
+
+                        </TextView>
+
+                    </LinearLayout>
+
+                    <View
+                        android:id="@+id/placed_divider3"
+                        android:layout_width="2dp"
+                        android:layout_height="@dimen/hundred_fifty"
+                        android:layout_below="@id/view_order_WorkCompleted"
+                        android:layout_marginLeft="@dimen/forty"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:background="@color/button1" />
+
+                    <View
+                        android:id="@+id/view_order_Payment"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_below="@id/placed_divider3"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginLeft="30dp"
+                        android:background="@drawable/check1" />
+
+                    <LinearLayout
+                        android:id="@+id/lin1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/placed_divider3"
+                        android:layout_marginLeft="@dimen/fifteen"
+                        android:layout_toRightOf="@id/view_order_Payment"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:text="Payment"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textsize">
+
+                        </TextView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/text2"
+                            android:drawableLeft="@drawable/check_mark2"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:text="Your Work has been completed"
+                            android:textColor="@color/text"
+                            android:textSize="@dimen/twelve_size">
+
+                        </TextView>
+                        <!--
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_below="@id/text2"
+                                            android:fontFamily="@font/montserrat_semibold"
+                                            android:text="Final bill amount is generated below"
+                                            android:textColor="@color/text"
+                                            android:drawableLeft="@drawable/check_mark2"
+                                            android:textSize="@dimen/twelve_size">
+
+                                        </TextView>
+                        -->
+
+                    </LinearLayout>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/lin1"
+                        android:layout_marginLeft="@dimen/fifteen"
+                        android:layout_marginTop="@dimen/twenty"
+                        android:layout_marginRight="@dimen/fifteen"
+                        android:layout_marginBottom="@dimen/twenty"
+                        app:cardCornerRadius="@dimen/ten"
+                        app:cardElevation="@dimen/five">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/twenty"
+                            android:layout_marginBottom="@dimen/twenty"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/fifteen"
+                                android:layout_marginTop="@dimen/five"
+                                android:fontFamily="@font/montserrat_semibold"
+                                android:gravity="center"
+                                android:text="Details of Work"
+                                android:textColor="#717070"
+                                android:textSize="@dimen/textsize">
+
+                            </TextView>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/fifteen"
+                                android:layout_marginTop="@dimen/ten"
+                                android:fontFamily="@font/montserrat_semibold"
+                                android:gravity="center"
+                                android:text="AC Service"
+                                android:textColor="#717070"
+                                android:textSize="@dimen/textsize">
+
+                            </TextView>
+
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </RelativeLayout>
+
+
+            </ScrollView>
 
 
         </RelativeLayout>
 
     </ScrollView>
-
-
-
-
 
 
 </RelativeLayout>

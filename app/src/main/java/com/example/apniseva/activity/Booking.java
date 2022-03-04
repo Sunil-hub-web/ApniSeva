@@ -66,7 +66,7 @@ public class Booking extends AppCompatActivity {
         str_TotalPrice = intent.getStringExtra("total_price");
 
         subTotalPrice.setText(str_TotalPrice);
-        TotalPrice.setText(str_TotalPrice +"("+"gst included"+")");
+        TotalPrice.setText(str_TotalPrice +"("+"GST included"+")");
 
         servicesItem = sharedPreference.loadFavorites(Booking.this);
 
@@ -172,7 +172,6 @@ public class Booking extends AppCompatActivity {
         dialog.show();
         Window window = dialog.getWindow();
         window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-
 
     }
 }

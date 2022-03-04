@@ -71,12 +71,17 @@ public class SharedPreference {
         ArrayList<CartItem> favorites = loadFavorites(context);
 
         Log.d("RanjeetShared", String.valueOf(favorites.size()));
+
         if (favorites != null) {
 
             favorites.remove(beanSampleList);
 
             Log.d("RanjeetShared", String.valueOf(favorites.size()));
             storeFavorites(context, favorites);
+
+        }else{
+
+            Log.d("RanjeetShared", String.valueOf(favorites.size()));
         }
 
     }

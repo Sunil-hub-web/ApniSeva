@@ -33,4 +33,6 @@ public class OrderItem_ModelClass {
     public void setAmount(String amount) {
         Amount = amount;
     }
+
+    
 }

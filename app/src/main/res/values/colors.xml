@@ -13,6 +13,8 @@
 
     <color name="boxlines">#9b9b9b</color>
     <color name="textcol">#FF4A4A4A</color>
+    <color name="button1">#3BB54A</color>
+    <color name="button2">#D6D6D6</color>
 
     <!--<color name="Blue">#152E88</color>-->
 </resources>

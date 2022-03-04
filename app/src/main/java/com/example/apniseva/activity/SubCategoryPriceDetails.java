@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +51,7 @@ public class SubCategoryPriceDetails extends AppCompatActivity {
 
     public static TextView textName,looking,price;
     String subcategoryid,category_name;
+    ImageView image_back;
 
     SharedPreference sharedPreference = new SharedPreference();
 
@@ -63,6 +65,7 @@ public class SubCategoryPriceDetails extends AppCompatActivity {
         textName = findViewById(R.id.textName);
         looking = findViewById(R.id.looking);
         price = findViewById(R.id.price);
+        image_back = findViewById(R.id.image_back);
 
         Intent intent = getIntent();
         subcategoryid = intent.getStringExtra("sub_category");
@@ -185,6 +188,7 @@ public class SubCategoryPriceDetails extends AppCompatActivity {
         };
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(30000,3,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         RequestQueue requestQueue = Volley.newRequestQueue(SubCategoryPriceDetails.this);
+        requestQueue.getCache().clear();
         requestQueue.add(stringRequest);
 
     }

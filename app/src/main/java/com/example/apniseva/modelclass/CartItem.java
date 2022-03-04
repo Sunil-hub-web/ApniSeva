@@ -4,6 +4,7 @@ public class CartItem {
 
     String name,price;
     String id;
+    private boolean isSelected = false;
 
     public CartItem(String id) {
         this.id = id;
@@ -36,6 +37,14 @@ public class CartItem {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 
     @Override

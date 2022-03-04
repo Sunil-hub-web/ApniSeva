@@ -136,8 +136,9 @@ public class MainActivity extends AppCompatActivity {
 
         username = SharedPrefManager.getInstance(MainActivity.this).getUser().getMobileNo();
         password = SharedPrefManager.getInstance(MainActivity.this).getUser().getPassword();
+        String userid = SharedPrefManager.getInstance(MainActivity.this).getUser().getUserid();
 
-        Log.d("password",password + username);
+        Log.d("password",password + username + userid);
 
         if (YourAddress != null) {
 

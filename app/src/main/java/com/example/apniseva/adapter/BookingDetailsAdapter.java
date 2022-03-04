@@ -53,6 +53,7 @@ public class BookingDetailsAdapter extends RecyclerView.Adapter<BookingDetailsAd
         holder.text_BookingId.setText("#"+booking.getOrder_id());
 
         holder.text_bookingStatues.setText(booking.getWork_status());
+        holder.text_Services.setText(booking.getCategoryname());
 
         orderitem = new ArrayList<>();
         orderitem = booking.getOrderitem();
@@ -85,7 +86,7 @@ public class BookingDetailsAdapter extends RecyclerView.Adapter<BookingDetailsAd
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView text_BookingId,text_bookingStatues;
+        TextView text_BookingId,text_bookingStatues,text_Services;
         Button btn_Reorder;
         RecyclerView recyclerBookingHistory;
 
@@ -96,6 +97,7 @@ public class BookingDetailsAdapter extends RecyclerView.Adapter<BookingDetailsAd
             text_bookingStatues = itemView.findViewById(R.id.text_bookingStatues);
             btn_Reorder = itemView.findViewById(R.id.btn_Reorder);
             recyclerBookingHistory = itemView.findViewById(R.id.recyclerBookingHistory);
+            text_Services = itemView.findViewById(R.id.text_Services);
         }
     }
 }
