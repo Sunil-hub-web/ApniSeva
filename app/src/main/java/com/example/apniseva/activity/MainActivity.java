@@ -165,6 +165,7 @@ public class MainActivity extends AppCompatActivity {
         showImageViewPager.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
 
         CompositePageTransformer compositePageTransformer = new CompositePageTransformer();
+
         compositePageTransformer.addTransformer(new ViewPager2.PageTransformer() {
             @Override
             public void transformPage(@NonNull View page, float position) {
@@ -397,6 +398,7 @@ public class MainActivity extends AppCompatActivity {
                         for (int k = 0; k < jsonArray_banner.length(); k++) {
 
                             JSONObject jsonObject_banner = jsonArray_banner.getJSONObject(k);
+
                             String image = jsonObject_banner.getString("image");
 
                             Banner_ModelClass banner_modelClass = new Banner_ModelClass(

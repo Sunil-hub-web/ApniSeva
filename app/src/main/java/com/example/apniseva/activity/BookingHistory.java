@@ -7,9 +7,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,6 +57,14 @@ public class BookingHistory extends AppCompatActivity {
     ArrayList<OrderItem_ModelClass> orderitem;
     String booking = "BookingDetails";
 
+    View view_order_BookingConfirm, view_order_TechnicianAllocat, view_order_WorkInProgress, view_order_WorkCompleted,
+            view_order_Payment;
+    RelativeLayout BookingConfirm, TechnicianAllocat;
+    LinearLayout WorkInProgress, WorkCompleted, Payment;
+    ProgressBar placed_divider1, placed_divider, placed_divider2, placed_divider3;
+    private int i = 0;
+    private Handler hdlr = new Handler();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +82,27 @@ public class BookingHistory extends AppCompatActivity {
         payonvisite = findViewById(R.id.payonvisite);
         TotalPrice = findViewById(R.id.TotalPrice);
         recyclerBookingHistory = findViewById(R.id.recyclerBookingHistory);
+
+        Payment = findViewById(R.id.Payment);
+        BookingConfirm = findViewById(R.id.BookingConfirm);
+        WorkInProgress = findViewById(R.id.WorkInProgress);
+        WorkCompleted = findViewById(R.id.WorkCompleted);
+        TechnicianAllocat = findViewById(R.id.TechnicianAllocat);
+        placed_divider1 = findViewById(R.id.placed_divider1);
+        view_order_WorkInProgress = findViewById(R.id.view_order_WorkInProgress);
+        placed_divider2 = findViewById(R.id.placed_divider2);
+        view_order_WorkCompleted = findViewById(R.id.view_order_WorkCompleted);
+        placed_divider3 = findViewById(R.id.placed_divider3);
+        view_order_Payment = findViewById(R.id.view_order_Payment);
+        view_order_TechnicianAllocat = findViewById(R.id.view_order_TechnicianAllocat);
+        placed_divider = findViewById(R.id.placed_divider);
+        view_order_BookingConfirm = findViewById(R.id.view_order_BookingConfirm);
+
+        placed_divider.setProgress(100);
+        placed_divider1.setProgress(100);
+        placed_divider2.setProgress(100);
+        placed_divider3.setProgress(100);
+
 
         Intent intent = getIntent();
         booking_id = intent.getStringExtra("booking_id");

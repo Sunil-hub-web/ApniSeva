@@ -21,8 +21,11 @@
         android:theme="@style/Theme.ApniSeva"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".activity.BookingHistory"
+            android:name=".OrderTracking"
             android:theme="@style/Theme.ApniSeva.NoActionBar"></activity>
+        <activity
+            android:name=".activity.BookingHistory"
+            android:theme="@style/Theme.ApniSeva.NoActionBar" />
         <activity
             android:name=".activity.Booking"
             android:theme="@style/Theme.ApniSeva.NoActionBar" />

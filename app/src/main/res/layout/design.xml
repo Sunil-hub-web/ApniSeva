@@ -23,6 +23,7 @@
                 android:background="@drawable/check1"/>
 
             <RelativeLayout
+                android:id="@+id/BookingConfirm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/view_order_BookingConfirm"
@@ -63,7 +64,7 @@
                 android:layout_below="@id/view_order_BookingConfirm"/>
 
             <View
-                android:id="@+id/view_order_TechniciamAiiocat"
+                android:id="@+id/view_order_TechnicianAllocat"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginStart="30dp"
@@ -72,11 +73,12 @@
                 android:layout_below="@id/placed_divider"/>
 
             <RelativeLayout
+                android:id="@+id/TechnicianAllocat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/fifteen"
                 android:layout_below="@id/placed_divider"
-                android:layout_toRightOf="@id/view_order_TechniciamAiiocat">
+                android:layout_toRightOf="@id/view_order_TechnicianAllocat">
 
                 <TextView
                     android:id="@+id/text"
@@ -182,7 +184,7 @@
                 android:layout_marginBottom="4dp"
                 android:background="@color/button1"
                 android:layout_marginLeft="@dimen/forty"
-                android:layout_below="@id/view_order_TechniciamAiiocat"/>
+                android:layout_below="@id/view_order_TechnicianAllocat"/>
 
             <View
                 android:id="@+id/view_order_WorkInProgress"
@@ -194,6 +196,7 @@
                 android:layout_below="@id/placed_divider1"/>
 
             <LinearLayout
+                android:id="@+id/WorkInProgress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/fifteen"
@@ -271,6 +274,7 @@
                 android:layout_below="@id/placed_divider2"/>
 
             <LinearLayout
+                android:id="@+id/WorkCompleted"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/fifteen"
@@ -334,7 +338,7 @@
                 android:layout_below="@id/placed_divider3"/>
 
             <LinearLayout
-                android:id="@+id/lin1"
+                android:id="@+id/Payment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/fifteen"
@@ -363,20 +367,20 @@
                     android:textSize="@dimen/twelve_size">
 
                 </TextView>
-<!--
+                <!--
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/text2"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:text="Final bill amount is generated below"
-                    android:textColor="@color/text"
-                    android:drawableLeft="@drawable/check_mark2"
-                    android:textSize="@dimen/twelve_size">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/text2"
+                                    android:fontFamily="@font/montserrat_semibold"
+                                    android:text="Final bill amount is generated below"
+                                    android:textColor="@color/text"
+                                    android:drawableLeft="@drawable/check_mark2"
+                                    android:textSize="@dimen/twelve_size">
 
-                </TextView>
--->
+                                </TextView>
+                -->
 
             </LinearLayout>
 
@@ -390,7 +394,7 @@
                 android:layout_marginBottom="@dimen/twenty"
                 app:cardCornerRadius="@dimen/ten"
                 app:cardElevation="@dimen/five"
-                android:layout_below="@+id/lin1"
+                android:layout_below="@+id/Payment"
                 >
 
                 <LinearLayout

@@ -332,7 +332,9 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
 
             Toast.makeText(this, "Payment Successful: " + razorpayPaymentID, Toast.LENGTH_SHORT).show();
 
-            billingDetails(userid, str_TotalPrice, str_TotalPrice, str_name, str_mobileno, str_address, str_address, "0", "0", "PayNow", razorpayPaymentID);
+            billingDetails(userid, str_TotalPrice, str_TotalPrice, str_name, str_mobileno, str_workingcity, str_address, "0", "0", "PayNow", razorpayPaymentID);
+
+            //billingDetails(userid, int_totalamount, str_TotalPrice, str_name, str_mobileno,str_workingcity, str_address, "0", "0", "PayVisit", "false");
 
         } catch (Exception e) {
 
