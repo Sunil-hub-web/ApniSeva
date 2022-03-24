@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#16308E"
-    tools:context=".activity.UserDetails">
+    tools:context="com.in.apniseva.activity.UserDetails">
 
 
     <ScrollView

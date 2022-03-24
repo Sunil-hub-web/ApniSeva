@@ -2,7 +2,7 @@
 <manifest
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.apniseva">
+    package="com.in.apniseva">
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -23,16 +23,16 @@
         android:theme="@style/Theme.ApniSeva"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".OrderTracking"
+            android:name="com.in.apniseva.OrderTracking"
             android:theme="@style/Theme.ApniSeva.NoActionBar"></activity>
         <activity
-            android:name=".activity.BookingHistory"
+            android:name="com.in.apniseva.activity.BookingHistory"
             android:theme="@style/Theme.ApniSeva.NoActionBar" />
         <activity
-            android:name=".activity.Booking"
+            android:name="com.in.apniseva.activity.Booking"
             android:theme="@style/Theme.ApniSeva.NoActionBar" />
         <activity
-            android:name=".activity.TermsofService"
+            android:name="com.in.apniseva.activity.TermsofService"
             android:theme="@style/Theme.ApniSeva.NoActionBar" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -47,50 +47,50 @@
             android:value="@string/api_key" />
 
         <activity
-            android:name=".activity.MapsActivity"
+            android:name="com.in.apniseva.activity.MapsActivity"
             android:label="@string/title_activity_maps"
             android:theme="@style/Theme.ApniSeva.NoActionBar" />
         <activity
-            android:name=".activity.PaymentSuccessFully"
+            android:name="com.in.apniseva.activity.PaymentSuccessFully"
             android:theme="@style/Theme.ApniSeva.NoActionBar" />
         <activity
-            android:name=".activity.EditProfile"
+            android:name="com.in.apniseva.activity.EditProfile"
             android:theme="@style/Theme.ApniSeva.NoActionBar" />
         <activity
-            android:name=".activity.BookingDetails"
+            android:name="com.in.apniseva.activity.BookingDetails"
             android:theme="@style/Theme.ApniSeva.NoActionBar" />
         <activity
-            android:name=".activity.SubCategoryPriceDetails"
+            android:name="com.in.apniseva.activity.SubCategoryPriceDetails"
             android:theme="@style/Theme.ApniSeva.NoActionBar" />
         <activity
-            android:name=".activity.Subcategory_Product"
+            android:name="com.in.apniseva.activity.Subcategory_Product"
             android:theme="@style/Theme.ApniSeva.NoActionBar" />
         <activity
-            android:name=".activity.Subcategory"
+            android:name="com.in.apniseva.activity.Subcategory"
             android:theme="@style/Theme.ApniSeva.NoActionBar" />
         <activity
-            android:name=".activity.PaymentOption"
+            android:name="com.in.apniseva.activity.PaymentOption"
             android:theme="@style/Theme.ApniSeva.NoActionBar" />
         <activity
-            android:name=".activity.BillingDetails"
+            android:name="com.in.apniseva.activity.BillingDetails"
             android:theme="@style/Theme.ApniSeva.NoActionBar" />
         <activity
-            android:name=".activity.Loding"
+            android:name="com.in.apniseva.activity.Loding"
             android:theme="@style/Theme.ApniSeva.NoActionBar" />
         <activity
-            android:name=".activity.UserDetails"
+            android:name="com.in.apniseva.activity.UserDetails"
             android:theme="@style/Theme.ApniSeva.NoActionBar" />
         <activity
-            android:name=".activity.Service"
+            android:name="com.in.apniseva.activity.Service"
             android:theme="@style/Theme.ApniSeva.NoActionBar" />
         <activity
-            android:name=".activity.SearchLocation"
+            android:name="com.in.apniseva.activity.SearchLocation"
             android:theme="@style/Theme.ApniSeva.NoActionBar" />
         <activity
-            android:name=".activity.LocationActivity"
+            android:name="com.in.apniseva.activity.LocationActivity"
             android:theme="@style/Theme.ApniSeva.NoActionBar" />
         <activity
-            android:name=".activity.SplashScreen"
+            android:name="com.in.apniseva.activity.SplashScreen"
             android:theme="@style/Theme.ApniSeva.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -99,19 +99,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.VerificationCode"
+            android:name="com.in.apniseva.activity.VerificationCode"
             android:theme="@style/Theme.ApniSeva.NoActionBar" />
         <activity
-            android:name=".activity.ForGotPassword"
+            android:name="com.in.apniseva.activity.ForGotPassword"
             android:theme="@style/Theme.ApniSeva.NoActionBar" />
         <activity
-            android:name=".activity.SignUpPage"
+            android:name="com.in.apniseva.activity.SignUpPage"
             android:theme="@style/Theme.ApniSeva.NoActionBar" />
         <activity
-            android:name=".activity.LoginPage"
+            android:name="com.in.apniseva.activity.LoginPage"
             android:theme="@style/Theme.ApniSeva.NoActionBar" />
         <activity
-            android:name=".activity.MainActivity"
+            android:name="com.in.apniseva.activity.MainActivity"
             android:theme="@style/Theme.ApniSeva.NoActionBar" />
 
         <meta-data

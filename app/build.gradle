@@ -7,11 +7,11 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.example.apniseva"
+        applicationId "com.in.apniseva"
         minSdkVersion 19
         targetSdkVersion 30
-        versionCode 2
-        versionName "2.0"
+        versionCode 4
+        versionName "3.1"
         multiDexEnabled true
         resConfigs "en","US"
 
