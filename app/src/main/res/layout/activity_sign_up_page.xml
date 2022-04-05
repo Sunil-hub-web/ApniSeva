@@ -114,7 +114,7 @@
                     android:layout_below="@id/edit_MobileNumber"
                     android:layout_marginLeft="@dimen/twenty_five"
                     android:layout_marginRight="@dimen/twenty_five"
-                    android:layout_marginBottom="@dimen/twenty"
+                    android:layout_marginBottom="@dimen/ten"
                     android:drawableLeft="@drawable/password"
                     android:drawableRight="@drawable/visibility1"
                     android:drawablePadding="@dimen/thirty"
@@ -126,6 +126,15 @@
                     android:textSize="@dimen/twenty_size"
                     android:textStyle="normal"
                     android:fontFamily="@font/avenir_lt_w01_55_roman"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="* Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                    android:textColor="#040404"
+                    android:textSize="13sp"
+                    android:layout_marginLeft="@dimen/twenty"
+                    android:layout_marginRight="@dimen/twenty"/>
 
             </LinearLayout>
 

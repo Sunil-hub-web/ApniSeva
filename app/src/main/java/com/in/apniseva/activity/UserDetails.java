@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -49,6 +50,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class UserDetails extends AppCompatActivity {
 
@@ -444,5 +447,6 @@ public class UserDetails extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(UserDetails.this);
         requestQueue.add(stringRequest);
     }
+
 
 }

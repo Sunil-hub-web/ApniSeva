@@ -81,7 +81,7 @@
                 android:text="AC Service"
                 android:textColor="#000000"
                 android:layout_marginTop="@dimen/twenty"
-                android:textSize="@dimen/edittextsize">
+                android:textSize="@dimen/textsize">
 
             </TextView>
 

@@ -46,7 +46,7 @@ public class VerificationCode extends AppCompatActivity {
     TextView text_Timer,resend_OTP,resendtext,mobileNumber;
     Button btn_verifayOtp;
     SessionManager sessionManager;
-    String userOTP,userMobileNo;
+    String userOTP,userMobileNo,className,str_MobileNo;
     OtpTextView otp_view;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -67,13 +67,24 @@ public class VerificationCode extends AppCompatActivity {
         otp_view = findViewById(R.id.otp_view);
         mobileNumber = findViewById(R.id.mobileNumber);
 
+        className = getIntent().getStringExtra("className");
+        str_MobileNo = getIntent().getStringExtra("mobileno");
+
         timer();
 
         sessionManager = new SessionManager(this);
         userOTP = sessionManager.getUserOTP();
         userMobileNo = sessionManager.getUserMobileno();
 
-        mobileNumber.setText("+91 " +userMobileNo);
+        if(className != null){
+
+            mobileNumber.setText("+91 " +str_MobileNo);
+
+        }else{
+
+            mobileNumber.setText("+91 " +userMobileNo);
+        }
+
 
         //otp_view.setOTP(userOTP);
 
@@ -94,9 +105,24 @@ public class VerificationCode extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String getOTP = otp_view.getOTP();
+                if(otp_view.getOTP().length() != 4){
 
-                verifayOtp(userMobileNo,getOTP);
+                    Toast.makeText(VerificationCode.this, "Enter Valide Otp", Toast.LENGTH_SHORT).show();
+
+                }else{
+
+                    if(className != null){
+
+                        String getOTP = otp_view.getOTP();
+                        verifayOtpPass(str_MobileNo,getOTP,"verify_otp");
+
+                    }else{
+
+                        String getOTP = otp_view.getOTP();
+                        verifayOtp(userMobileNo,getOTP);
+                    }
+
+                }
 
             }
         });
@@ -273,4 +299,71 @@ public class VerificationCode extends AppCompatActivity {
         requestQueue.getCache().clear();
         requestQueue.add(stringRequest);
     }
+
+    public void verifayOtpPass(String mobileNo,String OTP,String type){
+
+        ProgressDialog progressDialog = new ProgressDialog(VerificationCode.this);
+        progressDialog.setMessage("Verification Your Otp Please Wait...");
+        progressDialog.show();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppUrl.forgotPass, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                progressDialog.dismiss();
+
+                Log.d("Ranjeet_verfyOtp",response.toString());
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+
+                    String message = jsonObject.getString("status");
+
+                    if(message.equals("OK")){
+
+                        String message1 = jsonObject.getString("msg");
+
+                        Toast.makeText(VerificationCode.this, message1, Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(VerificationCode.this,ForgotPasswordActivity.class);
+                        intent.putExtra("mobileNo",mobileNo);
+                        startActivity(intent);
+
+                    }else if(message.equals("NOK")){
+
+                        String message1 = jsonObject.getString("msg");
+                        Toast.makeText(VerificationCode.this, message1, Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                progressDialog.dismiss();
+                error.printStackTrace();
+                Toast.makeText(VerificationCode.this, ""+error, Toast.LENGTH_SHORT).show();
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String,String> params = new HashMap<>();
+                params.put("type",type);
+                params.put("mobile",mobileNo);
+                params.put("otp",OTP);
+                return params;
+            }
+        };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(30000,3,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueue requestQueue = Volley.newRequestQueue(VerificationCode.this);
+        requestQueue.getCache().clear();
+        requestQueue.add(stringRequest);
+    }
+
 }

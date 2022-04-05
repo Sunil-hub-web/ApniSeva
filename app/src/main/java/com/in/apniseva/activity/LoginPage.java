@@ -100,6 +100,7 @@ public class LoginPage extends AppCompatActivity {
 
         sessionManager = new SessionManager(this);
 
+
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -554,7 +555,6 @@ public class LoginPage extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                progressDialog.dismiss();
                 progressDialog.dismiss();
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
 

@@ -107,6 +107,8 @@ public class SubCategoryPriceDetails extends AppCompatActivity {
 
     public void showSubCateGory(String categoryId){
 
+        acPackage.clear();
+
         ProgressDialog progressDialog = new ProgressDialog(SubCategoryPriceDetails.this);
         progressDialog.setMessage("Retrive Data Please wait...");
         progressDialog.show();

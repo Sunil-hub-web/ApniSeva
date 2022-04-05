@@ -132,10 +132,7 @@ public class SignUpPage extends AppCompatActivity {
 
                     userRegister(str_fullname, str_MobileNumber, str_Email, str_Password);
 
-                } else {
-
-                    Toast.makeText(SignUpPage.this, "Failure", Toast.LENGTH_SHORT).show();
-                }
+                } else { }
             }
         });
 

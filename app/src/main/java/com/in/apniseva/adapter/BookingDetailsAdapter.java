@@ -50,7 +50,7 @@ public class BookingDetailsAdapter extends RecyclerView.Adapter<BookingDetailsAd
         holder.text_BookingId.setText("#"+booking.getOrder_id());
 
         holder.text_bookingStatues.setText(booking.getWork_status());
-        holder.text_Services.setText(booking.getCategoryname());
+        holder.text_Services.setText(booking.getCategoryname()+"("+booking.getSubcategoryname()+")");
 
         orderitem = new ArrayList<>();
         orderitem = booking.getOrderitem();

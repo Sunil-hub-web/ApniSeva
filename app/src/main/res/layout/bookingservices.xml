@@ -10,12 +10,13 @@
 
         <TextView
             android:id="@+id/services_Name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/twelve"
             android:fontFamily="@font/montserrat_semibold"
             android:text="sub Total:"
             android:textColor="#595656"
+            android:layout_toLeftOf="@+id/services_Price"
             android:textSize="@dimen/edittextsize"
             android:textStyle="bold"></TextView>
 

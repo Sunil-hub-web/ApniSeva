@@ -50,7 +50,7 @@ public class PaymentSuccessFully extends AppCompatActivity {
             }
         });
 
-       /* handler = new Handler();
+        handler = new Handler();
 
         handler.postDelayed(new Runnable() {
 
@@ -61,6 +61,14 @@ public class PaymentSuccessFully extends AppCompatActivity {
                 startActivity(i);
                 finish();
             }
-        }, 5000);*/
+        }, 5000);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        Intent intent = new Intent(PaymentSuccessFully.this, MainActivity.class);
+        startActivity(intent);
     }
 }

@@ -5,13 +5,13 @@ import java.util.ArrayList;
 public class BookingDetails_ModelClass {
 
     String order_id,price,subtotal,name,address,address1,mobile,create_user_id,work_status,
-            book_pay_status,categoryname;
+            book_pay_status,categoryname,subcategoryname;
     ArrayList<OrderItem_ModelClass> orderitem;
 
     public BookingDetails_ModelClass(String order_id, String price, String subtotal, String name,
                                      String address, String address1, String mobile, String create_user_id,
                                      String work_status, String book_pay_status,
-                                     ArrayList<OrderItem_ModelClass> orderitem,String categoryname) {
+                                     ArrayList<OrderItem_ModelClass> orderitem,String categoryname,String subcategoryname) {
         this.order_id = order_id;
         this.price = price;
         this.subtotal = subtotal;
@@ -24,6 +24,7 @@ public class BookingDetails_ModelClass {
         this.book_pay_status = book_pay_status;
         this.orderitem = orderitem;
         this.categoryname = categoryname;
+        this.subcategoryname = subcategoryname;
     }
 
     public String getOrder_id() {
@@ -120,6 +121,14 @@ public class BookingDetails_ModelClass {
 
     public void setCategoryname(String categoryname) {
         this.categoryname = categoryname;
+    }
+
+    public String getSubcategoryname() {
+        return subcategoryname;
+    }
+
+    public void setSubcategoryname(String subcategoryname) {
+        this.subcategoryname = subcategoryname;
     }
 
     @Override

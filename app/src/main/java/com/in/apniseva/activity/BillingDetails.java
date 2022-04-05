@@ -104,8 +104,7 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
         SharedPreferences sharedPreferences_services = getSharedPreferences("shared preferences", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences_services.getString("task list", null);
-        Type type = new TypeToken<ArrayList<String>>() {
-        }.getType();
+        Type type = new TypeToken<ArrayList<String>>() {}.getType();
         servicesId = gson.fromJson(json, type);
 
         Log.d("servicesId1", servicesId.toString());
@@ -192,10 +191,11 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
             @Override
             public void onClick(View v) {
 
-                billingDetails(userid, int_totalamount, str_TotalPrice, str_name, str_mobileno,str_workingcity, str_address, "0", "0", "PayVisit", "false");
+                billingDetails(userid, int_totalamount, str_TotalPrice, str_name, str_mobileno,str_workingcity, str_address, "0", "0", "PayVisit", "");
 
                 order.clear();
                 sharedPreference.clearDate(BillingDetails.this);
+                services_Id = "";
 
             }
         });
@@ -335,6 +335,7 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
 
             order.clear();
             sharedPreference.clearDate(BillingDetails.this);
+            services_Id = "";
 
         } catch (Exception e) {
 
@@ -346,6 +347,10 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
 
     @Override
     public void onPaymentError(int code, String response) {
+
+        order.clear();
+        sharedPreference.clearDate(BillingDetails.this);
+        services_Id = "";
 
         try {
             Toast.makeText(this, "Payment failed: " + code + " " + response, Toast.LENGTH_LONG).show();

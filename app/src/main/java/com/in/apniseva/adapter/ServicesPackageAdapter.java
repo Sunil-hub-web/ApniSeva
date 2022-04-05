@@ -61,6 +61,10 @@ public class ServicesPackageAdapter extends RecyclerView.Adapter<ServicesPackage
 
         ServicesPackage_ModelClass ac_services = acservices.get(position);
 
+        sharedPreference.clearDate(context);
+        servicesItem.clear();
+        servicesid.clear();
+
         //holder.text_Description.setText(ac_services.getServicesDescription());
         holder.text_Price.setText(ac_services.getServicesPrice());
         holder.text_ServicesName.setText(ac_services.getServicesName());
@@ -171,8 +175,6 @@ public class ServicesPackageAdapter extends RecyclerView.Adapter<ServicesPackage
                 }catch(Exception e){
                     e.printStackTrace();
                 }
-
-
 
             }
         });

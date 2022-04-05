@@ -47,7 +47,7 @@ public class BookingDetails extends AppCompatActivity {
     RelativeLayout rel_product;
 
     ImageView img_back;
-    String categoryname;
+    String categoryname,subcategoryname;
 
     String userId;
 
@@ -71,6 +71,7 @@ public class BookingDetails extends AppCompatActivity {
 
                 Intent intent = new Intent(BookingDetails.this,UserDetails.class);
                 startActivity(intent);
+
             }
         });
     }
@@ -135,11 +136,12 @@ public class BookingDetails extends AppCompatActivity {
                                     JSONObject jsonObject_item = jsonArray_item.getJSONObject(j);
 
                                     categoryname = jsonObject_item.getString("categoryname");
+                                    subcategoryname = jsonObject_item.getString("subcategoryname");
                                     String Product = jsonObject_item.getString("Product");
                                     String Amount = jsonObject_item.getString("Amount");
 
                                     OrderItem_ModelClass orderItem_modelClass = new OrderItem_ModelClass(
-                                            categoryname,Product,Amount
+                                            categoryname,Product,Amount,subcategoryname
                                     );
 
                                     orderitem.add(orderItem_modelClass);
@@ -148,7 +150,7 @@ public class BookingDetails extends AppCompatActivity {
 
 
                                 BookingDetails_ModelClass bookingDetails_modelClass = new BookingDetails_ModelClass(
-                                        order_id,"",subtotal,name,address,address1,mobile,create_user_id,work_status,book_pay_status,orderitem,categoryname
+                                        order_id,"",subtotal,name,address,address1,mobile,create_user_id,work_status,book_pay_status,orderitem,categoryname,subcategoryname
                                 );
 
                                 bookingDetails.add(bookingDetails_modelClass);

@@ -182,8 +182,8 @@ public class OrderTracking extends AppCompatActivity {
                                         placed_divider1.setVisibility(View.VISIBLE);
                                         view_order_WorkInProgress.setVisibility(View.VISIBLE);
                                         placed_divider2.setVisibility(View.VISIBLE);
-                                        view_order_WorkCompleted.setVisibility(View.VISIBLE);
-                                        placed_divider3.setVisibility(View.VISIBLE);
+                                        view_order_WorkCompleted.setVisibility(View.INVISIBLE);
+                                        placed_divider3.setVisibility(View.INVISIBLE);
                                         view_order_Payment.setVisibility(View.INVISIBLE);
                                         view_order_TechnicianAllocat.setVisibility(View.VISIBLE);
                                         placed_divider.setVisibility(View.VISIBLE);
@@ -205,9 +205,6 @@ public class OrderTracking extends AppCompatActivity {
                         }
                     }
                 }).start();
-
-
-
 
             }
         });
@@ -259,8 +256,6 @@ public class OrderTracking extends AppCompatActivity {
                         }
                     }
                 }).start();
-
-
 
 
             }

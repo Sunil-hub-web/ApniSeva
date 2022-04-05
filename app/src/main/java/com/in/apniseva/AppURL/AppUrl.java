@@ -30,4 +30,6 @@ public class AppUrl {
 
     public static final String bookingHistory = "https://apniseva.com/api/bookhistory";
 
+    public static final String forgotPass = "https://apniseva.com/api/forgotPass";
+
 }

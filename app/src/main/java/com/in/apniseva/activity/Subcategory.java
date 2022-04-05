@@ -79,6 +79,8 @@ public class Subcategory extends AppCompatActivity {
 
     public void showSubCateGory(String categoryId){
 
+        subCategory.clear();
+
         ProgressDialog progressDialog = new ProgressDialog(Subcategory.this);
         progressDialog.setMessage("Retrive Data Please wait...");
         progressDialog.show();

@@ -2,12 +2,13 @@ package com.in.apniseva.modelclass;
 
 public class OrderItem_ModelClass {
 
-    String categoryname,Product,Amount;
+    String categoryname,Product,Amount,subcategoryname;
 
-    public OrderItem_ModelClass(String categoryname, String product, String amount) {
+    public OrderItem_ModelClass(String categoryname, String product, String amount,String subcategoryname) {
         this.categoryname = categoryname;
         Product = product;
         Amount = amount;
+        subcategoryname = subcategoryname;
     }
 
     public String getCategoryname() {
@@ -34,5 +35,11 @@ public class OrderItem_ModelClass {
         Amount = amount;
     }
 
-    
+    public String getSubcategoryname() {
+        return subcategoryname;
+    }
+
+    public void setSubcategoryname(String subcategoryname) {
+        this.subcategoryname = subcategoryname;
+    }
 }
