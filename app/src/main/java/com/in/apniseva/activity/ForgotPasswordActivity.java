@@ -228,7 +228,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                        str_Password = edit_Password.getText().toString().trim();
                        str_ConfirmPassword = edit_ConfirmPassword.getText().toString().trim();
 
-                       passUpdate("update_pass",str_MobileNumber,str_Password);
+                       //passUpdate("update_pass",str_MobileNumber,str_Password);
 
                    }else{
 

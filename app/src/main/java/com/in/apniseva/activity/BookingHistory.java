@@ -221,6 +221,24 @@ public class BookingHistory extends AppCompatActivity {
 
                             bookingconfirm();
 
+                            for(int i= 0;i<jsonArray_technician_details.length();i++){
+
+                                JSONObject jsonObject_technician = jsonArray_technician_details.getJSONObject(i);
+
+                                String id = jsonObject_technician.getString("id");
+                                String techname = jsonObject_technician.getString("name");
+                                String email = jsonObject_technician.getString("em  ail");
+                                techmobile = jsonObject_technician.getString("mobile");
+                                String profile_img = jsonObject_technician.getString("profile_img");
+                                String category = jsonObject_technician.getString("category");
+                                String subcategory = jsonObject_technician.getString("subcategory");
+
+                                text_Techniciansid.setText(techname);
+                                text_designation.setText(category);
+                                Picasso.with(BookingHistory.this).load(profile_img).placeholder(R.drawable.profileimage).into(profile_image);
+
+                            }
+
                         }else{
 
                             if(pin_verification_status.equals("0")){
@@ -239,7 +257,7 @@ public class BookingHistory extends AppCompatActivity {
                                     String category = jsonObject_technician.getString("category");
                                     String subcategory = jsonObject_technician.getString("subcategory");
 
-                                    text_Techniciansid.setText(id);
+                                    text_Techniciansid.setText(techname);
                                     text_designation.setText(category);
                                     Picasso.with(BookingHistory.this).load(profile_img).placeholder(R.drawable.profileimage).into(profile_image);
 
@@ -263,7 +281,7 @@ public class BookingHistory extends AppCompatActivity {
                                         String category = jsonObject_technician.getString("category");
                                         String subcategory = jsonObject_technician.getString("subcategory");
 
-                                        text_Techniciansid.setText(id);
+                                        text_Techniciansid.setText(techname);
                                         text_designation.setText(category);
                                         Picasso.with(BookingHistory.this).load(profile_img).placeholder(R.drawable.profileimage).into(profile_image);
 
@@ -288,7 +306,7 @@ public class BookingHistory extends AppCompatActivity {
                                         String category = jsonObject_technician.getString("category");
                                         String subcategory = jsonObject_technician.getString("subcategory");
 
-                                        text_Techniciansid.setText(id);
+                                        text_Techniciansid.setText(techname);
                                         text_designation.setText(category);
                                         Picasso.with(BookingHistory.this).load(profile_img).placeholder(R.drawable.profileimage).into(profile_image);
 
