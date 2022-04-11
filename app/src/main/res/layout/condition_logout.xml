@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/ten"
+    android:background="#EEEEEE"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/cardback">
+
+        <TextView
+            android:id="@+id/editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="LOGOUT OPTIONS"
+            android:textColor="#0C0C0C"
+            android:textSize="@dimen/edittextsize"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/editText1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editText"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="10dp"
+            android:text="Are you Sure Want to Logout Your application"
+            android:textAllCaps="false"
+            android:textColor="#0C0C0C"
+            android:textSize="@dimen/textsize" />
+
+        <Button
+            android:id="@+id/no"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/forty"
+            android:layout_below="@+id/editText1"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="end"
+            android:layout_margin="@dimen/ten"
+            android:background="@drawable/button_back"
+            android:text="No"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textsize"
+            android:textStyle="bold"
+            app:backgroundTint="#DA291C" />
+
+        <Button
+            android:id="@+id/yes"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/forty"
+            android:layout_below="@+id/editText1"
+            android:layout_gravity="end"
+            android:layout_margin="@dimen/ten"
+            android:background="@drawable/button_back"
+            android:text="Yes"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textsize"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

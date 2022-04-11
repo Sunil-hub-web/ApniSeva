@@ -237,7 +237,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
                }else {
 
-                   Toast.makeText(ForgotPasswordActivity.this, "Enter Valide Password", Toast.LENGTH_SHORT).show();
+                   Toast.makeText(ForgotPasswordActivity.this, "Enter Valid Password", Toast.LENGTH_SHORT).show();
                }
             }
         });
