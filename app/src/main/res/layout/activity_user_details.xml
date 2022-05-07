@@ -40,7 +40,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/avenir_lt_w01_55_roman"
-                    android:text="Akash Rautaray"
                     android:textColor="#FFFFFF"
                     android:textSize="@dimen/twenty_size"
                     android:textStyle="bold">
@@ -53,7 +52,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/five"
                     android:fontFamily="@font/avenir_lt_w01_55_roman"
-                    android:text="+91 900000001"
                     android:textColor="#FFFFFF"
                     android:textSize="@dimen/textsize"
                     android:textStyle="bold">
@@ -73,7 +71,7 @@
                         android:layout_height="@dimen/two_hundred"
                         android:elevation="@dimen/ten"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/profileimage">
+                        android:src="@drawable/no_avatar">
 
                     </com.google.android.material.imageview.ShapeableImageView>
 <!--
@@ -160,6 +158,7 @@
                         android:background="@color/view" />-->
 
                     <TextView
+                        android:id="@+id/text_RateOutApp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/twenty"
@@ -171,7 +170,7 @@
 
                     </TextView>
 
-                    <View
+                   <!-- <View
                         android:layout_width="@dimen/hundred_fifty"
                         android:layout_height="2dp"
                         android:layout_below="@+id/text1"
@@ -189,7 +188,7 @@
                         android:textSize="@dimen/edittextsize"
                         android:textStyle="bold">
 
-                    </TextView>
+                    </TextView>-->
 
                     <View
                         android:layout_width="@dimen/hundred_fifty"

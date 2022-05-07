@@ -16,8 +16,9 @@
             android:id="@+id/image_ServicesImage"
             android:layout_width="@dimen/forty"
             android:layout_height="@dimen/forty"
-            android:src="@drawable/pest_control"
-            android:layout_centerHorizontal="true"></ImageView>
+            android:layout_centerHorizontal="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/pest_control"></ImageView>
 
         <TextView
             android:id="@+id/text_ServicesName"

@@ -54,7 +54,7 @@ public class ForGotPassword extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.setStatusBarColor(ContextCompat.getColor(ForGotPassword.this, R.color.white));
-
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         btn_verifyOtp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +76,6 @@ public class ForGotPassword extends AppCompatActivity {
                 }
             }
         });
-
 
     }
 
@@ -136,7 +135,7 @@ public class ForGotPassword extends AppCompatActivity {
                             JSONObject jsonError = new JSONObject(jError);
 //                            if (error.networkResponse.statusCode == 400) {
                             String data = jsonError.getString("message");
-                            Toast.makeText(ForGotPassword.this, data, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ForGotPassword.this, "Facing Technical issues, Try again!", Toast.LENGTH_SHORT).show();
 
 //                            } else if (error.networkResponse.statusCode == 404) {
 //                                JSONArray data = jsonError.getJSONArray("msg");

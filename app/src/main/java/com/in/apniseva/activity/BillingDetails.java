@@ -210,16 +210,16 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
         final Activity activity = this;
 
         final Checkout co = new Checkout();
-        co.setKeyID("rzp_test_zaz75RSgcXbsfA");
+        co.setKeyID("rzp_live_pEiadfp4ZIDBJT");
 
         try {
             JSONObject options = new JSONObject();
-            options.put("name", "Razorpay Corp");
-            options.put("description", "Demoing Charges");
+            options.put("name", "Apni Seva");
+            options.put("description", "Aap Se Aap Tak");
             options.put("send_sms_hash", true);
             options.put("allow_rotation", true);
             //You can omit the image option to fetch the image from dashboard
-            options.put("image", "https://s3.amazonaws.com/rzp-mobile/images/rzp.png");
+            //options.put("image", "https://s3.amazonaws.com/rzp-mobile/images/rzp.png");
             options.put("currency", "INR");
             options.put("amount", amount);
 
@@ -311,7 +311,7 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
 
                 error.printStackTrace();
 
-                Toast.makeText(BillingDetails.this, "" + error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(BillingDetails.this, "Facing Technical issues, Try again!", Toast.LENGTH_SHORT).show();
 
                 Log.d("error", error.toString());
 
@@ -353,13 +353,18 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
         services_Id = "";
 
         try {
-            Toast.makeText(this, "Payment failed: " + code + " " + response, Toast.LENGTH_LONG).show();
+
+            //Toast.makeText(this, "Payment failed: " + code + " " + response, Toast.LENGTH_LONG).show();
             //Toast.makeText(this, response, Toast.LENGTH_LONG).show();
+
+            Log.e(TAG, + code + " " + response);
+
         } catch (Exception e) {
+
             Log.e(TAG, "Exception in onPaymentError", e);
         }
 
-        Toast.makeText(this, response, Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, response, Toast.LENGTH_LONG).show();
 
     }
 }

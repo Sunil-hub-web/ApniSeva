@@ -2,7 +2,6 @@
 package com.in.apniseva.activity;
 
 import android.Manifest;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -17,9 +16,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -167,7 +164,9 @@ public class UserDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                logoutOption();
+                sessionManager.logoutUser();
+                SharedPrefManager.getInstance(UserDetails.this).logout();
+
             }
         });
     }
@@ -449,40 +448,5 @@ public class UserDetails extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    public void logoutOption(){
 
-        //Show Your Another AlertDialog
-        final Dialog dialog = new Dialog(UserDetails.this);
-        dialog.setContentView(R.layout.condition_logout);
-        dialog.setCancelable(false);
-        Button btn_No = dialog.findViewById(R.id.no);
-        TextView textView = dialog.findViewById(R.id.editText);
-        Button btn_Yes = dialog.findViewById(R.id.yes);
-
-        btn_Yes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                sessionManager.logoutUser();
-                SharedPrefManager.getInstance(UserDetails.this).logout();
-                dialog.dismiss();
-
-                finish();
-                //System.exit(1);
-
-            }
-        });
-        btn_No.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                dialog.dismiss();
-            }
-        });
-
-        dialog.show();
-        Window window = dialog.getWindow();
-        window.setLayout(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        window.setBackgroundDrawableResource(R.drawable.homecard_back1);
-    }
 }

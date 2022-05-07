@@ -60,10 +60,18 @@ public class SharedPreference {
 
     public void addFavorite(Context context, CartItem beanSampleList) {
         List<CartItem> favorites = loadFavorites(context);
-        if (favorites == null)
+
+        if (favorites == null){
+
             favorites = new ArrayList<CartItem>();
-        favorites.add(beanSampleList);
-        storeFavorites(context, favorites);
+            favorites.add(beanSampleList);
+            storeFavorites(context, favorites);
+
+        }else{
+
+            favorites.add(beanSampleList);
+            storeFavorites(context, favorites);
+        }
     }
 
     public void removeFavorite(Context context, int beanSampleList) {

@@ -72,11 +72,18 @@ public class SubCategoryPriceDetails extends AppCompatActivity {
         category_name = intent.getStringExtra("category_name");
         textName.setText(category_name);
 
+
+
         showSubCateGory(subcategoryid);
+
+        SharedPreference sharedPreference = new SharedPreference();
+        sharedPreference.clearDate(SubCategoryPriceDetails.this);
 
         btn_proceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
 
                 if(price.getText().toString().trim().equals("0.0")){
 
@@ -175,7 +182,7 @@ public class SubCategoryPriceDetails extends AppCompatActivity {
 
                 progressDialog.dismiss();
                 error.printStackTrace();
-                Toast.makeText(SubCategoryPriceDetails.this, ""+error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(SubCategoryPriceDetails.this, " Facing Technical issues, Try again! ", Toast.LENGTH_SHORT).show();
 
             }
         }){

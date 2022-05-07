@@ -66,8 +66,9 @@ public class Booking extends AppCompatActivity {
         str_TotalPrice = intent.getStringExtra("total_price");
 
         subTotalPrice.setText(str_TotalPrice);
-        TotalPrice.setText(str_TotalPrice +"("+"GST included"+")");
+        TotalPrice.setText(str_TotalPrice);
 
+        servicesItem.clear();
         servicesItem = sharedPreference.loadFavorites(Booking.this);
 
         if (servicesItem.size() != 0) {
@@ -89,7 +90,7 @@ public class Booking extends AppCompatActivity {
 
                 if(edit_Address.getText().toString().trim().equals("")){
 
-                    Toast.makeText(Booking.this, "Add PersonalDetails", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Booking.this, "  Add PersonalDetails  ", Toast.LENGTH_SHORT).show();
 
                 }else{
 
@@ -173,5 +174,13 @@ public class Booking extends AppCompatActivity {
         Window window = dialog.getWindow();
         window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        Intent intent = new Intent(Booking.this,SubCategoryPriceDetails.class);
+        startActivity(intent);
     }
 }

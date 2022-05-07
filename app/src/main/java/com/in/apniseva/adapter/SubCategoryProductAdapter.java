@@ -1,5 +1,6 @@
 package com.in.apniseva.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -46,7 +47,7 @@ public class SubCategoryProductAdapter extends RecyclerView.Adapter<SubCategoryP
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
         SubCateGory_ModelClass sub_category = subcategoryproduct.get(position);
 

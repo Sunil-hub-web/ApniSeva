@@ -405,7 +405,7 @@
             android:text="Pay Now"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="@dimen/textsize"
+            android:textSize="@dimen/twelve_size"
             android:textStyle="bold"></Button>
 
         <TextView
@@ -418,7 +418,7 @@
             android:gravity="center"
             android:text="Pay On Visit"
             android:textColor="@color/black"
-            android:textSize="@dimen/textsize"
+            android:textSize="@dimen/twelve_size"
             android:textStyle="bold">
 
         </TextView>

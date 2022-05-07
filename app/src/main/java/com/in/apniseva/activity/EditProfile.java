@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -50,6 +51,8 @@ public class EditProfile extends AppCompatActivity {
         btn_Update = findViewById(R.id.btn_Update);
 
         userid = SharedPrefManager.getInstance(EditProfile.this).getUser().getUserid();
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE | WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         try {
             Log.d("Ranjeet_userId", userid);
@@ -127,7 +130,7 @@ public class EditProfile extends AppCompatActivity {
                 progressDialog.dismiss();
                 error.printStackTrace();
 
-                Toast.makeText(EditProfile.this, "Your user id not found", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditProfile.this, "Facing Technical issues, Try again!", Toast.LENGTH_SHORT).show();
 
             }
         }) {
@@ -188,7 +191,7 @@ public class EditProfile extends AppCompatActivity {
                 progressDialog.dismiss();
                 error.printStackTrace();
 
-                Toast.makeText(EditProfile.this, "Your user id not found", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditProfile.this, "Facing Technical issues, Try again!", Toast.LENGTH_SHORT).show();
 
             }
         }) {

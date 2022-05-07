@@ -16,6 +16,7 @@ import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -57,6 +58,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
         getSupportActionBar().hide();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE | WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         edit_MobileNumber = findViewById(R.id.edit_MobileNumber);
         edit_Password = findViewById(R.id.edit_Password);
@@ -112,33 +115,41 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
-                final int Right = 2;
-                if (event.getAction() == MotionEvent.ACTION_UP) {
+                if(edit_Password.getText().toString().trim().equals("")){
 
-                    if (event.getRawX() >= edit_Password.getRight() - edit_Password.getCompoundDrawables()[Right].getBounds().width()) {
+                    edit_Password.setError("Fill Details");
 
-                        int selection = edit_Password.getSelectionEnd();
-                        if (passwordVisiable) {
+                }else{
 
-                            //set Drawable Image here
-                            edit_Password.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.visibility, 0);
-                            // for show Password
-                            edit_Password.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                            passwordVisiable = false;
+                    final int Right = 2;
+                    if (event.getAction() == MotionEvent.ACTION_UP) {
 
-                        } else {
+                        if (event.getRawX() >= edit_Password.getRight() - edit_Password.getCompoundDrawables()[Right].getBounds().width()) {
 
-                            //set Drawable Image here
-                            edit_Password.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.visibility, 0);
-                            // for show Password
-                            edit_Password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                            passwordVisiable = true;
+                            int selection = edit_Password.getSelectionEnd();
+                            if (passwordVisiable) {
+
+                                //set Drawable Image here
+                                edit_Password.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.password1, 0, R.drawable.visibility, 0);
+                                // for show Password
+                                edit_Password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                                passwordVisiable = false;
+
+                            } else {
+
+                                //set Drawable Image here
+                                edit_Password.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.password1, 0, R.drawable.visibility, 0);
+                                // for show Password
+                                edit_Password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                                passwordVisiable = true;
+                            }
+
+                            edit_Password.setSelection(selection);
+                            return true;
                         }
-
-                        edit_Password.setSelection(selection);
-                        return true;
                     }
                 }
+
                 return false;
             }
         });
@@ -185,31 +196,38 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
-                final int Right = 2;
-                if (event.getAction() == MotionEvent.ACTION_UP) {
+                if(edit_ConfirmPassword.getText().toString().trim().equals("")){
 
-                    if (event.getRawX() >= edit_ConfirmPassword.getRight() - edit_ConfirmPassword.getCompoundDrawables()[Right].getBounds().width()) {
+                    edit_ConfirmPassword.setError("Fill Details");
 
-                        int selection = edit_Password.getSelectionEnd();
-                        if (passwordVisiable) {
+                }else{
 
-                            //set Drawable Image here
-                            edit_ConfirmPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.visibility, 0);
-                            // for show Password
-                            edit_ConfirmPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                            passwordVisiable = false;
+                    final int Right = 2;
+                    if (event.getAction() == MotionEvent.ACTION_UP) {
 
-                        } else {
+                        if (event.getRawX() >= edit_ConfirmPassword.getRight() - edit_ConfirmPassword.getCompoundDrawables()[Right].getBounds().width()) {
 
-                            //set Drawable Image here
-                            edit_ConfirmPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.visibility, 0);
-                            // for show Password
-                            edit_ConfirmPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                            passwordVisiable = true;
+                            int selection = edit_Password.getSelectionEnd();
+                            if (passwordVisiable) {
+
+                                //set Drawable Image here
+                                edit_ConfirmPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.visibility, 0);
+                                // for show Password
+                                edit_ConfirmPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                                passwordVisiable = false;
+
+                            } else {
+
+                                //set Drawable Image here
+                                edit_ConfirmPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.visibility, 0);
+                                // for show Password
+                                edit_ConfirmPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                                passwordVisiable = true;
+                            }
+
+                            edit_ConfirmPassword.setSelection(selection);
+                            return true;
                         }
-
-                        edit_ConfirmPassword.setSelection(selection);
-                        return true;
                     }
                 }
                 return false;
@@ -228,7 +246,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                        str_Password = edit_Password.getText().toString().trim();
                        str_ConfirmPassword = edit_ConfirmPassword.getText().toString().trim();
 
-                       //passUpdate("update_pass",str_MobileNumber,str_Password);
+                       passUpdate("update_pass",str_MobileNumber,str_Password);
 
                    }else{
 
@@ -299,6 +317,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 //                            if (error.networkResponse.statusCode == 400) {
                             String data = jsonError.getString("message");
                             Toast.makeText(ForgotPasswordActivity.this, data, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ForgotPasswordActivity.this, "Facing Technical issues, Try again!", Toast.LENGTH_SHORT).show();
 
 //                            } else if (error.networkResponse.statusCode == 404) {
 //                                JSONArray data = jsonError.getJSONArray("msg");

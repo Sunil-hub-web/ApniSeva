@@ -2,7 +2,7 @@
 <RelativeLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
     <LinearLayout
@@ -14,9 +14,9 @@
             android:id="@+id/cardView"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/hundred_fifty"
-            android:layout_marginLeft="@dimen/fifteen"
+            android:layout_marginLeft="@dimen/ten"
             android:layout_marginTop="@dimen/twenty"
-            android:layout_marginRight="@dimen/fifteen"
+            android:layout_marginRight="@dimen/ten"
             android:layout_marginBottom="@dimen/ten"
             app:cardCornerRadius="@dimen/fifteen"
             app:cardElevation="@dimen/ten">
@@ -28,12 +28,16 @@
 
                 <ImageView
                     android:id="@+id/category_Image"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/two_hundred"
-                    android:layout_centerVertical="true"
-                    android:layout_margin="@dimen/ten"
+                    android:layout_width="@dimen/eighty"
+                    android:layout_height="@dimen/eighty"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="@dimen/ten"
+                    android:layout_marginTop="@dimen/ten"
+                    android:layout_marginEnd="@dimen/ten"
+                    android:layout_marginBottom="@dimen/ten"
                     android:src="@drawable/unnamed_1"
-                    android:scaleType="centerInside">
+                    android:scaleType="fitCenter"
+                    >
 
                 </ImageView>
 

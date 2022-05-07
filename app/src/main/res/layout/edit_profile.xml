@@ -4,237 +4,258 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/img_back"
-        android:layout_width="@dimen/thirty"
-        android:layout_height="@dimen/forty"
-        android:layout_marginLeft="@dimen/twenty"
-        android:layout_marginTop="@dimen/twenty"
-        android:scaleType="fitXY"
-        android:src="@drawable/left_arrowh"></ImageView>
-
-    <RelativeLayout
-        android:id="@+id/heading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/thirty">
-
-        <TextView
-            android:id="@+id/textName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/twenty"
-            android:fontFamily="@font/montserrat_bold"
-            android:text="Edit Profile"
-            android:textColor="#000000"
-            android:textSize="@dimen/twenty_size"
-            android:textStyle="bold">
-
-        </TextView>
-    </RelativeLayout>
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/heading"
-        android:layout_margin="@dimen/twenty"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:fitsSystemWindows="true">
 
-
-        <TextView
-            android:id="@+id/recommendedServices"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/ten"
-            android:layout_marginTop="@dimen/fifteen"
-            android:fontFamily="@font/montserrat_semibold"
-            android:text="Full Name"
-            android:textColor="#000000"
-            android:textSize="@dimen/edittextsize"></TextView>
-
-        <View
-            android:id="@+id/view"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="@dimen/fifteen"
-            android:background="@color/text" />
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/twenty">
-
-            <RelativeLayout
-                android:id="@+id/rel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/ten"
-                android:background="@drawable/relativeback"
-                android:elevation="@dimen/ten">
-
-                <TextView
-                    android:id="@+id/text_mr"
-                    android:layout_width="@dimen/forty"
-                    android:layout_height="@dimen/forty"
-                    android:background="@drawable/nameback"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:gravity="center"
-                    android:text="Mr."
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/twelve_size"
-                    android:textStyle="bold"></TextView>
-
-                <TextView
-                    android:id="@+id/text_ms"
-                    android:layout_width="@dimen/forty"
-                    android:layout_height="@dimen/forty"
-                    android:layout_toRightOf="@id/text_mr"
-                    android:background="@drawable/nameback1"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:gravity="center"
-                    android:text="Ms."
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/twelve_size"
-                    android:textStyle="bold"></TextView>
-
-            </RelativeLayout>
-
-            <EditText
-                android:id="@+id/edit_userName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/ten"
-                android:layout_marginTop="@dimen/eight"
-                android:layout_toRightOf="@id/rel"
-                android:background="@color/transparent"
-                android:fontFamily="@font/montserrat_medium"
-                android:gravity="center"
-                android:text="XXXXXXX"
-                android:textColor="@color/black">
-
-            </EditText>
-
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="@dimen/fifteen"
-            android:background="@color/text" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/ten"
-            android:layout_marginTop="@dimen/fifteen"
-            android:fontFamily="@font/montserrat_bold"
-            android:text="Email Address"
-            android:textColor="#000000"
-            android:textSize="@dimen/edittextsize"></TextView>
-
-
-        <EditText
-            android:id="@+id/edit_EmailId"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/ten"
-            android:layout_marginTop="@dimen/twelve"
-            android:layout_marginBottom="@dimen/ten"
-            android:layout_toRightOf="@id/rel"
-            android:background="@color/transparent"
-            android:fontFamily="@font/montserrat_medium"
-            android:gravity="center"
-            android:text="XXXXX@XX.com"
-            android:textColor="@color/black"
-            android:textStyle="bold">
-
-        </EditText>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="@dimen/fifteen"
-            android:background="@color/text" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/ten"
-            android:layout_marginTop="@dimen/fifteen"
-            android:fontFamily="@font/montserrat_bold"
-            android:text="phone number"
-            android:textColor="#000000"
-            android:textSize="@dimen/edittextsize"></TextView>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/fifteen">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/image"
+                android:id="@+id/img_back"
+                android:layout_width="@dimen/thirty"
+                android:layout_height="@dimen/forty"
+                android:layout_marginLeft="@dimen/twenty"
+                android:layout_marginTop="@dimen/twenty"
+                android:scaleType="fitXY"
+                android:src="@drawable/left_arrowh"></ImageView>
+
+            <RelativeLayout
+                android:id="@+id/heading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/flag"
-                android:layout_marginTop="@dimen/six"
-                android:layout_marginLeft="@dimen/ten">
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/thirty">
 
+                <TextView
+                    android:id="@+id/textName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/twenty"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="Edit Profile"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/twenty_size"
+                    android:textStyle="bold">
 
-            </ImageView>
+                </TextView>
+            </RelativeLayout>
 
-            <TextView
-                android:id="@+id/code"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/ten"
-                android:layout_toRightOf="@id/image"
-                android:fontFamily="@font/montserrat_medium"
-                android:text="+91"
-                android:textColor="#000000"
-                android:textSize="@dimen/edittextsize"></TextView>
-
-            <EditText
-                android:id="@+id/edit_MobileNo"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/ten"
-                android:layout_marginBottom="@dimen/ten"
-                android:background="@color/transparent"
-                android:drawablePadding="@dimen/twenty"
-                android:maxLength="10"
-                android:layout_toRightOf="@+id/code"
-                android:inputType="number"
-                android:fontFamily="@font/montserrat_medium"
-                android:text="00000000"
-                android:textColor="@color/black"
-                android:textStyle="bold">
+                android:layout_below="@id/heading"
+                android:layout_margin="@dimen/ten"
+                android:layout_marginStart="@dimen/twenty"
+                android:layout_marginTop="@dimen/twenty"
+                android:layout_marginEnd="@dimen/twenty"
+                android:layout_marginBottom="@dimen/twenty"
+                android:orientation="vertical">
 
-            </EditText>
 
-        </RelativeLayout>
+                <TextView
+                    android:id="@+id/recommendedServices"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/ten"
+                    android:layout_marginTop="@dimen/fifteen"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="Full Name"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/edittextsize"></TextView>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="@dimen/fifteen"
-            android:background="@color/text" />
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/fifteen"
+                    android:background="@color/text" />
 
-    </LinearLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/ten">
 
-    <Button
-        android:id="@+id/btn_Update"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/forty_five"
-        android:layout_weight="1"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="@dimen/fifty"
-        android:background="@drawable/loginback"
-        android:fontFamily="@font/montserrat_semibold"
-        android:text="Update"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="@dimen/edittextsize"
-        android:textStyle="bold"></Button>
+                    <!-- <RelativeLayout
+                        android:id="@+id/rel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/ten"
+                        android:background="@drawable/relativeback"
+                        android:elevation="@dimen/ten">
+
+                        <TextView
+                            android:id="@+id/text_mr"
+                            android:layout_width="@dimen/forty"
+                            android:layout_height="@dimen/forty"
+                            android:background="@drawable/nameback"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:gravity="center"
+                            android:text="Mr."
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/twelve_size"
+                            android:textStyle="bold"></TextView>
+
+                        <TextView
+                            android:id="@+id/text_ms"
+                            android:layout_width="@dimen/forty"
+                            android:layout_height="@dimen/forty"
+                            android:layout_toRightOf="@id/text_mr"
+                            android:background="@drawable/nameback1"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:gravity="center"
+                            android:text="Ms."
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/twelve_size"
+                            android:textStyle="bold"></TextView>
+
+                    </RelativeLayout>-->
+
+                    <EditText
+                        android:id="@+id/edit_userName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/ten"
+                        android:layout_marginTop="@dimen/eight"
+                        android:layout_toRightOf="@id/rel"
+                        android:background="@color/transparent"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:gravity="left"
+                        android:text="XXXXXXX"
+                        android:textColor="@color/black">
+
+                    </EditText>
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/fifteen"
+                    android:background="@color/text" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/ten"
+                    android:layout_marginTop="@dimen/ten"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="Email Address"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/edittextsize"></TextView>
+
+
+                <EditText
+                    android:id="@+id/edit_EmailId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/ten"
+                    android:layout_marginTop="@dimen/twelve"
+                    android:layout_toRightOf="@id/rel"
+                    android:background="@color/transparent"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:gravity="left"
+                    android:text="XXXXX@XX.com"
+                    android:textColor="@color/black"
+                    android:textStyle="bold">
+
+                </EditText>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/fifteen"
+                    android:background="@color/text" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/ten"
+                    android:layout_marginTop="@dimen/fifteen"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="phone number"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/edittextsize"></TextView>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/fifteen">
+
+                    <ImageView
+                        android:id="@+id/image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/ten"
+                        android:layout_marginTop="@dimen/six"
+                        android:src="@drawable/flag">
+
+
+                    </ImageView>
+
+                    <TextView
+                        android:id="@+id/code"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/ten"
+                        android:layout_toRightOf="@id/image"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="+91"
+                        android:textColor="#000000"
+                        android:textSize="@dimen/edittextsize"></TextView>
+
+                    <EditText
+                        android:id="@+id/edit_MobileNo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/ten"
+                        android:layout_marginBottom="@dimen/ten"
+                        android:layout_toRightOf="@+id/code"
+                        android:background="@color/transparent"
+                        android:drawablePadding="@dimen/twenty"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:text="00000000"
+                        android:textColor="@color/black"
+                        android:textStyle="bold">
+
+                    </EditText>
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/ten"
+                    android:background="@color/text" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_Update"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/forty_five"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="@dimen/fifty"
+                android:background="@drawable/loginback"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="Update"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/edittextsize"
+                android:textStyle="bold"></Button>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+
 
 </RelativeLayout>

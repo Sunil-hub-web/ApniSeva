@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
 
         showImageViewPager = findViewById(R.id.showImageViewPager);
         dots_container = findViewById(R.id.dots_container);
-        showrecommendedServices = findViewById(R.id.showrecommendedServices);
+        //showrecommendedServices = findViewById(R.id.showrecommendedServices);
         bottomNavigation = findViewById(R.id.bottomNavigation);
         recyclerOurServices = findViewById(R.id.recyclerOurServices);
         customerReviewRecycler = findViewById(R.id.customerReviewRecycler);
@@ -341,7 +341,7 @@ public class MainActivity extends AppCompatActivity {
 
                         services = new ArrayList<>();
 
-                        JSONArray jsonArray_offers = new JSONArray(recomended_services);
+                       /* JSONArray jsonArray_offers = new JSONArray(recomended_services);
 
                         for (int i = 0; i < jsonArray_offers.length(); i++) {
 
@@ -362,7 +362,7 @@ public class MainActivity extends AppCompatActivity {
                         recommendedServicesAdapter = new RecommendedServicesAdapter(MainActivity.this, services);
                         showrecommendedServices.setLayoutManager(linearLayoutManager);
                         showrecommendedServices.setHasFixedSize(true);
-                        showrecommendedServices.setAdapter(recommendedServicesAdapter);
+                        showrecommendedServices.setAdapter(recommendedServicesAdapter);*/
 
 
                         user_review = new ArrayList<>();

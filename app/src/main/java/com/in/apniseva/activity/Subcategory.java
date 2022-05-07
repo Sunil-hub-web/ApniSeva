@@ -136,7 +136,7 @@ public class Subcategory extends AppCompatActivity {
 
                 progressDialog.dismiss();
                 error.printStackTrace();
-                Toast.makeText(Subcategory.this, ""+error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(Subcategory.this, "Facing Technical issues, Try again!", Toast.LENGTH_SHORT).show();
 
             }
         }){

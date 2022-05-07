@@ -119,13 +119,14 @@
 
     </ScrollView>
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/btn"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="@dimen/forty">
+        android:layout_marginBottom="@dimen/thirty"
+        android:orientation="vertical">
 
         <RelativeLayout
             android:id="@+id/r8"
@@ -216,7 +217,24 @@
 
         </RelativeLayout>
 
-    </RelativeLayout>
+        <TextView
+            android:id="@+id/PersonalDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginLeft="@dimen/twenty"
+            android:layout_marginTop="@dimen/ten"
+            android:layout_marginRight="@dimen/ten"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="GST included"
+            android:textColor="#828282"
+            android:textSize="@dimen/twelve_size"
+            android:textStyle="bold">
+
+        </TextView>
+
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/btn"

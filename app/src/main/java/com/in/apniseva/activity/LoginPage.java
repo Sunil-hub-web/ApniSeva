@@ -40,12 +40,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
-import com.facebook.AccessTokenTracker;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.LoginStatusCallback;
-import com.facebook.Profile;
-import com.facebook.internal.ImageRequest;
 import com.in.apniseva.AppURL.AppUrl;
 import com.in.apniseva.R;
 import com.in.apniseva.SessionManager;
@@ -93,7 +87,7 @@ public class LoginPage extends AppCompatActivity {
     CallbackManager callbackManager;
 
     GoogleSignInClient mGoogleSignInClient;
-    RelativeLayout googlesignInButton, facebooksignInButton;
+    RelativeLayout googlesignInButton,facebooksignInButton;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -114,8 +108,8 @@ public class LoginPage extends AppCompatActivity {
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        //AppEventsLogger.activateApp(this);
+          FacebookSdk.sdkInitialize(getApplicationContext());
+          //AppEventsLogger.activateApp(this);
 
         Window window = LoginPage.this.getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -138,12 +132,33 @@ public class LoginPage extends AppCompatActivity {
 
         callbackManager = CallbackManager.Factory.create();
 
+        LoginManager.getInstance().registerCallback(callbackManager,
+                new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        // App code
+
+                        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+                        boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        // App code
+                    }
+
+                    @Override
+                    public void onError(FacebookException exception) {
+                        // App code
+                    }
+                });
 
         facebooksignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                LoginManager.getInstance().logInWithReadPermissions(LoginPage.this, Arrays.asList("email", "public_profile"));
+
+                LoginManager.getInstance().logInWithReadPermissions(LoginPage.this, Arrays.asList("public_profile"));
 
                 LoginManager.getInstance().registerCallback(callbackManager,
                         new FacebookCallback<LoginResult>() {
@@ -154,40 +169,24 @@ public class LoginPage extends AppCompatActivity {
                                 AccessToken accessToken = AccessToken.getCurrentAccessToken();
                                 boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
 
-                                if(isLoggedIn == true){
-
-                                    Profile profile = Profile.getCurrentProfile();
-                                    String id = profile.getName();
-                                    setFacebookData(loginResult);
-
-                                }else{
-
-                                    Toast.makeText(LoginPage.this, "Logout", Toast.LENGTH_SHORT).show();
-                                }
-
+                                Toast.makeText(LoginPage.this, "Login Success", Toast.LENGTH_SHORT).show();
                             }
 
                             @Override
                             public void onCancel() {
                                 // App code
-
-                                Toast.makeText(LoginPage.this, "failed", Toast.LENGTH_SHORT).show();
                             }
 
                             @Override
                             public void onError(FacebookException exception) {
                                 // App code
 
-                                Toast.makeText(LoginPage.this, "" + exception, Toast.LENGTH_SHORT).show();
-
-                                Log.d("sunilException", exception.toString());
-
+                                Toast.makeText(LoginPage.this, "Login Error", Toast.LENGTH_SHORT).show();
                             }
                         });
-
-
             }
         });
+
 
         googlesignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -324,34 +323,36 @@ public class LoginPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (edit_MobileNumber.getText().toString().trim().equals("")) {
+                if(edit_MobileNumber.getText().toString().trim().equals("")){
 
                     edit_MobileNumber.setError("Fill The Details");
 
-                } else if (edit_Password.getText().toString().trim().equals("")) {
+                }else  if(edit_Password.getText().toString().trim().equals("")){
 
                     edit_Password.setError("Fill The Details");
 
-                } else {
+                } else{
 
                     str_MobileNumber = edit_MobileNumber.getText().toString().trim();
                     str_Password = edit_Password.getText().toString().trim();
 
-                    if (str_MobileNumber.matches("^[0-9]*$")) {
+                    if(str_MobileNumber.matches("^[0-9]*$")){
 
-                        if (awesomeValidation.validate()) {
+                        if(awesomeValidation.validate()){
 
                             userlogin(str_MobileNumber, str_Password);
-                        } else {
+                        }
+                        else{
 
                             edit_MobileNumber.setError("Enter Valid Mobile No");
                         }
-                    } else {
+                    }else{
 
-                        if (isValidEmail(str_MobileNumber)) {
+                        if(isValidEmail(str_MobileNumber)){
 
                             userlogin(str_MobileNumber, str_Password);
-                        } else {
+                        }
+                        else{
 
                             edit_MobileNumber.setError("Enter Valid EmailId");
                         }
@@ -365,11 +366,11 @@ public class LoginPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (edit_MobileNumber.getText().toString().trim().equals("")) {
+                if(edit_MobileNumber.getText().toString().trim().equals("")){
 
                     edit_MobileNumber.setError("Fill The Field");
 
-                } else {
+                }else{
 
                     str_MobileNumber = edit_MobileNumber.getText().toString().trim();
                     loginviaOTP(str_MobileNumber);
@@ -420,41 +421,6 @@ public class LoginPage extends AppCompatActivity {
                 });
     }
 
-    private void setFacebookData(final LoginResult loginResult) {
-
-        GraphRequest request = GraphRequest.newMeRequest(
-                loginResult.getAccessToken(),
-                new GraphRequest.GraphJSONObjectCallback() {
-                    @Override
-                    public void onCompleted(JSONObject object, GraphResponse response) {
-                        // Application code
-                        try {
-                            Log.i("Response", response.toString());
-
-                            String email = response.getJSONObject().getString("email");
-                            String firstName = response.getJSONObject().getString("first_name");
-                            String lastName = response.getJSONObject().getString("last_name");
-                            String profileURL = "";
-
-                            edit_MobileNumber.setText(email);
-
-                            userSociallogin(email);
-
-                            if (Profile.getCurrentProfile() != null) {
-                                profileURL = ImageRequest.getProfilePictureUri(Profile.getCurrentProfile().getId(), 400, 400).toString();
-                            }
-
-                            //TODO put your code here
-                        } catch (JSONException e) {
-                            Toast.makeText(LoginPage.this, "error_occurred_try_again", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-        Bundle parameters = new Bundle();
-        parameters.putString("fields", "id,email,first_name,last_name");
-        request.setParameters(parameters);
-        request.executeAsync();
-    }
 
     /*public void googlesignin() {
 
@@ -476,6 +442,7 @@ public class LoginPage extends AppCompatActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
         callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
@@ -487,46 +454,6 @@ public class LoginPage extends AppCompatActivity {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
         }
-    }
-
-    AccessTokenTracker t = new AccessTokenTracker() {
-        @Override
-        protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
-
-            if (currentAccessToken == null) {
-
-                Toast.makeText(LoginPage.this, "Logout", Toast.LENGTH_SHORT).show();
-
-            } else {
-
-                loaduserProfile(currentAccessToken);
-            }
-        }
-    };
-
-    private void loaduserProfile(AccessToken currentAccessToken) {
-
-        GraphRequest graphRequest = GraphRequest.newMeRequest(currentAccessToken, (object, response) -> {
-
-            if (object != null) {
-
-                try {
-
-                    String email = object.getString("email");
-                    edit_MobileNumber.setText(email);
-
-                } catch (JSONException ex) {
-
-                    ex.printStackTrace();
-
-                }
-            }
-        });
-        Bundle parameter = new Bundle();
-        parameter.putString("field", "email");
-        graphRequest.setParameters(parameter);
-        graphRequest.executeAsync();
-
     }
 
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
@@ -584,7 +511,7 @@ public class LoginPage extends AppCompatActivity {
             public void onResponse(JSONObject response) {
 
                 progressDialog.dismiss();
-                Log.d("Ranjeet_login_response", response.toString());
+                Log.d("Ranjeet_login_response",response.toString());
 
                 try {
                     String message = response.getString("status");
@@ -689,20 +616,20 @@ public class LoginPage extends AppCompatActivity {
             public void onResponse(JSONObject response) {
 
                 progressDialog.dismiss();
-                Log.d("Ranjeet_login_responseO", response.toString());
+                Log.d("Ranjeet_login_responseO",response.toString());
 
                 String message;
                 try {
                     message = response.getString("status");
 //                    String message1 = response.getString("message");
 
-                    Log.d("Ranjeet_message", message);
+                    Log.d("Ranjeet_message",message);
 
                     if (message.equals("NOK")) {
 
                         Toast.makeText(LoginPage.this, "User does not exists", Toast.LENGTH_SHORT).show();
 
-                    } else if (message.equals("OK")) {
+                    }else if(message.equals("OK")){
 
                         String OTP = response.getString("otp");
 
@@ -717,7 +644,7 @@ public class LoginPage extends AppCompatActivity {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Log.d("Ranjeet_Login_otp", e.toString());
+                    Log.d("Ranjeet_Login_otp",e.toString());
 
                 }
 
@@ -762,7 +689,7 @@ public class LoginPage extends AppCompatActivity {
             public void onResponse(JSONObject response) {
 
                 progressDialog.dismiss();
-                Log.d("Ranjeet_login_response", response.toString());
+                Log.d("Ranjeet_login_response",response.toString());
 
                 try {
                     String message = response.getString("status");
@@ -798,7 +725,7 @@ public class LoginPage extends AppCompatActivity {
 
                         Toast.makeText(LoginPage.this, "Login Successfully", Toast.LENGTH_SHORT).show();
 
-                        Intent intent = new Intent(LoginPage.this, MainActivity.class);
+                        Intent intent = new Intent(LoginPage.this,MainActivity.class);
                         startActivity(intent);
 
                     }
@@ -843,14 +770,14 @@ public class LoginPage extends AppCompatActivity {
 
         String email = sessionManager.getUserEmail();
 
-        if (SharedPrefManager.getInstance(LoginPage.this).isLoggedIn()) {
+        if (SharedPrefManager.getInstance (LoginPage.this).isLoggedIn ()){
 
-            Intent intent = new Intent(LoginPage.this, MainActivity.class);
-            startActivity(intent);
+            Intent intent = new Intent ( LoginPage.this, MainActivity.class );
+            startActivity (intent);
 
-        } else if (sessionManager.isLogin()) {
+        }else if(sessionManager.isLogin()){
 
-            Intent intent = new Intent(LoginPage.this, MainActivity.class);
+            Intent intent = new Intent(LoginPage.this,MainActivity.class);
             startActivity(intent);
         }
     }

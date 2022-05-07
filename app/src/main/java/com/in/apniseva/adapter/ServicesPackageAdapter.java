@@ -30,7 +30,7 @@ public class ServicesPackageAdapter extends RecyclerView.Adapter<ServicesPackage
     Context context;
     ArrayList<ServicesPackage_ModelClass> acservices;
     int index;
-    double price = 0;
+    double price = 0.00;
     String str_name, str_price;
 
     ArrayList<CartItem> servicesItem = new ArrayList<>();
@@ -57,13 +57,9 @@ public class ServicesPackageAdapter extends RecyclerView.Adapter<ServicesPackage
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
         ServicesPackage_ModelClass ac_services = acservices.get(position);
-
-        sharedPreference.clearDate(context);
-        servicesItem.clear();
-        servicesid.clear();
 
         //holder.text_Description.setText(ac_services.getServicesDescription());
         holder.text_Price.setText(ac_services.getServicesPrice());
@@ -101,21 +97,22 @@ public class ServicesPackageAdapter extends RecyclerView.Adapter<ServicesPackage
         });*/
 
         holder.button_Services.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
 
                 try{
 
-                    if(holder.rel_right1.getVisibility() == View.VISIBLE){
+                    if(holder.rel_rightGray.getVisibility() == View.VISIBLE){
 
-                        ac_services.setSelected(!ac_services.isSelected());
 
-                        holder.rel_right.setVisibility(View.VISIBLE);
-                        holder.rel_right1.setVisibility(View.GONE);
+                        holder.rel_rightGreen.setVisibility(View.VISIBLE);
+                        holder.rel_rightGray.setVisibility(View.GONE);
 
-                        holder.rel_right1.setBackgroundColor(ac_services.isSelected() ? ContextCompat.getColor(context, R.color.button2) : ContextCompat.getColor(context, R.color.button1));
+                        //holder.rel_rightGreen.setBackgroundColor(ac_services.isSelected() ? ContextCompat.getColor(context, R.color.button2) : ContextCompat.getColor(context, R.color.button1));
 
+                        str_price = ac_services.getServicesPrice();
+
+                        str_name = ac_services.getServicesName();
                         str_price = ac_services.getServicesPrice();
 
                         double d_price = Double.valueOf(str_price);
@@ -126,29 +123,25 @@ public class ServicesPackageAdapter extends RecyclerView.Adapter<ServicesPackage
 
                         SubCategoryPriceDetails.price.setText(tot_price);
 
-                        str_name = ac_services.getServicesName();
-                        str_price = ac_services.getServicesPrice();
-
                         CartItem cartItem = new CartItem(str_name, str_price);
 
                         sharedPreference.addFavorite(context, cartItem);
-
-                        servicesItem.add(cartItem);
 
                         servicesid.add(ac_services.getServicesId());
 
                         Log.d("servicesid", servicesid.toString());
 
-                    }else{
 
-                        ac_services.setSelected(!ac_services.isSelected());
+                    }else if(holder.rel_rightGreen.getVisibility() == View.VISIBLE){
 
-                        holder.rel_right.setVisibility(View.GONE);
-                        holder.rel_right1.setVisibility(View.VISIBLE);
+                        //ac_services.setSelected(!ac_services.isSelected());
+                        //holder.rel_rightGreen.setBackgroundColor(ac_services.isSelected() ?
+                        // ContextCompat.getColor(context, R.color.button2) : ContextCompat.getColor(context, R.color.button1));
 
-                        holder.rel_right1.setBackgroundColor(ac_services.isSelected() ? ContextCompat.getColor(context, R.color.button1) : ContextCompat.getColor(context, R.color.button2));
+                        holder.rel_rightGreen.setVisibility(View.GONE);
+                        holder.rel_rightGray.setVisibility(View.VISIBLE);
 
-                        String str_price = ac_services.getServicesPrice();
+                        str_price = ac_services.getServicesPrice();
 
                         double d_price = Double.valueOf(str_price);
 
@@ -156,19 +149,18 @@ public class ServicesPackageAdapter extends RecyclerView.Adapter<ServicesPackage
 
                         double d_totprice = Double.valueOf(tot_price);
 
-                        price = price - d_price;
+                        price = d_totprice - d_price;
+
+                        String str_totprice = String.valueOf(price);
+
+                        SubCategoryPriceDetails.price.setText(str_totprice);
 
                         sharedPreference.removeFavorite(context,position);
 
-                        servicesItem.remove(position);
-
                         servicesid.remove(position);
 
-                        String str_amount = String.valueOf(price);
-
-                        SubCategoryPriceDetails.price.setText(str_amount);
-
                         Log.d("servicesid", servicesid.toString());
+
 
                     }
 
@@ -179,16 +171,6 @@ public class ServicesPackageAdapter extends RecyclerView.Adapter<ServicesPackage
             }
         });
 
-        /*if(index == position){
-
-            holder.rel_right.setBackgroundResource(R.drawable.layoutback);
-            holder.rel_right.setElevation(5);
-        }
-        else {
-
-            holder.rel_right.setBackgroundResource(R.drawable.layouback1);
-            holder.rel_right.setElevation(5);
-        }*/
     }
 
     @Override
@@ -204,7 +186,7 @@ public class ServicesPackageAdapter extends RecyclerView.Adapter<ServicesPackage
 
         TextView text_ServicesName, text_Price, text_Description;
         Button button_Services;
-        RelativeLayout rel_right, rel_right1;
+        RelativeLayout rel_rightGreen, rel_rightGray;
         //CardView cardView;
         CheckBox checkBox;
 
@@ -216,8 +198,8 @@ public class ServicesPackageAdapter extends RecyclerView.Adapter<ServicesPackage
             //text_Description = itemView.findViewById(R.id.text_Description);
             button_Services = itemView.findViewById(R.id.button_Services);
             //checkBox = itemView.findViewById(R.id.radio);
-            rel_right = itemView.findViewById(R.id.rel_right);
-            rel_right1 = itemView.findViewById(R.id.rel_right1);
+            rel_rightGreen = itemView.findViewById(R.id.rel_rightGreen);
+            rel_rightGray = itemView.findViewById(R.id.rel_rightGray);
 
 
         }

@@ -60,6 +60,8 @@ public class VerificationCode extends AppCompatActivity {
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.setStatusBarColor(ContextCompat.getColor(VerificationCode.this, R.color.white));
 
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
         text_Timer = findViewById(R.id.timer);
         resend_OTP = findViewById(R.id.resend_OTP);
         btn_verifayOtp = findViewById(R.id.btn_verifayOtp);
@@ -222,7 +224,7 @@ public class VerificationCode extends AppCompatActivity {
                 progressDialog.dismiss();
 
                 error.printStackTrace();
-                Toast.makeText(VerificationCode.this, ""+error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(VerificationCode.this, "Facing Technical issues, Try again!", Toast.LENGTH_SHORT).show();
 
             }
         }){
@@ -280,7 +282,7 @@ public class VerificationCode extends AppCompatActivity {
 
                 progressDialog.dismiss();
                 error.printStackTrace();
-                Toast.makeText(VerificationCode.this, ""+error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(VerificationCode.this, "Facing Technical issues, Try again!", Toast.LENGTH_SHORT).show();
 
             }
         }){
@@ -345,7 +347,7 @@ public class VerificationCode extends AppCompatActivity {
 
                 progressDialog.dismiss();
                 error.printStackTrace();
-                Toast.makeText(VerificationCode.this, ""+error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(VerificationCode.this, "Facing Technical issues, Try again!", Toast.LENGTH_SHORT).show();
 
             }
         }){

@@ -31,7 +31,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/ten"
-
+                        android:layout_toLeftOf="@id/rel"
                         android:layout_marginRight="@dimen/five">
 
                         <TextView
@@ -98,7 +98,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true">
                     <RelativeLayout
-                        android:id="@+id/rel_right"
+                        android:id="@+id/rel_rightGreen"
                         android:layout_width="@dimen/fifty"
                         android:layout_height="match_parent"
                         android:background="@drawable/layoutback"
@@ -115,7 +115,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
-                        android:id="@+id/rel_right1"
+                        android:id="@+id/rel_rightGray"
                         android:layout_width="@dimen/fifty"
                         android:layout_height="match_parent"
                         android:background="@drawable/layouback1">
@@ -145,7 +145,6 @@
                     android:id="@+id/button_Services"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_toLeftOf="@id/rel"
                     android:background="@android:color/transparent"></Button>
 
             </RelativeLayout>

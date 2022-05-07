@@ -2,6 +2,7 @@ package com.in.apniseva.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -80,6 +81,7 @@ public class BookingHistory extends AppCompatActivity {
     SwipeRefreshLayout swipeRefreshLayout;
     OrderItemAdapter orderItemAdapter;
     CircleImageView profile_image;
+    CardView crd1;
 
 
     @Override
@@ -119,12 +121,14 @@ public class BookingHistory extends AppCompatActivity {
         text_TechnicianPin = findViewById(R.id.text_TechnicianPin);
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
         text_ShowWorkDetails = findViewById(R.id.text_ShowWorkDetails);
+        crd1 = findViewById(R.id.crd1);
 
      /*   placed_divider.setProgress(100);
         placed_divider1.setProgress(100);
         placed_divider2.setProgress(100);
         placed_divider3.setProgress(100);*/
 
+        crd1.setVisibility(View.GONE);
 
         Intent intent = getIntent();
         booking_id = intent.getStringExtra("booking_id");
@@ -189,6 +193,8 @@ public class BookingHistory extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
 
+                    Log.d("sunilresponse",response);
+
                     String status = jsonObject.getString("status");
 
                     if (status.equals("OK")) {
@@ -215,11 +221,11 @@ public class BookingHistory extends AppCompatActivity {
                         text_TechnicianPin.setText(verification_pin);
                         text_ShowWorkDetails.setText(work_details);
 
-                        JSONArray jsonArray_technician_details = new JSONArray(technician_details);
-
                         if (verification_pin.equals("null")) {
 
                             bookingconfirm();
+
+                            JSONArray jsonArray_technician_details = new JSONArray(technician_details);
 
                             for(int i= 0;i<jsonArray_technician_details.length();i++){
 
@@ -245,13 +251,15 @@ public class BookingHistory extends AppCompatActivity {
 
                                 tecnicianAllocate();
 
-                                for(int i= 0;i<jsonArray_technician_details.length();i++){
+                                JSONArray jsonArray_technician_details = new JSONArray(technician_details);
 
-                                    JSONObject jsonObject_technician = jsonArray_technician_details.getJSONObject(i);
+                                for(int j= 0;j<jsonArray_technician_details.length();j++){
+
+                                    JSONObject jsonObject_technician = jsonArray_technician_details.getJSONObject(j);
 
                                     String id = jsonObject_technician.getString("id");
                                     String techname = jsonObject_technician.getString("name");
-                                    String email = jsonObject_technician.getString("em  ail");
+                                    String email = jsonObject_technician.getString("email");
                                     techmobile = jsonObject_technician.getString("mobile");
                                     String profile_img = jsonObject_technician.getString("profile_img");
                                     String category = jsonObject_technician.getString("category");
@@ -268,10 +276,13 @@ public class BookingHistory extends AppCompatActivity {
                                 if(work_status.equals("payment_done")){
 
                                     workingComplete();
+                                    crd1.setVisibility(View.VISIBLE);
 
-                                    for(int i= 0 ;i<jsonArray_technician_details.length();i++){
+                                    JSONArray jsonArray_technician_details = new JSONArray(technician_details);
 
-                                        JSONObject jsonObject_technician = jsonArray_technician_details.getJSONObject(i);
+                                    for(int k= 0 ;k<jsonArray_technician_details.length();k++){
+
+                                        JSONObject jsonObject_technician = jsonArray_technician_details.getJSONObject(k);
 
                                         String id = jsonObject_technician.getString("id");
                                         String techname = jsonObject_technician.getString("name");
@@ -294,9 +305,13 @@ public class BookingHistory extends AppCompatActivity {
 
                                     workInProgress();
 
-                                    for(int i= 0;i<jsonArray_technician_details.length();i++){
+                                    crd1.setVisibility(View.VISIBLE);
 
-                                        JSONObject jsonObject_technician = jsonArray_technician_details.getJSONObject(i);
+                                    JSONArray jsonArray_technician_details = new JSONArray(technician_details);
+
+                                    for(int l= 0;l<jsonArray_technician_details.length();l++){
+
+                                        JSONObject jsonObject_technician = jsonArray_technician_details.getJSONObject(l);
 
                                         String id = jsonObject_technician.getString("id");
                                         String techname = jsonObject_technician.getString("name");
@@ -309,6 +324,7 @@ public class BookingHistory extends AppCompatActivity {
                                         text_Techniciansid.setText(techname);
                                         text_designation.setText(category);
                                         Picasso.with(BookingHistory.this).load(profile_img).placeholder(R.drawable.profileimage).into(profile_image);
+
 
                                     }
 
@@ -378,7 +394,7 @@ public class BookingHistory extends AppCompatActivity {
                 dialog.dismiss();
                 error.printStackTrace();
 
-                Toast.makeText(BookingHistory.this, "" + error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(BookingHistory.this, "Facing Technical issues, Try again!", Toast.LENGTH_SHORT).show();
 
                 Log.d("error", error.toString());
 

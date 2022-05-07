@@ -69,7 +69,7 @@ public class BookingDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(BookingDetails.this,UserDetails.class);
+                Intent intent = new Intent(BookingDetails.this,MainActivity.class);
                 startActivity(intent);
 
             }
@@ -187,7 +187,7 @@ public class BookingDetails extends AppCompatActivity {
                 progressDialog.dismiss();
                 error.printStackTrace();
 
-                Toast.makeText(BookingDetails.this, "" + error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(BookingDetails.this, "Facing Technical issues, Try again!", Toast.LENGTH_SHORT).show();
 
                 Log.d("error", error.toString());
 
@@ -208,4 +208,10 @@ public class BookingDetails extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        finish();
+    }
 }

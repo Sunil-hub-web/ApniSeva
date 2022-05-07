@@ -60,6 +60,8 @@ public class SignUpPage extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.setStatusBarColor(ContextCompat.getColor(SignUpPage.this, R.color.white));
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE | WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
 
         edit_Password = findViewById(R.id.edit_Password);
         edit_fullname = findViewById(R.id.edit_fullname);
@@ -227,6 +229,7 @@ public class SignUpPage extends AppCompatActivity {
 //                            if (error.networkResponse.statusCode == 400) {
                             String data = jsonError.getString("message");
                             Toast.makeText(SignUpPage.this, data, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUpPage.this, "Facing Technical issues, Try again!", Toast.LENGTH_SHORT).show();
 
 //                            } else if (error.networkResponse.statusCode == 404) {
 //                                JSONArray data = jsonError.getJSONArray("msg");
