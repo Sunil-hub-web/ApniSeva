@@ -18,10 +18,6 @@
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
         <!-- Customize your theme here. -->
 
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
-        <item name="android:fitsSystemWindows">true</item>
-
     </style>
 
     <style name="Theme.ApniSeva.NoActionBar">
@@ -32,6 +28,11 @@
     <style name="ShapeAppearanceOverlay.App.SelectedCornerRadius" parent="">
         <item name="cornerSizeTopLeft">75dp</item>
         <item name="cornerFamilyTopRight">rounded</item>
+    </style>
+
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/grey</item>
+        <item name="colorControlActivated">@color/yellow</item>
     </style>
 
 </resources>

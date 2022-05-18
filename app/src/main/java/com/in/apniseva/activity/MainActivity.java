@@ -97,6 +97,8 @@ public class MainActivity extends AppCompatActivity {
     EditText serach;
     TextView text_location;
 
+    int arraysize;
+
     private Boolean exit = false;
 
     private int FINE_LOCATION_ACCESS_REQUEST_CODE = 10001;
@@ -127,6 +129,8 @@ public class MainActivity extends AppCompatActivity {
         rel_loc = findViewById(R.id.rel_loc);
         //serach = findViewById(R.id.serach);
         text_location = findViewById(R.id.location);
+
+        getHomePageDetails();
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -182,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                showImageViewPager.setCurrentItem(showImageViewPager.getCurrentItem() + 1);
+                showImageViewPager.setCurrentItem(showImageViewPager.getCurrentItem()+1);
             }
         };
 
@@ -191,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
             public void onPageSelected(int position) {
                 //super.onPageSelected(position);
 
-                if (currentPossition > 4)
+                if (currentPossition >= arraysize)
                     currentPossition = 0;
                 selectedIndicatorPosition(currentPossition++);
 
@@ -248,9 +252,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        getHomePageDetails();
-
 
     }
 
@@ -369,7 +370,7 @@ public class MainActivity extends AppCompatActivity {
 
                         JSONArray jsonArray_reviews = new JSONArray(reviews);
 
-                        for (int i = 0; i < jsonArray_reviews.length(); i++) {
+                        for (int i = 0; i < 6; i++) {
 
                             JSONObject jsonObject_reviews = jsonArray_reviews.getJSONObject(i);
 
@@ -411,9 +412,11 @@ public class MainActivity extends AppCompatActivity {
                         bannerAdapter = new BannerAdapter(MainActivity.this, homeBanner, showImageViewPager);
                         showImageViewPager.setAdapter(bannerAdapter);
 
-                        int arraysize = homeBanner.size();
+                        arraysize = homeBanner.size();
 
                         dots = new TextView[arraysize];
+
+                        Log.d("arraysizesunil",String.valueOf(arraysize));
 
                         dotsIndicator();
 

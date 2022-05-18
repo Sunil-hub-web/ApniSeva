@@ -26,8 +26,10 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.in.apniseva.AppURL.AppUrl;
 import com.in.apniseva.R;
+import com.in.apniseva.SessionManager;
 import com.in.apniseva.SharedPreference;
 import com.in.apniseva.adapter.ServicesPackageAdapter;
+import com.in.apniseva.modelclass.CartItem;
 import com.in.apniseva.modelclass.ServicesPackage_ModelClass;
 import com.google.gson.Gson;
 
@@ -46,12 +48,15 @@ public class SubCategoryPriceDetails extends AppCompatActivity {
     LinearLayoutManager linearLayoutManager;
     ArrayList<ServicesPackage_ModelClass> acPackage = new ArrayList<>();
     ArrayList<String> servicesId = new ArrayList<>();
+    ArrayList<CartItem> servicesItem = new ArrayList<>();
 
     Button btn_proceed;
 
     public static TextView textName,looking,price;
     String subcategoryid,category_name;
     ImageView image_back;
+
+    SessionManager sessionManager;
 
     SharedPreference sharedPreference = new SharedPreference();
 
@@ -67,12 +72,22 @@ public class SubCategoryPriceDetails extends AppCompatActivity {
         price = findViewById(R.id.price);
         image_back = findViewById(R.id.image_back);
 
+        sessionManager = new SessionManager(SubCategoryPriceDetails.this);
+        //sharedPreference.clearDate(SubCategoryPriceDetails.this);
+        servicesId.clear();
+        servicesItem.clear();
+
+        price.setText("0.00");
+
         Intent intent = getIntent();
+
         subcategoryid = intent.getStringExtra("sub_category");
         category_name = intent.getStringExtra("category_name");
+
+        subcategoryid = sessionManager.getSubcategoryId();
+        category_name = sessionManager.getCategoryName();
+
         textName.setText(category_name);
-
-
 
         showSubCateGory(subcategoryid);
 
@@ -85,7 +100,7 @@ public class SubCategoryPriceDetails extends AppCompatActivity {
 
 
 
-                if(price.getText().toString().trim().equals("0.0")){
+                if(price.getText().toString().trim().equals("0.00")){
 
                     Toast.makeText(SubCategoryPriceDetails.this, "You must select one product", Toast.LENGTH_SHORT).show();
 
@@ -106,10 +121,18 @@ public class SubCategoryPriceDetails extends AppCompatActivity {
                     editor.putString("task list", json);
                     editor.apply();
 
+                    servicesItem = servicesPackageAdapter.getData();
+
+                    SharedPreferences sharedPreferences = getSharedPreferences("shared preferences1", MODE_PRIVATE);
+                    SharedPreferences.Editor editor1 = sharedPreferences.edit();
+                    Gson gson1 = new Gson();
+                    String json1 = gson1.toJson(servicesItem);
+                    editor1.putString("task list1", json1);
+                    editor1.apply();
+
                 }
             }
         });
-
     }
 
     public void showSubCateGory(String categoryId){
@@ -117,7 +140,7 @@ public class SubCategoryPriceDetails extends AppCompatActivity {
         acPackage.clear();
 
         ProgressDialog progressDialog = new ProgressDialog(SubCategoryPriceDetails.this);
-        progressDialog.setMessage("Retrive Data Please wait...");
+        progressDialog.setMessage("Loading Please wait...");
         progressDialog.show();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, AppUrl.getCategory, new Response.Listener<String>() {
@@ -209,4 +232,5 @@ public class SubCategoryPriceDetails extends AppCompatActivity {
         Intent intent = new Intent(SubCategoryPriceDetails.this,Subcategory.class);
         startActivity(intent);
     }
+
 }

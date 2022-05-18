@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context="com.in.apniseva.activity.LoginPage"
     android:background="@color/white"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:id="@+id/relativeLayout">
 
     <ScrollView
         android:layout_width="match_parent"

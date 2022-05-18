@@ -1,8 +1,5 @@
 package com.in.apniseva.activity;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -20,6 +17,9 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -117,7 +117,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
                 if(edit_Password.getText().toString().trim().equals("")){
 
-                    edit_Password.setError("Fill Details");
+                    //edit_Password.setError("Fill Details");
 
                 }else{
 
@@ -198,7 +198,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
                 if(edit_ConfirmPassword.getText().toString().trim().equals("")){
 
-                    edit_ConfirmPassword.setError("Fill Details");
+                    //edit_ConfirmPassword.setError("Fill Details");
 
                 }else{
 
@@ -207,7 +207,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
                         if (event.getRawX() >= edit_ConfirmPassword.getRight() - edit_ConfirmPassword.getCompoundDrawables()[Right].getBounds().width()) {
 
-                            int selection = edit_Password.getSelectionEnd();
+                            int selection = edit_ConfirmPassword.getSelectionEnd();
+
                             if (passwordVisiable) {
 
                                 //set Drawable Image here
@@ -250,7 +251,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
                    }else{
 
-                       edit_ConfirmPassword.setError("Password not Match");
+                       Toast.makeText(ForgotPasswordActivity.this, "Password not Match", Toast.LENGTH_SHORT).show();
+                      // edit_ConfirmPassword.setError("Password not Match");
                    }
 
                }else {
@@ -281,7 +283,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                     if (status.equals("OK")) {
 
                         String message = jsonObject.getString("msg");
-                        Toast.makeText(ForgotPasswordActivity.this, message, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(ForgotPasswordActivity.this, message, Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent(ForgotPasswordActivity.this,LoginPage.class);
                         startActivity(intent);

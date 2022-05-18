@@ -20,8 +20,8 @@ public class SessionManager {
     private static final String USER_MOBILENO = "usermobile";
     private static final String CATEGORY_iD = "categoryid";
     private static final String IS_LOGIN="islogin";
-    private static final String IS_SETCATEGORY="islogin";
-    private static final String IS_SETSUB_CATEGORY="islogin";
+    private static final String IS_CATEGORYNAME="categoryname";
+    private static final String IS_SUB_CATEGORYID="subcategoryid";
 
 
     public SessionManager(Context context){
@@ -77,6 +77,30 @@ public class SessionManager {
         return sharedprefernce.getString(CATEGORY_iD,"DEFAULT");
 
     }
+
+    public void setCategoryName(String categoryName){
+
+        editor.putString(IS_CATEGORYNAME,categoryName);
+        editor.commit();
+    }
+
+    public String getCategoryName(){
+
+        return sharedprefernce.getString(IS_CATEGORYNAME,"DEFAULT");
+    }
+
+    public void setSubcategoryID(String SubcategoryID){
+
+        editor.putString(IS_SUB_CATEGORYID,SubcategoryID);
+        editor.commit();
+    }
+
+    public String getSubcategoryId(){
+
+        return sharedprefernce.getString(IS_SUB_CATEGORYID,"DEFAULT");
+    }
+
+
 
     public Boolean isLogin(){
         return sharedprefernce.getBoolean(IS_LOGIN, false);

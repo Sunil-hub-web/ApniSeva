@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
@@ -19,11 +21,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
 import com.in.apniseva.R;
 import com.in.apniseva.SharedPreference;
 import com.in.apniseva.adapter.BookingAdapter;
 import com.in.apniseva.modelclass.CartItem;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class Booking extends AppCompatActivity {
@@ -69,7 +74,16 @@ public class Booking extends AppCompatActivity {
         TotalPrice.setText(str_TotalPrice);
 
         servicesItem.clear();
-        servicesItem = sharedPreference.loadFavorites(Booking.this);
+        // servicesItem = sharedPreference.loadFavorites(Booking.this);
+
+            SharedPreferences sharedPreferences = getSharedPreferences("shared preferences1", MODE_PRIVATE);
+            Gson gson = new Gson();
+            String json = sharedPreferences.getString("task list1", null);
+            Type type = new TypeToken<ArrayList<CartItem>>() {}.getType();
+            servicesItem = gson.fromJson(json, type);
+
+
+        Log.d("arraylistfind",servicesItem.toString());
 
         if (servicesItem.size() != 0) {
 
@@ -144,15 +158,15 @@ public class Booking extends AppCompatActivity {
 
                 }else if(edit_fullname.getText().toString().trim().equals("")){
 
-                    edit_fullname.setError("fiil the field");
+                    Toast.makeText(Booking.this, "Fill The Fields", Toast.LENGTH_SHORT).show();
 
                 }else if(edit_MobileNumber.getText().toString().trim().equals("")){
 
-                    edit_MobileNumber.setError("fiil the field");
+                    Toast.makeText(Booking.this, "Fill The Fields", Toast.LENGTH_SHORT).show();
 
                 }else if(edit_CompleteAddress.getText().toString().trim().equals("")){
 
-                    edit_CompleteAddress.setError("fiil the field");
+                    Toast.makeText(Booking.this, "Fill The Fields", Toast.LENGTH_SHORT).show();
 
                 } else{
 

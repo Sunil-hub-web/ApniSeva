@@ -82,7 +82,7 @@ public class Subcategory extends AppCompatActivity {
         subCategory.clear();
 
         ProgressDialog progressDialog = new ProgressDialog(Subcategory.this);
-        progressDialog.setMessage("Retrive Data Please wait...");
+        progressDialog.setMessage("Loading Please wait...");
         progressDialog.show();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, AppUrl.getCategory, new Response.Listener<String>() {
@@ -94,12 +94,14 @@ public class Subcategory extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     String status = jsonObject.getString("status");
+
                     if(status.equals("OK")){
 
-                        String categoryname = jsonObject.getString("category_name");
+                        String category_name = jsonObject.getString("category_name");
                         String result = jsonObject.getString("result");
+                        String item_status = jsonObject.getString("item_status");
 
-                        textName.setText(categoryname);
+                        textName.setText(category_name);
 
                         JSONArray jsonArray_result = new JSONArray(result);
 
@@ -108,18 +110,18 @@ public class Subcategory extends AppCompatActivity {
                             JSONObject jsonObject_result = jsonArray_result.getJSONObject(i);
 
                             String id = jsonObject_result.getString("id");
-                            String category_name = jsonObject_result.getString("category_name");
+                            String categoryname = jsonObject_result.getString("category_name");
                             String image = jsonObject_result.getString("image");
 
                             SubCateGory_ModelClass subCateGory_modelClass = new SubCateGory_ModelClass(
-                                    id,category_name,image
+                                    id,categoryname,image
                             );
 
                             subCategory.add(subCateGory_modelClass);
                         }
 
                         gridLayoutManager = new GridLayoutManager(Subcategory.this,2,GridLayoutManager.VERTICAL,false);
-                        subcategoryAdapter = new SubcategoryAdapter(subCategory, Subcategory.this,categoryname);
+                        subcategoryAdapter = new SubcategoryAdapter(subCategory, Subcategory.this,item_status);
                         recyclerSubCategory.setLayoutManager(gridLayoutManager);
                         recyclerSubCategory.setHasFixedSize(true);
                         recyclerSubCategory.setAdapter(subcategoryAdapter);

@@ -97,6 +97,7 @@
                     android:layout_width="@dimen/thirty_five"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true">
+
                     <RelativeLayout
                         android:id="@+id/rel_rightGreen"
                         android:layout_width="@dimen/fifty"

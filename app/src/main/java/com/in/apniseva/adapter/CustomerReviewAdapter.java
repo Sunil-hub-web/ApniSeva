@@ -41,11 +41,22 @@ public class CustomerReviewAdapter extends RecyclerView.Adapter<CustomerReviewAd
 
         CustomerReview_ModelClass customer_review = customReview.get(position);
 
+        String image = "https://apniseva.com/img/profile/";
+
         holder.text_CustomerNmae.setText(customer_review.getUserName());
         holder.text_Description.setText(customer_review.getReview());
         holder.text_Reating.setText(customer_review.getRating());
 
-        Picasso.with(context).load(customer_review.getImage()).into(holder.profile_image);
+        if(customer_review.getImage().equals(image)){
+
+            Picasso.with(context).load(R.drawable.profile).into(holder.profile_image);
+
+        }else{
+
+            Picasso.with(context).load(customer_review.getImage()).into(holder.profile_image);
+        }
+
+
 
     }
 

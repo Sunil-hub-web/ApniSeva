@@ -26,8 +26,11 @@
                 android:id="@+id/profile_image"
                 android:layout_width="@dimen/fifty"
                 android:layout_height="@dimen/fifty"
-                android:src="@drawable/image30"
-                android:layout_margin="@dimen/twenty"/>
+                android:layout_marginStart="@dimen/twenty"
+                android:layout_marginTop="@dimen/twenty"
+                android:layout_marginEnd="@dimen/twenty"
+                android:layout_marginBottom="@dimen/twenty"
+                android:src="@drawable/profile" />
 
             <TextView
                 android:id="@+id/text_CustomerNmae"

@@ -27,7 +27,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/twenty"
             android:fontFamily="@font/montserrat_bold"
-            android:text="AC Service &amp; Repair"
             android:textColor="#000000"
             android:textSize="@dimen/twenty_size">
 
@@ -42,7 +41,6 @@
         android:layout_marginLeft="@dimen/fifteen"
         android:layout_marginTop="@dimen/fifty"
         android:fontFamily="@font/montserrat_semibold"
-        android:text="Split AC services"
         android:textColor="#000000"
         android:textSize="@dimen/eighteen"
         android:textStyle="bold"></TextView>
@@ -54,53 +52,58 @@
         android:id="@+id/acServiceRecycler"
         android:layout_below="@id/looking"
         android:layout_marginTop="@dimen/twenty"
-        android:layout_above="@+id/price"
+        android:layout_above="@+id/rel_price"
         android:layout_marginBottom="@dimen/ten">
 
     </androidx.recyclerview.widget.RecyclerView>
 
-
-    <TextView
-        android:id="@+id/price"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/btn_proceed"
+        android:id="@+id/rel_price"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="@dimen/five"
-        android:layout_marginBottom="@dimen/twenty"
-        android:fontFamily="@font/montserrat_semibold"
-        android:text="0.0"
-        android:textColor="#000000"
-        android:textSize="@dimen/eighteen"
-        android:textStyle="bold"></TextView>
+        android:layout_marginBottom="@dimen/twenty">
 
-    <TextView
-        android:id="@+id/symbol"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/btn_proceed"
-        android:layout_marginLeft="@dimen/ten"
-        android:layout_marginBottom="@dimen/twenty"
-        android:layout_toLeftOf="@+id/rssymbol"
-        android:fontFamily="@font/montserrat_semibold"
-        android:text="Total"
-        android:textColor="#000000"
-        android:textSize="@dimen/eighteen"
-        android:textStyle="bold"></TextView>
+        <TextView
+            android:id="@+id/symbol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="Total"
+            android:textColor="#000000"
+            android:textSize="@dimen/eighteen"
+            android:textStyle="bold"></TextView>
 
-    <TextView
-        android:id="@+id/rssymbol"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/btn_proceed"
-        android:layout_marginLeft="@dimen/ten"
-        android:layout_marginBottom="@dimen/twenty"
-        android:layout_toLeftOf="@+id/price"
-        android:fontFamily="@font/montserrat_semibold"
-        android:text="Rs"
-        android:textColor="#000000"
-        android:textSize="@dimen/eighteen"
-        android:textStyle="bold"></TextView>
+
+        <TextView
+            android:id="@+id/rssymbol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/ten"
+            android:layout_toRightOf="@+id/symbol"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="Rs"
+            android:textColor="#000000"
+            android:textSize="@dimen/eighteen"
+            android:textStyle="bold"></TextView>
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/five"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="0.0"
+            android:layout_toRightOf="@id/rssymbol"
+            android:textColor="#000000"
+            android:textSize="@dimen/eighteen"
+            android:textStyle="bold"></TextView>
+
+
+    </RelativeLayout>
+
+
 
 
     <Button

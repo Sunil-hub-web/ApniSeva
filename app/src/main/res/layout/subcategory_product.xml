@@ -27,7 +27,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/twenty"
             android:fontFamily="@font/montserrat_bold"
-            android:text="AC Service &amp; Repair"
             android:textColor="#000000"
             android:textSize="@dimen/twenty_size">
 

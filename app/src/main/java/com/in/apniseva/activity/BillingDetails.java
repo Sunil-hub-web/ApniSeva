@@ -23,9 +23,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkResponse;
+import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
@@ -147,7 +150,7 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
 
 
         name.setText(str_name);
-        TotalPrice.setText(str_TotalPrice + "(" + "GST included" + ")");
+        TotalPrice.setText(str_TotalPrice);
         subTotalPrice.setText(str_TotalPrice);
         mobileno.setText(str_mobileno);
         CompleteAddress.setText(str_address);
@@ -211,6 +214,7 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
 
         final Checkout co = new Checkout();
         co.setKeyID("rzp_live_pEiadfp4ZIDBJT");
+        //co.setImage(R.drawable.splash_image);
 
         try {
             JSONObject options = new JSONObject();
@@ -226,8 +230,12 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
             JSONObject preFill = new JSONObject();
             preFill.put("email", str_Email);
             preFill.put("contact", str_mobileno);
-
             options.put("prefill", preFill);
+
+          /*  JSONObject retryObj = new JSONObject();
+            retryObj.put("enabled", true);
+            retryObj.put("max_count", 4);
+            options.put("retry", retryObj);*/
 
             co.open(activity, options);
 
@@ -283,7 +291,7 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
 
                         String message = response.getString("message");
 
-                        Toast.makeText(BillingDetails.this, message, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(BillingDetails.this, " "+message+" ", Toast.LENGTH_SHORT).show();
 
                         booking_id = response.getString("booking_id");
 
@@ -311,9 +319,38 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
 
                 error.printStackTrace();
 
-                Toast.makeText(BillingDetails.this, "Facing Technical issues, Try again!", Toast.LENGTH_SHORT).show();
-
                 Log.d("error", error.toString());
+
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+
+                    Toast.makeText(getApplicationContext(), "Please check Internet Connection", Toast.LENGTH_SHORT).show();
+
+                } else {
+
+                    Log.d("successresponceVolley", "" + error.networkResponse);
+                    NetworkResponse networkResponse = error.networkResponse;
+                    if (networkResponse != null && networkResponse.data != null) {
+                        try {
+                            String jError = new String(networkResponse.data);
+                            JSONObject jsonError = new JSONObject(jError);
+//                            if (error.networkResponse.statusCode == 400) {
+                            String data = jsonError.getString("message");
+                            Toast.makeText(BillingDetails.this, data, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(BillingDetails.this, "Facing Technical issues, Try again!", Toast.LENGTH_SHORT).show();
+
+//                            } else if (error.networkResponse.statusCode == 404) {
+//                                JSONArray data = jsonError.getJSONArray("msg");
+//                                JSONObject jsonitemChild = data.getJSONObject(0);
+//                                String ms = jsonitemChild.toString();
+//                                Toast.makeText(RegisterActivity.this, ms, Toast.LENGTH_SHORT).show();
+//
+//                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.d("successresponceVolley", "" + e);
+                        }
+                    }
+                }
 
             }
         });

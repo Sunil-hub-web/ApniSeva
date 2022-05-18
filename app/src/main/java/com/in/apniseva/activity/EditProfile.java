@@ -93,7 +93,7 @@ public class EditProfile extends AppCompatActivity {
         edit_MobileNo.setText("");
 
         ProgressDialog progressDialog = new ProgressDialog(EditProfile.this);
-        progressDialog.setMessage("Retrive User Details Please wait...");
+        progressDialog.setMessage("Loading Please wait...");
         progressDialog.show();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, AppUrl.viewUserProfile, new Response.Listener<String>() {

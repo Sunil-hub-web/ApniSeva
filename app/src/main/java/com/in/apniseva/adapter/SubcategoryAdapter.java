@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,12 +49,13 @@ public class SubcategoryAdapter extends RecyclerView.Adapter<SubcategoryAdapter.
     String category_name;
     int index;
     SessionManager sessionManager;
+    String item_status;
 
-    public SubcategoryAdapter(ArrayList<SubCateGory_ModelClass> subCategory, Subcategory subcategory_, String categoryname) {
+    public SubcategoryAdapter(ArrayList<SubCateGory_ModelClass> subCategory, Subcategory subcategory_,String item_status) {
 
         this.context = subcategory_;
         this.subcategory = subCategory;
-        this.category_name = categoryname;
+        this.item_status = item_status;
     }
 
     @NonNull
@@ -78,9 +80,11 @@ public class SubcategoryAdapter extends RecyclerView.Adapter<SubcategoryAdapter.
             @Override
             public void onClick(View v) {
 
-                index = position;
-                notifyDataSetChanged();
+
                 checkProduct(sub_category.getId());
+                notifyDataSetChanged();
+
+                Log.d("sunilsubcategory",sub_category.getId());
 
             }
         });
@@ -133,6 +137,7 @@ public class SubcategoryAdapter extends RecyclerView.Adapter<SubcategoryAdapter.
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     String status = jsonObject.getString("status");
+
                     if (status.equals("OK")) {
 
                         String categoryname = jsonObject.getString("category_name");
@@ -142,17 +147,26 @@ public class SubcategoryAdapter extends RecyclerView.Adapter<SubcategoryAdapter.
 
                             Intent intent = new Intent(context, SubCategoryPriceDetails.class);
                             intent.putExtra("sub_category", subCategoryId);
-                            intent.putExtra("category_name", categoryname);
+                            intent.putExtra("category_name", subCategoryId);
+
+                            sessionManager.setSubcategoryID(subCategoryId);
+                            sessionManager.setCategoryName(categoryname);
+
                             context.startActivity(intent);
 
                         } else if(item_status.equals("0")) {
 
                             Intent intent = new Intent(context, Subcategory_Product.class);
                             intent.putExtra("sub_category", subCategoryId);
-                            intent.putExtra("category_name", categoryname);
+                            intent.putExtra("category_name",categoryname);
+
+                            sessionManager.setSubcategoryID(subCategoryId);
+                            sessionManager.setCategoryName(categoryname);
+
                             context.startActivity(intent);
 
                         }
+
                     }
 
                 } catch (JSONException e) {

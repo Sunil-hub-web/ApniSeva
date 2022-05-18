@@ -61,8 +61,10 @@ public class Subcategory_Product extends AppCompatActivity {
         image_back = findViewById(R.id.image_back);
 
         Intent intent = getIntent();
+
         subcategoryid = intent.getStringExtra("sub_category");
         category_name = intent.getStringExtra("category_name");
+
         textName.setText(category_name);
 
         showSubCateGory(subcategoryid);
@@ -114,7 +116,7 @@ public class Subcategory_Product extends AppCompatActivity {
         subcategory.clear();
 
         ProgressDialog progressDialog = new ProgressDialog(Subcategory_Product.this);
-        progressDialog.setMessage("Retrive Data Please wait...");
+        progressDialog.setMessage("Loading Please wait...");
         progressDialog.show();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, AppUrl.getCategory, new Response.Listener<String>() {
@@ -126,6 +128,7 @@ public class Subcategory_Product extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     String status = jsonObject.getString("status");
+
                     if (status.equals("OK")) {
 
                         String categoryname = jsonObject.getString("category_name");

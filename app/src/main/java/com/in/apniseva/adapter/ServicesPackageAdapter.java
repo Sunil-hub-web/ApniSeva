@@ -2,6 +2,7 @@ package com.in.apniseva.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,12 +18,15 @@ import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
 import com.in.apniseva.R;
 import com.in.apniseva.SharedPreference;
 import com.in.apniseva.activity.SubCategoryPriceDetails;
 import com.in.apniseva.modelclass.CartItem;
 import com.in.apniseva.modelclass.ServicesPackage_ModelClass;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class ServicesPackageAdapter extends RecyclerView.Adapter<ServicesPackageAdapter.ViewHolder> {
@@ -34,7 +38,7 @@ public class ServicesPackageAdapter extends RecyclerView.Adapter<ServicesPackage
     String str_name, str_price;
 
     ArrayList<CartItem> servicesItem = new ArrayList<>();
-    public static ArrayList<String> servicesid = new ArrayList<>();
+    public static ArrayList<String> servicesid = new ArrayList<>() ;
 
     SharedPreference sharedPreference = new SharedPreference();
 
@@ -60,6 +64,9 @@ public class ServicesPackageAdapter extends RecyclerView.Adapter<ServicesPackage
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
         ServicesPackage_ModelClass ac_services = acservices.get(position);
+
+        sharedPreference.clearDate(context);
+        servicesid.clear();
 
         //holder.text_Description.setText(ac_services.getServicesDescription());
         holder.text_Price.setText(ac_services.getServicesPrice());
@@ -100,13 +107,21 @@ public class ServicesPackageAdapter extends RecyclerView.Adapter<ServicesPackage
             @Override
             public void onClick(View v) {
 
+                index = holder.getAdapterPosition();
+
+                CartItem cartItem;
+
+                String buttonClick = "1";
+
                 try{
 
                     if(holder.rel_rightGray.getVisibility() == View.VISIBLE){
 
-
-                        holder.rel_rightGreen.setVisibility(View.VISIBLE);
                         holder.rel_rightGray.setVisibility(View.GONE);
+                        holder.rel_rightGreen.setVisibility(View.VISIBLE);
+
+
+                        Log.d("servicesid", servicesid.toString());
 
                         //holder.rel_rightGreen.setBackgroundColor(ac_services.isSelected() ? ContextCompat.getColor(context, R.color.button2) : ContextCompat.getColor(context, R.color.button1));
 
@@ -121,18 +136,18 @@ public class ServicesPackageAdapter extends RecyclerView.Adapter<ServicesPackage
 
                         String tot_price = String.valueOf(price);
 
-                        SubCategoryPriceDetails.price.setText(tot_price);
+                        SubCategoryPriceDetails.price.setText(tot_price+"0");
 
-                        CartItem cartItem = new CartItem(str_name, str_price);
+                        cartItem = new CartItem(str_name, str_price);
 
-                        sharedPreference.addFavorite(context, cartItem);
+                      /*  sharedPreference.addFavorite(context, cartItem);*/
 
+                        servicesItem.add(cartItem);
                         servicesid.add(ac_services.getServicesId());
 
-                        Log.d("servicesid", servicesid.toString());
+                        Log.d("showaraylist",servicesid.toString());
 
-
-                    }else if(holder.rel_rightGreen.getVisibility() == View.VISIBLE){
+                    }else{
 
                         //ac_services.setSelected(!ac_services.isSelected());
                         //holder.rel_rightGreen.setBackgroundColor(ac_services.isSelected() ?
@@ -153,13 +168,15 @@ public class ServicesPackageAdapter extends RecyclerView.Adapter<ServicesPackage
 
                         String str_totprice = String.valueOf(price);
 
-                        SubCategoryPriceDetails.price.setText(str_totprice);
+                        SubCategoryPriceDetails.price.setText(str_totprice+"0");
 
-                        sharedPreference.removeFavorite(context,position);
+                        servicesid.remove(index);
+                        servicesItem.remove(index);
+                        //sharedPreference.removeFavorite(context,index);
 
-                        servicesid.remove(position);
+                        Log.d("removearaylist",servicesid.toString());
 
-                        Log.d("servicesid", servicesid.toString());
+                        //notifyItemRemoved(index);
 
 
                     }
@@ -181,6 +198,10 @@ public class ServicesPackageAdapter extends RecyclerView.Adapter<ServicesPackage
     public ArrayList<String> getVAs() {
         return servicesid;
     }
+    public ArrayList<CartItem> getData() {
+        return servicesItem;
+    }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -204,4 +225,6 @@ public class ServicesPackageAdapter extends RecyclerView.Adapter<ServicesPackage
 
         }
     }
+
+
 }

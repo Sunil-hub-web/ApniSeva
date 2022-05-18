@@ -62,11 +62,13 @@ public class ForGotPassword extends AppCompatActivity {
 
                 if(edit_MobileNumber.getText().toString().trim().equals("")){
 
-                    edit_MobileNumber.setError("Fill The Fields");
+                    Toast.makeText(ForGotPassword.this, "Fill The Fields", Toast.LENGTH_SHORT).show();
+
 
                 }else if(edit_MobileNumber.getText().toString().trim().length() != 10){
 
-                    edit_MobileNumber.setError("Enter Valide Mobile NO");
+
+                    Toast.makeText(ForGotPassword.this, "Enter Valide Mobile NO", Toast.LENGTH_SHORT).show();
 
                 }else{
 

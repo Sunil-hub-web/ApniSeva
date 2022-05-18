@@ -17,6 +17,8 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.in.apniseva.R;
+import com.in.apniseva.SessionManager;
+import com.in.apniseva.SharedPreference;
 import com.in.apniseva.activity.SubCategoryPriceDetails;
 import com.in.apniseva.activity.Subcategory_Product;
 import com.in.apniseva.modelclass.SubCateGory_ModelClass;
@@ -30,6 +32,7 @@ public class SubCategoryProductAdapter extends RecyclerView.Adapter<SubCategoryP
     ArrayList<SubCateGory_ModelClass> subcategoryproduct;
     String category_name;
     int index;
+    SessionManager sessionManager;
 
     public SubCategoryProductAdapter(Subcategory_Product subcategory_product, ArrayList<SubCateGory_ModelClass> subcategory, String categoryname) {
 
@@ -48,6 +51,7 @@ public class SubCategoryProductAdapter extends RecyclerView.Adapter<SubCategoryP
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+        sessionManager = new SessionManager(context);
 
         SubCateGory_ModelClass sub_category = subcategoryproduct.get(position);
 
@@ -64,6 +68,10 @@ public class SubCategoryProductAdapter extends RecyclerView.Adapter<SubCategoryP
                 Intent intent = new Intent(context, SubCategoryPriceDetails.class);
                 intent.putExtra("sub_category", sub_category.getId());
                 intent.putExtra("category_name", category_name);
+
+                sessionManager.setSubcategoryID(sub_category.getId());
+                sessionManager.setCategoryName(category_name);
+
                 context.startActivity(intent);
 
             }

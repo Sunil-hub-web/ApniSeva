@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,6 +36,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.in.apniseva.AppURL.AppUrl;
 import com.in.apniseva.AppURL.VolleyMultipartRequest;
 import com.in.apniseva.R;
@@ -63,6 +67,7 @@ public class UserDetails extends AppCompatActivity {
     String profile_photo, userId;
     File f;
     String ImageDecode;
+    GoogleSignInClient mGoogleSignInClient;
 
     SessionManager sessionManager;
 
@@ -70,6 +75,7 @@ public class UserDetails extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
     private Bitmap bitmap;
     private String filePath;
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -165,10 +171,26 @@ public class UserDetails extends AppCompatActivity {
             public void onClick(View v) {
 
                 sessionManager.logoutUser();
+
                 SharedPrefManager.getInstance(UserDetails.this).logout();
+
+                //signOut();
 
             }
         });
+    }
+
+    private void signOut() {
+
+        mGoogleSignInClient.signOut()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                        Toast.makeText(UserDetails.this, "Your Account Logout", Toast.LENGTH_SHORT).show();
+                        // ...
+                    }
+                });
     }
 
     public void showFileChooser() {
@@ -388,7 +410,7 @@ public class UserDetails extends AppCompatActivity {
     public void viewProfileDetails(){
 
         ProgressDialog progressDialog = new ProgressDialog(UserDetails.this);
-        progressDialog.setMessage("Retrive User Details Please wait...");
+        progressDialog.setMessage("Loading Please wait...");
         progressDialog.show();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, AppUrl.viewUserProfile, new Response.Listener<String>() {

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -33,14 +34,17 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.gson.JsonArray;
 import com.in.apniseva.AppURL.AppUrl;
 import com.in.apniseva.R;
+import com.in.apniseva.SharedPrefManager;
 import com.in.apniseva.SharedPreference;
 import com.in.apniseva.adapter.OrderDetails_Adapter;
 import com.in.apniseva.adapter.OrderItemAdapter;
 import com.in.apniseva.modelclass.CartItem;
 import com.in.apniseva.modelclass.OrderItem_ModelClass;
+import com.razorpay.Checkout;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -57,31 +61,36 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class BookingHistory extends AppCompatActivity {
 
     ImageView image_back;
-    TextView text_name,text_MobileNo,text_city,text_address_details,text_orderConfirmed, bookingid,
-            subTotalPrice,payonvisite,TotalPrice,text_Techniciansid,text_designation,
-            text_TechnicianPin,text_ShowWorkDetails;
-    RecyclerView recyclerBookingHistory;
-    ArrayList<CartItem> orderDetails = new ArrayList<>();
-    LinearLayoutManager linearLayoutManager;
+   /* TextView text_name,text_MobileNo,text_city,text_address_details,text_orderConfirmed, bookingid,
+            subTotalPrice,payonvisite,TotalPrice;*/
+    //RecyclerView recyclerBookingHistory;
+
+    //ArrayList<CartItem> orderDetails = new ArrayList<>();
+   /* LinearLayoutManager linearLayoutManager;
     OrderDetails_Adapter orderDetailsAdapter;
-    SharedPreference sharedPreference;
+    SharedPreference sharedPreference;*/
     String booking_id;
+    TextView bookingid, totalAmount, text_Techniciansid, text_designation, text_TechnicianPin, text_allocatetechnician,
+            text_ShowWorkDetails, text_DeliveryAddress,text3,show_Payment,pay_Payment,text_orderConfirmed;
     private static final DecimalFormat df = new DecimalFormat("0.00");
-    ArrayList<OrderItem_ModelClass> orderitem;
-    String booking = "BookingDetails",techmobile;
+    //ArrayList<OrderItem_ModelClass> orderitem;
+    String booking = "BookingDetails", techmobile, techname, category, profile_img,str_Email,price,
+            str_mobileno;
 
     View view_order_BookingConfirm, view_order_TechnicianAllocat, view_order_WorkInProgress, view_order_WorkCompleted,
             view_order_Payment;
-    RelativeLayout BookingConfirm, TechnicianAllocat;
+    RelativeLayout BookingConfirm, TechnicianAllocat,text_technicianDetails;
     LinearLayout WorkInProgress, WorkCompleted, Payment;
-    ProgressBar placed_divider1, placed_divider, placed_divider2, placed_divider3;
+    View placed_divider1, placed_divider, placed_divider2, placed_divider3;
     private int i = 0;
     private Handler hdlr = new Handler();
     private static final int REQUEST_PHONE_CALL = 1;
     SwipeRefreshLayout swipeRefreshLayout;
     OrderItemAdapter orderItemAdapter;
-    CircleImageView profile_image;
-    CardView crd1;
+    ShapeableImageView profile_image;
+    CardView payment_card,card_reating;
+    RelativeLayout rel_card2;
+    int amount;
 
 
     @Override
@@ -89,18 +98,23 @@ public class BookingHistory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_history);
 
-        image_back = findViewById(R.id.image_back);
-        text_name = findViewById(R.id.text_name);
+
+       /* text_name = findViewById(R.id.text_name);
         text_MobileNo = findViewById(R.id.text_MobileNo);
         text_city = findViewById(R.id.text_city);
         text_address_details = findViewById(R.id.text_address_details);
-        text_orderConfirmed = findViewById(R.id.text_orderConfirmed);
-        bookingid = findViewById(R.id.bookingid);
+
+
         subTotalPrice = findViewById(R.id.subTotalPrice);
         payonvisite = findViewById(R.id.payonvisite);
         TotalPrice = findViewById(R.id.TotalPrice);
-        recyclerBookingHistory = findViewById(R.id.recyclerBookingHistory);
+        recyclerBookingHistory = findViewById(R.id.recyclerBookingHistory);*/
+
+        image_back = findViewById(R.id.image_back);
+        bookingid = findViewById(R.id.bookingid);
         profile_image = findViewById(R.id.profile_image);
+        totalAmount = findViewById(R.id.totalAmount);
+        text_orderConfirmed = findViewById(R.id.text_orderConfirmed);
 
         Payment = findViewById(R.id.Payment);
         BookingConfirm = findViewById(R.id.BookingConfirm);
@@ -120,24 +134,32 @@ public class BookingHistory extends AppCompatActivity {
         text_designation = findViewById(R.id.text_designation);
         text_TechnicianPin = findViewById(R.id.text_TechnicianPin);
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
-        text_ShowWorkDetails = findViewById(R.id.text_ShowWorkDetails);
-        crd1 = findViewById(R.id.crd1);
+        //text_ShowWorkDetails = findViewById(R.id.text_ShowWorkDetails);
+        payment_card = findViewById(R.id.payment_card);
+        text_DeliveryAddress = findViewById(R.id.text_DeliveryAddress);
+        text_allocatetechnician = findViewById(R.id.text_allocatetechnician);
+        text3 = findViewById(R.id.text3);
+        text_technicianDetails = findViewById(R.id.text_technicianDetails);
+        show_Payment = findViewById(R.id.show_Payment);
+        pay_Payment = findViewById(R.id.pay_Payment);
+        card_reating = findViewById(R.id.card_reating);
 
      /*   placed_divider.setProgress(100);
         placed_divider1.setProgress(100);
         placed_divider2.setProgress(100);
         placed_divider3.setProgress(100);*/
 
-        crd1.setVisibility(View.GONE);
-
         Intent intent = getIntent();
         booking_id = intent.getStringExtra("booking_id");
+
+        str_Email = SharedPrefManager.getInstance(BookingHistory.this).getUser().getEmailId();
+        str_mobileno = SharedPrefManager.getInstance(BookingHistory.this).getUser().getMobileNo();
 
         image_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(BookingHistory.this,BookingDetails.class);
+                Intent intent = new Intent(BookingHistory.this, BookingDetails.class);
                 startActivity(intent);
             }
         });
@@ -148,7 +170,7 @@ public class BookingHistory extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                makePhoneCall();
+                //makePhoneCall();
             }
         });
 
@@ -166,13 +188,35 @@ public class BookingHistory extends AppCompatActivity {
             }
         });
 
+        pay_Payment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                amount = Math.round(Float.parseFloat(price) * 100);
+                startPayment(amount);
+
+            }
+        });
+
+        card_reating.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent marketIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.in.apniseva"));
+                marketIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_MULTIPLE_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(marketIntent);
+
+
+            }
+        });
+
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
 
-        Intent intent = new Intent(BookingHistory.this,BookingDetails.class);
+        Intent intent = new Intent(BookingHistory.this, BookingDetails.class);
         startActivity(intent);
 
         //finish();
@@ -193,14 +237,14 @@ public class BookingHistory extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
 
-                    Log.d("sunilresponse",response);
+                    Log.d("sunilresponse", response);
 
                     String status = jsonObject.getString("status");
 
                     if (status.equals("OK")) {
 
                         String order_id = jsonObject.getString("order_id");
-                        String price = jsonObject.getString("price");
+                        price = jsonObject.getString("price");
                         String igst = jsonObject.getString("igst");
                         String cgst = jsonObject.getString("cgst");
                         String subtotal = jsonObject.getString("subtotal");
@@ -217,125 +261,152 @@ public class BookingHistory extends AppCompatActivity {
                         String payment_status = jsonObject.getString("payment_status");
                         String pay_type = jsonObject.getString("pay_type");
                         String technician_details = jsonObject.getString("technician_details");
+                        String deliaddress = address + "," + address1;
 
-                        text_TechnicianPin.setText(verification_pin);
-                        text_ShowWorkDetails.setText(work_details);
 
-                        if (verification_pin.equals("null")) {
+                        //text_ShowWorkDetails.setText(work_details);
 
-                            bookingconfirm();
+                       /* StringBuilder sb = new StringBuilder(work_status);
+                        sb.setCharAt(0, Character.toUpperCase(sb.charAt(0)));
+                        String str_workatatus = sb.toString();*/
 
-                            JSONArray jsonArray_technician_details = new JSONArray(technician_details);
+                        //String upperString = work_status.substring(0, 1).toUpperCase() + work_status.substring(1).toLowerCase();
+                        //tv.setText(StringUtils.capitalize(myString.toLowerCase().trim()));
+                       // String captilizedString = name.substring(0,1).toUpperCase() + name.substring(1);
+                        //myString.toLowerCase(Locale.getDefault()).capitalize()
 
-                            for(int i= 0;i<jsonArray_technician_details.length();i++){
+                        //CharSequence text = String.valueOf(text.charAt(0)).toUpperCase() + text.subSequence(1, text.length());
+
+                        text_orderConfirmed.setText(work_status);
+
+                        if(pin_verification_status.equals("1")){
+
+                            text_TechnicianPin.setText("Pin Verify Success");
+                            text_TechnicianPin.setTextColor(ContextCompat.getColor(BookingHistory.this,R.color.button1));
+
+                        }else{
+
+                            text_TechnicianPin.setText(verification_pin);
+                        }
+
+                        bookingid.setText("#" + order_id);
+                        totalAmount.setText("Rs " + price + "0");
+                        text_DeliveryAddress.setText(deliaddress);
+
+                        double int_price = Double.valueOf(price);
+                        double int_total = Double.valueOf(subtotal);
+                        double int_amount = int_price - int_total;
+                        String payOnVisit = df.format(int_amount);
+
+                        JSONArray jsonArray_technician_details = new JSONArray(technician_details);
+
+                        if(jsonArray_technician_details != null){
+
+                            for (int i = 0; i < jsonArray_technician_details.length(); i++) {
 
                                 JSONObject jsonObject_technician = jsonArray_technician_details.getJSONObject(i);
 
                                 String id = jsonObject_technician.getString("id");
-                                String techname = jsonObject_technician.getString("name");
-                                String email = jsonObject_technician.getString("em  ail");
+                                techname = jsonObject_technician.getString("name");
+                                String email = jsonObject_technician.getString("email");
                                 techmobile = jsonObject_technician.getString("mobile");
-                                String profile_img = jsonObject_technician.getString("profile_img");
-                                String category = jsonObject_technician.getString("category");
+                                profile_img = jsonObject_technician.getString("profile_img");
+                                category = jsonObject_technician.getString("category");
                                 String subcategory = jsonObject_technician.getString("subcategory");
 
                                 text_Techniciansid.setText(techname);
                                 text_designation.setText(category);
-                                Picasso.with(BookingHistory.this).load(profile_img).placeholder(R.drawable.profileimage).into(profile_image);
+                                Picasso.with(BookingHistory.this).load(profile_img).placeholder(R.drawable.no_avatar).into(profile_image);
 
                             }
+                        }
 
-                        }else{
+                        if (work_status.equals("Confirmed")) {
 
-                            if(pin_verification_status.equals("0")){
+                            view_order_BookingConfirm.setBackgroundDrawable(ContextCompat.getDrawable(BookingHistory.this, R.drawable.check1));
+                            text_allocatetechnician.setVisibility(View.VISIBLE);
+                            placed_divider.setBackgroundColor(ContextCompat.getColor(BookingHistory.this, R.color.button1));
 
-                                tecnicianAllocate();
-
-                                JSONArray jsonArray_technician_details = new JSONArray(technician_details);
-
-                                for(int j= 0;j<jsonArray_technician_details.length();j++){
-
-                                    JSONObject jsonObject_technician = jsonArray_technician_details.getJSONObject(j);
-
-                                    String id = jsonObject_technician.getString("id");
-                                    String techname = jsonObject_technician.getString("name");
-                                    String email = jsonObject_technician.getString("email");
-                                    techmobile = jsonObject_technician.getString("mobile");
-                                    String profile_img = jsonObject_technician.getString("profile_img");
-                                    String category = jsonObject_technician.getString("category");
-                                    String subcategory = jsonObject_technician.getString("subcategory");
-
-                                    text_Techniciansid.setText(techname);
-                                    text_designation.setText(category);
-                                    Picasso.with(BookingHistory.this).load(profile_img).placeholder(R.drawable.profileimage).into(profile_image);
-
-                                }
-
-                            }else{
-
-                                if(work_status.equals("payment_done")){
-
-                                    workingComplete();
-                                    crd1.setVisibility(View.VISIBLE);
-
-                                    JSONArray jsonArray_technician_details = new JSONArray(technician_details);
-
-                                    for(int k= 0 ;k<jsonArray_technician_details.length();k++){
-
-                                        JSONObject jsonObject_technician = jsonArray_technician_details.getJSONObject(k);
-
-                                        String id = jsonObject_technician.getString("id");
-                                        String techname = jsonObject_technician.getString("name");
-                                        String email = jsonObject_technician.getString("email");
-                                        techmobile = jsonObject_technician.getString("mobile");
-                                        String profile_img = jsonObject_technician.getString("profile_img");
-                                        String category = jsonObject_technician.getString("category");
-                                        String subcategory = jsonObject_technician.getString("subcategory");
-
-                                        text_Techniciansid.setText(techname);
-                                        text_designation.setText(category);
-                                        Picasso.with(BookingHistory.this).load(profile_img).placeholder(R.drawable.profileimage).into(profile_image);
-
-                                    }
-                                    Log.d("pin_verification_status",pin_verification_status);
+                        } else if (work_status.equals("Allocated")) {
 
 
 
-                                }else{
+                            view_order_BookingConfirm.setBackgroundDrawable(ContextCompat.getDrawable(BookingHistory.this, R.drawable.check1));
+                            text_allocatetechnician.setVisibility(View.VISIBLE);
+                            placed_divider1.setBackgroundColor(ContextCompat.getColor(BookingHistory.this, R.color.button1));
+                            //placed_divider1.setLayoutParams(new LinearLayout.LayoutParams(2,120));
 
-                                    workInProgress();
-
-                                    crd1.setVisibility(View.VISIBLE);
-
-                                    JSONArray jsonArray_technician_details = new JSONArray(technician_details);
-
-                                    for(int l= 0;l<jsonArray_technician_details.length();l++){
-
-                                        JSONObject jsonObject_technician = jsonArray_technician_details.getJSONObject(l);
-
-                                        String id = jsonObject_technician.getString("id");
-                                        String techname = jsonObject_technician.getString("name");
-                                        String email = jsonObject_technician.getString("email");
-                                        techmobile = jsonObject_technician.getString("mobile");
-                                        String profile_img = jsonObject_technician.getString("profile_img");
-                                        String category = jsonObject_technician.getString("category");
-                                        String subcategory = jsonObject_technician.getString("subcategory");
-
-                                        text_Techniciansid.setText(techname);
-                                        text_designation.setText(category);
-                                        Picasso.with(BookingHistory.this).load(profile_img).placeholder(R.drawable.profileimage).into(profile_image);
+                            view_order_TechnicianAllocat.setBackgroundDrawable(ContextCompat.getDrawable(BookingHistory.this, R.drawable.check1));
+                            text_technicianDetails.setVisibility(View.VISIBLE);
+                            text3.setVisibility(View.VISIBLE);
+                            placed_divider.setBackgroundColor(ContextCompat.getColor(BookingHistory.this, R.color.button1));
 
 
-                                    }
+                        }else if(work_status.equals("Progress")){
 
-                                    Log.d("pin_verification_status",pin_verification_status);
-                                }
+                            view_order_BookingConfirm.setBackgroundDrawable(ContextCompat.getDrawable(BookingHistory.this, R.drawable.check1));
+                            text_allocatetechnician.setVisibility(View.VISIBLE);
+                            placed_divider1.setBackgroundColor(ContextCompat.getColor(BookingHistory.this, R.color.button1));
 
-                            }
+                            view_order_TechnicianAllocat.setBackgroundDrawable(ContextCompat.getDrawable(BookingHistory.this, R.drawable.check1));
+                            text_technicianDetails.setVisibility(View.VISIBLE);
+                            text3.setVisibility(View.VISIBLE);
+                            placed_divider.setBackgroundColor(ContextCompat.getColor(BookingHistory.this, R.color.button1));
+
+                            view_order_WorkInProgress.setBackgroundDrawable(ContextCompat.getDrawable(BookingHistory.this, R.drawable.check1));
+                            WorkInProgress.setVisibility(View.VISIBLE);
+                            placed_divider2.setBackgroundColor(ContextCompat.getColor(BookingHistory.this, R.color.button1));
+
+
+                        }else if(work_status.equals("Generated")){
+
+                            view_order_BookingConfirm.setBackgroundDrawable(ContextCompat.getDrawable(BookingHistory.this, R.drawable.check1));
+                            text_allocatetechnician.setVisibility(View.VISIBLE);
+                            placed_divider1.setBackgroundColor(ContextCompat.getColor(BookingHistory.this, R.color.button1));
+
+                            view_order_TechnicianAllocat.setBackgroundDrawable(ContextCompat.getDrawable(BookingHistory.this, R.drawable.check1));
+                            text_technicianDetails.setVisibility(View.VISIBLE);
+                            text3.setVisibility(View.VISIBLE);
+                            placed_divider.setBackgroundColor(ContextCompat.getColor(BookingHistory.this, R.color.button1));
+
+                            view_order_WorkInProgress.setBackgroundDrawable(ContextCompat.getDrawable(BookingHistory.this, R.drawable.check1));
+                            WorkInProgress.setVisibility(View.VISIBLE);
+                            placed_divider2.setBackgroundColor(ContextCompat.getColor(BookingHistory.this, R.color.button1));
+
+                            view_order_WorkCompleted.setBackgroundDrawable(ContextCompat.getDrawable(BookingHistory.this, R.drawable.check1));
+                            WorkCompleted.setVisibility(View.VISIBLE);
+                            payment_card.setVisibility(View.VISIBLE);
+                            placed_divider3.setBackgroundColor(ContextCompat.getColor(BookingHistory.this, R.color.button1));
+
+                            show_Payment.setText(price);
+
+                        }else if(work_status.equals("Payment_done")){
+
+                            view_order_BookingConfirm.setBackgroundDrawable(ContextCompat.getDrawable(BookingHistory.this, R.drawable.check1));
+                            text_allocatetechnician.setVisibility(View.VISIBLE);
+                            placed_divider1.setBackgroundColor(ContextCompat.getColor(BookingHistory.this, R.color.button1));
+
+                            view_order_TechnicianAllocat.setBackgroundDrawable(ContextCompat.getDrawable(BookingHistory.this, R.drawable.check1));
+                            text_technicianDetails.setVisibility(View.VISIBLE);
+                            text3.setVisibility(View.VISIBLE);
+                            placed_divider.setBackgroundColor(ContextCompat.getColor(BookingHistory.this, R.color.button1));
+
+                            view_order_WorkInProgress.setBackgroundDrawable(ContextCompat.getDrawable(BookingHistory.this, R.drawable.check1));
+                            WorkInProgress.setVisibility(View.VISIBLE);
+                            placed_divider2.setBackgroundColor(ContextCompat.getColor(BookingHistory.this, R.color.button1));
+
+                            view_order_WorkCompleted.setBackgroundDrawable(ContextCompat.getDrawable(BookingHistory.this, R.drawable.check1));
+                            WorkCompleted.setVisibility(View.VISIBLE);
+                            payment_card.setVisibility(View.GONE);
+                            placed_divider3.setBackgroundColor(ContextCompat.getColor(BookingHistory.this, R.color.button1));
+
+                            show_Payment.setText(price);
+
+                            view_order_Payment.setBackgroundDrawable(ContextCompat.getDrawable(BookingHistory.this, R.drawable.check1));
 
                         }
 
-                        orderitem = new ArrayList<>();
+                       /* orderitem = new ArrayList<>();
 
                         String Order_item = jsonObject.getString("Order_item");
 
@@ -351,7 +422,7 @@ public class BookingHistory extends AppCompatActivity {
                             String Amount = jsonObject_item.getString("Amount");
 
                             OrderItem_ModelClass orderItem_modelClass = new OrderItem_ModelClass(
-                                    categoryname, Product, Amount,subcategoryname
+                                    categoryname, Product, Amount, subcategoryname
                             );
 
                             orderitem.add(orderItem_modelClass);
@@ -368,18 +439,13 @@ public class BookingHistory extends AppCompatActivity {
                         text_MobileNo.setText(mobile);
                         text_city.setText(address);
                         text_address_details.setText(address1);
-                        bookingid.setText("#" + order_id);
                         text_orderConfirmed.setText("Order" + " " + work_status);
                         TotalPrice.setText(price);
                         subTotalPrice.setText(subtotal);
+                        payonvisite.setText(payOnVisit);*/
 
-                        double int_price = Double.valueOf(price);
-                        double int_total = Double.valueOf(subtotal);
-                        double int_amount = int_price - int_total;
-                        String payOnVisit = df.format(int_amount);
-
-                        payonvisite.setText(payOnVisit);
-
+                        //v.setBackgroundResource(R.color.myGreenWithAlpha);
+                        //v.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.myGreen));
 
                     }
                 } catch (JSONException e) {
@@ -415,7 +481,7 @@ public class BookingHistory extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    private void makePhoneCall() {
+   /* private void makePhoneCall() {
         // String number = items;
         String number = "tel:"+ techmobile;
         if (number.trim().length() > 0) {
@@ -445,191 +511,41 @@ public class BookingHistory extends AppCompatActivity {
                 Toast.makeText(BookingHistory.this, "Permission DENIED", Toast.LENGTH_SHORT).show();
             }
         }
+    }*/
+
+    public void startPayment(int amount) {
+        /*
+          You need to pass current activity in order to let Razorpay create CheckoutActivity
+         */
+        final Activity activity = this;
+
+        final Checkout co = new Checkout();
+        co.setKeyID("rzp_live_pEiadfp4ZIDBJT");
+
+        try {
+            JSONObject options = new JSONObject();
+            options.put("name", "Apni Seva");
+            options.put("description", "Aap Se Aap Tak");
+            options.put("send_sms_hash", true);
+            options.put("allow_rotation", true);
+            //You can omit the image option to fetch the image from dashboard
+            //options.put("image", "https://s3.amazonaws.com/rzp-mobile/images/rzp.png");
+            options.put("currency", "INR");
+            options.put("amount", amount);
+
+            JSONObject preFill = new JSONObject();
+            preFill.put("email", str_Email);
+            preFill.put("contact", str_mobileno);
+
+            options.put("prefill", preFill);
+
+            co.open(activity, options);
+
+        } catch (Exception e) {
+
+            Toast.makeText(activity, "Error in payment: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
     }
 
-    public void bookingconfirm(){
-
-        i = placed_divider.getProgress();
-        new Thread(new Runnable() {
-            public void run() {
-                while (i < 100) {
-                    i += 5;
-                    // Update the progress bar and display the current value in text view
-                    hdlr.post(new Runnable() {
-                        public void run() {
-
-                            placed_divider.setProgress(i);
-
-                            if (i == 100) {
-
-                                Payment.setVisibility(View.INVISIBLE);
-                                WorkInProgress.setVisibility(View.INVISIBLE);
-                                WorkCompleted.setVisibility(View.INVISIBLE);
-                                TechnicianAllocat.setVisibility(View.INVISIBLE);
-                                placed_divider1.setVisibility(View.INVISIBLE);
-                                view_order_WorkInProgress.setVisibility(View.INVISIBLE);
-                                placed_divider2.setVisibility(View.INVISIBLE);
-                                view_order_WorkCompleted.setVisibility(View.INVISIBLE);
-                                placed_divider3.setVisibility(View.INVISIBLE);
-                                view_order_Payment.setVisibility(View.INVISIBLE);
-                                view_order_TechnicianAllocat.setVisibility(View.INVISIBLE);
-                                placed_divider.setVisibility(View.VISIBLE);
-
-                                placed_divider.setMax(100); // 100 maximum value for the progress value
-                                placed_divider1.setProgress(20); // 50 default progress value for the progress bar
-
-                            }
-                        }
-                    });
-                    try {
-                        // Sleep for 100 milliseconds to show the progress slowly.
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }).start();
-    }
-
-    public void tecnicianAllocate(){
-
-        i = placed_divider1.getProgress();
-        new Thread(new Runnable() {
-            public void run() {
-                while (i < 100) {
-                    i += 5;
-                    // Update the progress bar and display the current value in text view
-                    hdlr.post(new Runnable() {
-                        public void run() {
-
-                            placed_divider1.setProgress(i);
-
-                            if (i == 100) {
-
-                                Payment.setVisibility(View.INVISIBLE);
-                                WorkInProgress.setVisibility(View.INVISIBLE);
-                                WorkCompleted.setVisibility(View.INVISIBLE);
-                                TechnicianAllocat.setVisibility(View.VISIBLE);
-                                placed_divider1.setVisibility(View.VISIBLE);
-                                view_order_WorkInProgress.setVisibility(View.INVISIBLE);
-                                placed_divider2.setVisibility(View.INVISIBLE);
-                                view_order_WorkCompleted.setVisibility(View.INVISIBLE);
-                                placed_divider3.setVisibility(View.INVISIBLE);
-                                view_order_Payment.setVisibility(View.INVISIBLE);
-                                view_order_TechnicianAllocat.setVisibility(View.VISIBLE);
-                                placed_divider.setVisibility(View.VISIBLE);
-
-                                placed_divider.setMax(100); // 100 maximum value for the progress value
-                                placed_divider.setProgress(100); // 50 default progress value for the progress bar
-                                placed_divider2.setProgress(20); // 50 default progress value for the progress bar
-
-                            }
-                        }
-                    });
-                    try {
-                        // Sleep for 100 milliseconds to show the progress slowly.
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }).start();
-    }
-
-    public void workInProgress(){
-
-        i = placed_divider2.getProgress();
-        new Thread(new Runnable() {
-            public void run() {
-                while (i < 100) {
-                    i += 5;
-                    // Update the progress bar and display the current value in text view
-                    hdlr.post(new Runnable() {
-                        public void run() {
-
-                            placed_divider2.setProgress(i);
-
-                            if (i == 100) {
-
-                                Payment.setVisibility(View.INVISIBLE);
-                                WorkInProgress.setVisibility(View.VISIBLE);
-                                WorkCompleted.setVisibility(View.INVISIBLE);
-                                TechnicianAllocat.setVisibility(View.VISIBLE);
-                                placed_divider1.setVisibility(View.VISIBLE);
-                                view_order_WorkInProgress.setVisibility(View.VISIBLE);
-                                placed_divider2.setVisibility(View.VISIBLE);
-                                view_order_WorkCompleted.setVisibility(View.INVISIBLE);
-                                placed_divider3.setVisibility(View.INVISIBLE);
-                                view_order_Payment.setVisibility(View.INVISIBLE);
-                                view_order_TechnicianAllocat.setVisibility(View.VISIBLE);
-                                placed_divider.setVisibility(View.VISIBLE);
-
-                                placed_divider.setMax(100); // 100 maximum value for the progress value
-                                placed_divider.setProgress(100); // 50 default progress value for the progress bar
-
-                                placed_divider1.setProgress(100); // 50 default progress value for the progress bar
-                                placed_divider3.setProgress(20); // 50 default progress value for the progress bar
-                            }
-                        }
-                    });
-                    try {
-                        // Sleep for 100 milliseconds to show the progress slowly.
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }).start();
-    }
-
-    public void workingComplete(){
-
-        i = placed_divider3.getProgress();
-        new Thread(new Runnable() {
-            public void run() {
-                while (i < 100) {
-                    i += 5;
-                    // Update the progress bar and display the current value in text view
-                    hdlr.post(new Runnable() {
-                        public void run() {
-
-                            placed_divider3.setProgress(i);
-
-                            if (i == 100) {
-
-                                Payment.setVisibility(View.VISIBLE);
-                                WorkInProgress.setVisibility(View.VISIBLE);
-                                WorkCompleted.setVisibility(View.VISIBLE);
-                                TechnicianAllocat.setVisibility(View.VISIBLE);
-                                placed_divider1.setVisibility(View.VISIBLE);
-                                view_order_WorkInProgress.setVisibility(View.VISIBLE);
-                                placed_divider2.setVisibility(View.VISIBLE);
-                                view_order_WorkCompleted.setVisibility(View.VISIBLE);
-                                placed_divider3.setVisibility(View.VISIBLE);
-                                view_order_Payment.setVisibility(View.VISIBLE);
-                                view_order_TechnicianAllocat.setVisibility(View.VISIBLE);
-                                placed_divider.setVisibility(View.VISIBLE);
-
-                                placed_divider.setMax(100); // 100 maximum value for the progress value
-                                placed_divider.setProgress(100); // 50 default progress value for the progress bar
-
-                                placed_divider1.setProgress(100); // 50 default progress value for the progress bar
-                                placed_divider2.setProgress(100); // 50 default progress value for the progress bar
-                            }
-                        }
-                    });
-                    try {
-                        // Sleep for 100 milliseconds to show the progress slowly.
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }).start();
-
-    }
 }

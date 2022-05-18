@@ -50,6 +50,8 @@ public class SignUpPage extends AppCompatActivity {
 
     AwesomeValidation awesomeValidation;
 
+    int message;
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
