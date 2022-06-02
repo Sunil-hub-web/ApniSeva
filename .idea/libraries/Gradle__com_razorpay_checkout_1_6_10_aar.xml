@@ -4,6 +4,9 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e23dcab0106cf35ddafb6cda311d8280/jetified-checkout-1.6.10/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e23dcab0106cf35ddafb6cda311d8280/jetified-checkout-1.6.10/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e23dcab0106cf35ddafb6cda311d8280/jetified-checkout-1.6.10/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/39746d7fd448542e29dd0cd2d5f523a3/transformed/jetified-checkout-1.6.10/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/39746d7fd448542e29dd0cd2d5f523a3/transformed/jetified-checkout-1.6.10/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/39746d7fd448542e29dd0cd2d5f523a3/transformed/jetified-checkout-1.6.10/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.razorpay/checkout/1.6.10/772641c8514e72dd0ca07f44f96e5eabc92911e4/checkout-1.6.10-javadoc.jar!/" />

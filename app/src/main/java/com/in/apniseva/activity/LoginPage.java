@@ -61,6 +61,7 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.in.apniseva.AppURL.AppUrl;
 import com.in.apniseva.R;
 import com.in.apniseva.SessionManager;
@@ -94,6 +95,8 @@ public class LoginPage extends AppCompatActivity {
 
     GoogleSignInClient mGoogleSignInClient;
     RelativeLayout googlesignInButton, facebooksignInButton;
+
+    String token;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -141,6 +144,28 @@ public class LoginPage extends AppCompatActivity {
         //signInButton.setSize(SignInButton.SIZE_STANDARD);
 
         callbackManager = CallbackManager.Factory.create();
+
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+
+                        if (!task.isSuccessful()) {
+                            Log.w("hgsavajshj", "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
+
+                        // Get new FCM registration token
+                        token = task.getResult();
+                        sessionManager.setUserToken(token);
+
+
+                        // Log and toast
+                        //String msg = getString(R.string.msg_token_fmt, token);
+                        Log.d("hujasgugjgh", token);
+                        //Toast.makeText(LoginPage.this, token, Toast.LENGTH_LONG).show();
+                    }
+                });
 
 
         facebooksignInButton.setOnClickListener(new View.OnClickListener() {
@@ -257,15 +282,15 @@ public class LoginPage extends AppCompatActivity {
 
                     edit_Password.setBackgroundTintList(LoginPage.this.getResources().getColorStateList(R.color.text));
                     Drawable img = edit_Password.getContext().getResources().getDrawable(R.drawable.password);
-                    Drawable img1 = edit_Password.getContext().getResources().getDrawable(R.drawable.visibility1);
-                    edit_Password.setCompoundDrawablesWithIntrinsicBounds(img, null, img1, null);
+                    Drawable img1 = edit_Password.getContext().getResources().getDrawable(R.drawable.baseline_visibility);
+                    edit_Password.setCompoundDrawablesWithIntrinsicBounds(img, null, null, null);
                     edit_Password.setCompoundDrawablePadding(25);
 
 
                 } else {
 
                     edit_Password.setBackgroundTintList(LoginPage.this.getResources().getColorStateList(R.color.Blue));
-                    edit_Password.setCompoundDrawablesWithIntrinsicBounds(R.drawable.password1, 0, R.drawable.visibility, 0);
+                    edit_Password.setCompoundDrawablesWithIntrinsicBounds(R.drawable.password1, 0, 0, 0);
                     edit_Password.setCompoundDrawablePadding(25);
 
                 }
@@ -293,7 +318,7 @@ public class LoginPage extends AppCompatActivity {
                         if (passwordVisiable) {
 
                             //set Drawable Image here
-                            edit_Password.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.visibility, 0);
+                            edit_Password.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.baseline_visibility, 0);
                             // for show Password
                             edit_Password.setTransformationMethod(PasswordTransformationMethod.getInstance());
                             passwordVisiable = false;
@@ -301,7 +326,7 @@ public class LoginPage extends AppCompatActivity {
                         } else {
 
                             //set Drawable Image here
-                            edit_Password.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.visibility, 0);
+                            edit_Password.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.baseline_visibility_off, 0);
                             // for show Password
                             edit_Password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                             passwordVisiable = true;
@@ -345,7 +370,8 @@ public class LoginPage extends AppCompatActivity {
 
                         if (awesomeValidation.validate()) {
 
-                            userlogin(str_MobileNumber, str_Password);
+                            String token = sessionManager.getUserToken();
+                            userlogin(str_MobileNumber, str_Password,token);
 
                         } else {
 
@@ -355,7 +381,8 @@ public class LoginPage extends AppCompatActivity {
 
                         if (isValidEmail(str_MobileNumber)) {
 
-                            userlogin(str_MobileNumber, str_Password);
+                            String token = sessionManager.getUserToken();
+                            userlogin(str_MobileNumber, str_Password,token);
                             
                         } else {
                             Toast.makeText(LoginPage.this, "  "+"Enter Valid EmailId"+"  ", Toast.LENGTH_SHORT).show();
@@ -377,7 +404,8 @@ public class LoginPage extends AppCompatActivity {
                 } else {
 
                     str_MobileNumber = edit_MobileNumber.getText().toString().trim();
-                    loginviaOTP(str_MobileNumber);
+                    String token = sessionManager.getUserToken();
+                    loginviaOTP(str_MobileNumber,token);
 
                 }
 
@@ -443,7 +471,8 @@ public class LoginPage extends AppCompatActivity {
 
                             edit_MobileNumber.setText(email);
 
-                            userSociallogin(email);
+                            String token = sessionManager.getUserToken();
+                            userSociallogin(email,token);
 
                             if (Profile.getCurrentProfile() != null) {
                                 profileURL = ImageRequest.getProfilePictureUri(Profile.getCurrentProfile().getId(), 400, 400).toString();
@@ -548,7 +577,7 @@ public class LoginPage extends AppCompatActivity {
                 String personId = acct.getId();
                 Uri personPhoto = acct.getPhotoUrl();
 
-                userSociallogin(personEmail);
+                userSociallogin(personEmail,token);
 
             }
 
@@ -564,7 +593,7 @@ public class LoginPage extends AppCompatActivity {
         }
     }
 
-    public void userlogin(String mobileNo, String password) {
+    public void userlogin(String mobileNo, String password,String token) {
 
         ProgressDialog progressDialog = new ProgressDialog(LoginPage.this);
         progressDialog.setMessage("User Login Please wait...");
@@ -578,6 +607,7 @@ public class LoginPage extends AppCompatActivity {
             jsonObject.put("mobile", mobileNo);
             jsonObject.put("password", password);
             jsonObject.put("type", "manual");
+            jsonObject.put("token",token);
 
         } catch (Exception e) {
 
@@ -672,7 +702,7 @@ public class LoginPage extends AppCompatActivity {
         requestQueue.add(jsonObjectRequest);
     }
 
-    public void loginviaOTP(String mobileNo) {
+    public void loginviaOTP(String mobileNo,String token) {
 
         ProgressDialog progressDialog = new ProgressDialog(LoginPage.this);
         progressDialog.setMessage("Processing...");
@@ -683,6 +713,7 @@ public class LoginPage extends AppCompatActivity {
         try {
 
             jsonObject.put("mobile", mobileNo);
+            jsonObject.put("token",token);
 
         } catch (Exception e) {
 
@@ -743,7 +774,7 @@ public class LoginPage extends AppCompatActivity {
 
     }
 
-    public void userSociallogin(String email) {
+    public void userSociallogin(String email,String token) {
 
         ProgressDialog progressDialog = new ProgressDialog(LoginPage.this);
         progressDialog.setMessage("User Login Please wait...");
@@ -755,6 +786,7 @@ public class LoginPage extends AppCompatActivity {
         try {
 
             jsonObject.put("email", email);
+            jsonObject.put("token",token);
             jsonObject.put("type", "social_login");
 
         } catch (Exception e) {

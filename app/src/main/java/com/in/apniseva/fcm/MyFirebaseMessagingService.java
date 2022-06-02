@@ -7,7 +7,6 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-import com.in.apniseva.SessionManager;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
@@ -15,7 +14,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     NotificationHelper NotificationHelper;
     LocalBroadcastManager broadcaster;
     public static Handler handler = new Handler();
-    SessionManager session;
+    //SessionManager session;
 
     public MyFirebaseMessagingService() {
     }
@@ -29,7 +28,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         // ...
 
-        session = new SessionManager(getApplicationContext());
+        //session = new SessionManager(getApplicationContext());
 
         NotificationHelper = new NotificationHelper(this);
 

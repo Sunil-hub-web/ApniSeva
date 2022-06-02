@@ -13,7 +13,6 @@ import android.util.Log;
 import androidx.core.app.NotificationCompat;
 
 import com.in.apniseva.R;
-import com.in.apniseva.SessionManager;
 
 public class NotificationHelper {
 
@@ -22,8 +21,8 @@ public class NotificationHelper {
     public static NotificationManager mNotificationManager;
     private NotificationCompat.Builder mBuilder;
     Intent resultIntent;
-    SessionManager session;
-    public static final String NOTIFICATION_CHANNEL_ID = "com.in.apniseva";
+    //SessionManager session;
+    public static final String NOTIFICATION_CHANNEL_ID = "com.in.apnisevatechinican";
 
 
     public NotificationHelper(Context context) {
@@ -37,7 +36,7 @@ public class NotificationHelper {
     {
 
         try {
-            session = new SessionManager(mContext);
+            //session = new SessionManager(mContext);
 
             /*if (session.isLogin()) {
 

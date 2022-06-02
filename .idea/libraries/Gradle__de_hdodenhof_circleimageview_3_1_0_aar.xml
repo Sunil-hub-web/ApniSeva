@@ -4,6 +4,9 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6e6b2202c5487b92a37f9fbb3f25b45b/circleimageview-3.1.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6e6b2202c5487b92a37f9fbb3f25b45b/circleimageview-3.1.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6e6b2202c5487b92a37f9fbb3f25b45b/circleimageview-3.1.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4a8fac1b1b101afd613705d415ab34c7/transformed/jetified-circleimageview-3.1.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/4a8fac1b1b101afd613705d415ab34c7/transformed/jetified-circleimageview-3.1.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4a8fac1b1b101afd613705d415ab34c7/transformed/jetified-circleimageview-3.1.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/de.hdodenhof/circleimageview/3.1.0/e33964c462b854162fee2bd3cd52889ef878df77/circleimageview-3.1.0-javadoc.jar!/" />

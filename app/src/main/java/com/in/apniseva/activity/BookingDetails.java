@@ -212,6 +212,7 @@ public class BookingDetails extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
 
-        finish();
+        Intent intent = new Intent(BookingDetails.this,MainActivity.class);
+        startActivity(intent);
     }
 }
