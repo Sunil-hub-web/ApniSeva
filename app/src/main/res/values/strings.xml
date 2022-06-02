@@ -8,10 +8,15 @@
 
 
     <string name="facebook_app_id">337091035083415</string>
+    <string name="facebook_client_token">337091035083415</string>
     <string name="fb_login_protocol_scheme">fb337091035083415</string>
 
-    <string name="api_key">AIzaSyBEaYB7lJOdlVVppF5Vikip2ycsDA2rrI0</string>
+    <string name="api_key">AIzaSyCUW1xBfUy4lnFPdJzIG22AOTPciGMLaYk</string>
     <string name="title_activity_maps">Map</string>
+
+
+    <string name="default_notification_channel_id">com.in.apniseva</string>
+
 
 
 </resources>

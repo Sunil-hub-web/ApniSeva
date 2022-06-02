@@ -10,8 +10,8 @@ android {
         applicationId "com.in.apniseva"
         minSdkVersion 19
         targetSdkVersion 30
-        versionCode 5
-        versionName "3.2"
+        versionCode 10
+        versionName "3.7"
         multiDexEnabled true
         resConfigs "en","US"
 
@@ -58,7 +58,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.3.1'
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
-    testImplementation 'junit:junit:4.+'
+    testImplementation 'junit:junit:'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
@@ -77,11 +77,11 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.5.2'
 
     //adding volley library
-    implementation 'com.android.volley:volley:1.1.0'
+    implementation 'com.android.volley:volley:1.2.1'
 
     implementation 'com.android.support:multidex:1.0.3'
 
-    implementation 'com.google.android.gms:play-services-auth:19.2.0'
+    implementation 'com.google.android.gms:play-services-auth:20.1.0'
 
     implementation "com.google.android.gms:play-services-location:19.0.1"
     implementation 'com.google.android.gms:play-services-maps:18.0.2'

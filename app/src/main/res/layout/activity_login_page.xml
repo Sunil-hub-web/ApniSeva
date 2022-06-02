@@ -80,7 +80,7 @@
                     android:layout_marginRight="@dimen/twenty_five"
                     android:layout_marginBottom="@dimen/twenty"
                     android:drawableLeft="@drawable/password"
-                    android:drawableRight="@drawable/visibility1"
+                    android:drawableRight="@drawable/baseline_visibility_off"
                     android:drawablePadding="@dimen/twenty_five"
                     android:ems="10"
                     android:hint="Password"

@@ -36,6 +36,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -96,16 +97,17 @@ public class MainActivity extends AppCompatActivity {
     RelativeLayout rel_loc;
     EditText serach;
     TextView text_location;
+    SwipeRefreshLayout swipRefresh;
+    public static final int REQUEST_CODE_PERMISSIONS = 101;
 
     int arraysize;
 
     private Boolean exit = false;
 
-    private int FINE_LOCATION_ACCESS_REQUEST_CODE = 10001;
-    LocationManager locationManager;
-    FusedLocationProviderClient fusedLocationProviderClient;
+    public static LocationManager locationManager;
+    public static FusedLocationProviderClient fusedLocationProviderClient;
     Double latitude, longitude;
-    String YourAddress,username,password;
+    String YourAddress, username, password;
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -129,39 +131,65 @@ public class MainActivity extends AppCompatActivity {
         rel_loc = findViewById(R.id.rel_loc);
         //serach = findViewById(R.id.serach);
         text_location = findViewById(R.id.location);
-
-        getHomePageDetails();
+        swipRefresh = findViewById(R.id.swipRefresh);
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
+        requestLocationPermission();
+
         Intent intent = getIntent();
         YourAddress = intent.getStringExtra("YourAddress");
+        String Yourlocation = intent.getStringExtra("Yourlocation");
 
         username = SharedPrefManager.getInstance(MainActivity.this).getUser().getMobileNo();
         password = SharedPrefManager.getInstance(MainActivity.this).getUser().getPassword();
         String userid = SharedPrefManager.getInstance(MainActivity.this).getUser().getUserid();
 
-        Log.d("password_sunil",password + username + userid);
+        Log.d("password_sunil", password + username + userid);
 
-        if (YourAddress != null) {
 
-            text_location.setText(YourAddress);
+        if(Yourlocation != null){
 
-        } else {
+            if (YourAddress != null) {
+
+                text_location.setText(YourAddress);
+
+            }
+
+        }else{
 
             if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                 //Write Function To enable gps
                 locationPermission();
-                enableUserLocation();
+                requestLocationPermission();
 
             } else {
                 //GPS is already On then
                 getLocation();
             }
-
         }
 
+        swipRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+
+                    if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                        //Write Function To enable gps
+                        locationPermission();
+                        requestLocationPermission();
+
+                    } else {
+                        //GPS is already On then
+                        getLocation();
+                    }
+
+                swipRefresh.setRefreshing(false);
+            }
+        });
+
+        getHomePageDetails();
 
         showImageViewPager.setClipToPadding(false);
         showImageViewPager.setClipChildren(false);
@@ -186,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                showImageViewPager.setCurrentItem(showImageViewPager.getCurrentItem()+1);
+                showImageViewPager.setCurrentItem(showImageViewPager.getCurrentItem() + 1);
             }
         };
 
@@ -206,34 +234,34 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-            bottomNavigation.setSelectedItemId(R.id.home);
+        bottomNavigation.setSelectedItemId(R.id.home);
 
-            bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                    switch (item.getItemId()) {
+                switch (item.getItemId()) {
 
-                        case R.id.home:
-                            return true;
+                    case R.id.home:
+                        return true;
 
-                        case R.id.profile:
+                    case R.id.profile:
 
-                            startActivity(new Intent(getApplicationContext(), UserDetails.class));
-                            overridePendingTransition(0, 0);
-                            return true;
+                        startActivity(new Intent(getApplicationContext(), UserDetails.class));
+                        overridePendingTransition(0, 0);
+                        return true;
 
-                        case R.id.orders:
+                    case R.id.orders:
 
-                            startActivity(new Intent(getApplicationContext(), BookingDetails.class));
-                            overridePendingTransition(0, 0);
-                            return true;
+                        startActivity(new Intent(getApplicationContext(), BookingDetails.class));
+                        overridePendingTransition(0, 0);
+                        return true;
 
-                    }
-
-                    return false;
                 }
-            });
+
+                return false;
+            }
+        });
 
         img_editLocation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -416,7 +444,7 @@ public class MainActivity extends AppCompatActivity {
 
                         dots = new TextView[arraysize];
 
-                        Log.d("arraysizesunil",String.valueOf(arraysize));
+                        Log.d("arraysizesunil", String.valueOf(arraysize));
 
                         dotsIndicator();
 
@@ -507,60 +535,78 @@ public class MainActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
-    private void enableUserLocation() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
-        } else {
-            //Ask for permission
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
-                //We need to show user a dialog for displaying why the permission is needed and then ask for the permission...
-                ActivityCompat.requestPermissions(this, new String[]
-                        {Manifest.permission.ACCESS_FINE_LOCATION}, FINE_LOCATION_ACCESS_REQUEST_CODE);
+    private void requestLocationPermission() {
+
+        boolean foreground = ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+
+        if (foreground) {
+            boolean background = ActivityCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED;
+
+            if (background) {
+                handleLocationUpdates();
             } else {
-                ActivityCompat.requestPermissions(this, new String[]
-                        {Manifest.permission.ACCESS_FINE_LOCATION}, FINE_LOCATION_ACCESS_REQUEST_CODE);
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_BACKGROUND_LOCATION}, REQUEST_CODE_PERMISSIONS);
             }
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
+                            Manifest.permission.ACCESS_BACKGROUND_LOCATION}, REQUEST_CODE_PERMISSIONS);
         }
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == FINE_LOCATION_ACCESS_REQUEST_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                //We have the permission
-                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission
-                        (this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    return;
+        if (requestCode == REQUEST_CODE_PERMISSIONS) {
+
+            boolean foreground = false, background = false;
+
+            for (int i = 0; i < permissions.length; i++) {
+                if (permissions[i].equalsIgnoreCase(Manifest.permission.ACCESS_COARSE_LOCATION)) {
+                    //foreground permission allowed
+                    if (grantResults[i] >= 0) {
+                        foreground = true;
+                        //Toast.makeText(getApplicationContext(), "Foreground location permission allowed", Toast.LENGTH_SHORT).show();
+                        continue;
+                    } else {
+                        //Toast.makeText(getApplicationContext(), "Location Permission denied", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
                 }
-            } else {
-                //We do not have the permission..
+
+                if (permissions[i].equalsIgnoreCase(Manifest.permission.ACCESS_BACKGROUND_LOCATION)) {
+                    if (grantResults[i] >= 0) {
+                        foreground = true;
+                        background = true;
+                        //Toast.makeText(getApplicationContext(), "Background location location permission allowed", Toast.LENGTH_SHORT).show();
+                    } else {
+                        //Toast.makeText(getApplicationContext(), "Background location location permission denied", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+            }
+
+            if (foreground) {
+                if (background) {
+                    handleLocationUpdates();
+                } else {
+                    handleForegroundLocationUpdates();
+                }
             }
         }
     }
 
-    @Override
-    public void onBackPressed() {
-
-
-        if (exit) {
-            finish(); // finish activity
-        } else {
-            Toast.makeText(this, "Press Back again to Exit.",
-                    Toast.LENGTH_SHORT).show();
-            exit = true;
-            new Handler().postDelayed(new Runnable() {
-
-                @Override
-                public void run() {
-                    // TODO Auto-generated method stub
-                    Intent a = new Intent(Intent.ACTION_MAIN);
-                    a.addCategory(Intent.CATEGORY_HOME);
-                    a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(a);
-                }
-            }, 4 * 1000);
-        }
+    private void handleLocationUpdates() {
+        //foreground and background
+        //Toast.makeText(getApplicationContext(), "Start Foreground and Background Location Updates", Toast.LENGTH_SHORT).show();
     }
+
+    private void handleForegroundLocationUpdates() {
+        //handleForeground Location Updates
+        //Toast.makeText(getApplicationContext(), "Start foreground location updates", Toast.LENGTH_SHORT).show();
+    }
+
 }

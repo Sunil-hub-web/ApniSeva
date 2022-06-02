@@ -6,246 +6,264 @@
     android:layout_height="match_parent"
     tools:context="com.in.apniseva.activity.MainActivity">
 
-    <RelativeLayout
-        android:id="@+id/addre"
+
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipRefresh"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/eighty"
-        android:background="#16308E">
+        android:layout_height="wrap_content">
 
         <RelativeLayout
-            android:id="@+id/rel_loc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/delLocation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/ten"
-                android:layout_marginTop="@dimen/twenty"
-                android:fontFamily="@font/avenir_lt_w01_55_roman"
-                android:text="Delivery Location"
-                android:textColor="@color/white"
-                android:textSize="@dimen/twelve_size"></TextView>
-
-            <TextView
-                android:id="@+id/location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/delLocation"
-                android:layout_marginLeft="@dimen/ten"
-                android:layout_marginTop="@dimen/ten"
-                android:fontFamily="@font/avenir_lt_w01_55_roman"
-                android:text="Sector 62A, Noida"
-                android:textColor="@color/white"
-                android:textSize="@dimen/textsize"></TextView>
-
-            <ImageView
-                android:id="@+id/img_editLocation"
-                android:layout_width="@dimen/fifteen"
-                android:layout_height="@dimen/fifteen"
-                android:layout_below="@id/delLocation"
-                android:layout_marginLeft="@dimen/fifteen"
-                android:layout_marginTop="@dimen/five"
-                android:layout_toRightOf="@id/location"
-                android:src="@drawable/icon_edit">
-
-            </ImageView>
-
-        </RelativeLayout>
-
-
-       <!-- <ImageView
-            android:layout_width="@dimen/thirty"
-            android:layout_height="@dimen/thirty"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="@dimen/twenty_five"
-            android:layout_marginRight="@dimen/ten"
-            android:src="@drawable/notifications">
-
-        </ImageView>-->
-
-       <!-- <EditText
-            android:id="@+id/serach"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/fifty"
-            android:layout_below="@id/rel_loc"
-            android:layout_margin="@dimen/twenty"
-            android:background="@drawable/serachback"
-            android:drawableLeft="@drawable/search"
-            android:drawablePadding="@dimen/twenty"
-            android:fontFamily="@font/avenir_lt_w01_55_roman"
-            android:hint="Serach For a service"
-            android:padding="@dimen/fifteen"
-            android:focusable="false"></EditText>-->
-
-    </RelativeLayout>
-
-    <LinearLayout
-        android:id="@+id/lin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/view"
-        android:layout_below="@id/addre"
-        android:background="#EAE7E7">
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="none">
+            android:layout_height="match_parent">
 
             <RelativeLayout
+                android:id="@+id/addre"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="#16308E">
 
                 <RelativeLayout
-                    android:id="@+id/rel1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#FFFFFF"
-                    android:elevation="@dimen/five">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/viewPager">
-
-                        <androidx.viewpager2.widget.ViewPager2
-                            android:id="@+id/showImageViewPager"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                        </androidx.viewpager2.widget.ViewPager2>
-
-
-                        <LinearLayout
-                            android:id="@+id/dots_container"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@android:color/transparent"
-                            android:layout_alignParentBottom="true"
-                            android:layout_marginBottom="-20dp"
-                            android:gravity="center_horizontal"
-                            android:orientation="horizontal"></LinearLayout>
-
-                    </RelativeLayout>
-
-
+                    android:id="@+id/rel_loc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/ourServices"
+                        android:id="@+id/delLocation"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/viewPager"
                         android:layout_marginLeft="@dimen/ten"
-                        android:layout_marginTop="@dimen/ten"
-                        android:fontFamily="@font/avenirlt65medium"
-                        android:text="Our Services"
-                        android:textColor="#3A3A3A"
-                        android:textSize="@dimen/twenty_size"></TextView>
+                        android:layout_marginTop="@dimen/twenty"
+                        android:fontFamily="@font/avenir_lt_w01_55_roman"
+                        android:text="Delivery Location"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/twelve_size"></TextView>
 
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerOurServices"
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/location"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/ourServices"
-                        android:layout_marginTop="@dimen/ten">
+                        android:layout_below="@id/delLocation"
+                        android:layout_marginStart="@dimen/ten"
+                        android:layout_marginTop="@dimen/ten"
+                        android:layout_marginEnd="@dimen/ten"
+                        android:layout_marginBottom="@dimen/ten"
+                        android:fontFamily="@font/avenir_lt_w01_55_roman"
+                        android:text=""
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/textsize"></TextView>
 
-                    </androidx.recyclerview.widget.RecyclerView>
+                    <ImageView
+                        android:id="@+id/img_editLocation"
+                        android:layout_width="@dimen/fifteen"
+                        android:layout_height="@dimen/fifteen"
+                        android:layout_below="@id/delLocation"
+                        android:layout_marginLeft="@dimen/fifteen"
+                        android:layout_marginTop="@dimen/five"
+                        android:layout_toRightOf="@id/location"
+                        android:src="@drawable/icon_edit">
 
-
+                    </ImageView>
 
                 </RelativeLayout>
 
-                <!--<RelativeLayout
-                    android:id="@+id/rel2"
+
+                <!-- <ImageView
+                    android:layout_width="@dimen/thirty"
+                    android:layout_height="@dimen/thirty"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="@dimen/twenty_five"
+                    android:layout_marginRight="@dimen/ten"
+                    android:src="@drawable/notifications">
+
+                </ImageView>-->
+
+                <!-- <EditText
+                    android:id="@+id/serach"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/rel1"
-                    android:layout_marginTop="@dimen/fifteen"
-                    android:background="#FFFFFF"
-                    android:elevation="@dimen/five">
-
-                    <TextView
-                        android:id="@+id/recommendedServices"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/ten"
-                        android:layout_marginTop="@dimen/fifteen"
-                        android:fontFamily="@font/avenirlt65medium"
-                        android:text="Recommended Services"
-                        android:textColor="#3A3A3A"
-                        android:textSize="@dimen/twenty_size"></TextView>
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/showrecommendedServices"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/recommendedServices"
-                        android:layout_marginTop="@dimen/ten"
-                        android:layout_marginBottom="@dimen/ten">
-
-                    </androidx.recyclerview.widget.RecyclerView>
-
-
-                </RelativeLayout>-->
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/rel1"
-                    android:layout_marginTop="@dimen/fifteen"
-                    android:background="#FFFFFF"
-                    android:elevation="@dimen/five">
-
-                    <TextView
-                        android:id="@+id/CustomerReview"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/ten"
-                        android:layout_marginTop="@dimen/fifteen"
-                        android:fontFamily="@font/avenirlt65medium"
-                        android:text="Customer Review"
-                        android:textColor="#3A3A3A"
-                        android:textSize="@dimen/twenty_size"></TextView>
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/customerReviewRecycler"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/CustomerReview"
-                        android:layout_marginTop="@dimen/five">
-
-                    </androidx.recyclerview.widget.RecyclerView>
-
-                </RelativeLayout>
+                    android:layout_height="@dimen/fifty"
+                    android:layout_below="@id/rel_loc"
+                    android:layout_margin="@dimen/twenty"
+                    android:background="@drawable/serachback"
+                    android:drawableLeft="@drawable/search"
+                    android:drawablePadding="@dimen/twenty"
+                    android:fontFamily="@font/avenir_lt_w01_55_roman"
+                    android:hint="Serach For a service"
+                    android:padding="@dimen/fifteen"
+                    android:focusable="false"></EditText>-->
 
             </RelativeLayout>
 
-        </ScrollView>
+            <LinearLayout
+                android:id="@+id/lin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/view"
+                android:layout_below="@id/addre"
+                android:background="#EAE7E7">
 
-    </LinearLayout>
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="none">
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="2.5dp"
-        android:layout_above="@id/bottomNavigation"
-        android:background="@color/text" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigation"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/sixty"
-        android:layout_alignParentBottom="true"
-        android:background="#FFFFFF"
-        app:itemIconTint="@drawable/selector_home"
-        app:itemTextColor="@drawable/selector_home"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/menu_navigation_home">
+                        <RelativeLayout
+                            android:id="@+id/rel1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#FFFFFF"
+                            android:elevation="@dimen/five">
 
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/viewPager">
+
+                                <androidx.viewpager2.widget.ViewPager2
+                                    android:id="@+id/showImageViewPager"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+                                </androidx.viewpager2.widget.ViewPager2>
+
+
+                                <LinearLayout
+                                    android:id="@+id/dots_container"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@android:color/transparent"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_marginBottom="-20dp"
+                                    android:gravity="center_horizontal"
+                                    android:orientation="horizontal"></LinearLayout>
+
+                            </RelativeLayout>
+
+
+
+                            <TextView
+                                android:id="@+id/ourServices"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/viewPager"
+                                android:layout_marginLeft="@dimen/ten"
+                                android:layout_marginTop="@dimen/ten"
+                                android:fontFamily="@font/avenirlt65medium"
+                                android:text="Our Services"
+                                android:textColor="#3A3A3A"
+                                android:textSize="@dimen/twenty_size"></TextView>
+
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recyclerOurServices"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/ourServices"
+                                android:layout_marginTop="@dimen/ten">
+
+                            </androidx.recyclerview.widget.RecyclerView>
+
+
+
+                        </RelativeLayout>
+
+                        <!--<RelativeLayout
+                            android:id="@+id/rel2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/rel1"
+                            android:layout_marginTop="@dimen/fifteen"
+                            android:background="#FFFFFF"
+                            android:elevation="@dimen/five">
+
+                            <TextView
+                                android:id="@+id/recommendedServices"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/ten"
+                                android:layout_marginTop="@dimen/fifteen"
+                                android:fontFamily="@font/avenirlt65medium"
+                                android:text="Recommended Services"
+                                android:textColor="#3A3A3A"
+                                android:textSize="@dimen/twenty_size"></TextView>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/showrecommendedServices"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/recommendedServices"
+                                android:layout_marginTop="@dimen/ten"
+                                android:layout_marginBottom="@dimen/ten">
+
+                            </androidx.recyclerview.widget.RecyclerView>
+
+
+                        </RelativeLayout>-->
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/rel1"
+                            android:layout_marginTop="@dimen/fifteen"
+                            android:background="#FFFFFF"
+                            android:elevation="@dimen/five">
+
+                            <TextView
+                                android:id="@+id/CustomerReview"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/ten"
+                                android:layout_marginTop="@dimen/fifteen"
+                                android:fontFamily="@font/avenirlt65medium"
+                                android:text="Customer Review"
+                                android:textColor="#3A3A3A"
+                                android:textSize="@dimen/twenty_size"></TextView>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/customerReviewRecycler"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/CustomerReview"
+                                android:layout_marginTop="@dimen/five">
+
+                            </androidx.recyclerview.widget.RecyclerView>
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                </ScrollView>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="2.5dp"
+                android:layout_above="@id/bottomNavigation"
+                android:background="@color/text" />
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottomNavigation"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/sixty"
+                android:layout_alignParentBottom="true"
+                android:background="#FFFFFF"
+                app:itemIconTint="@drawable/selector_home"
+                app:itemTextColor="@drawable/selector_home"
+                app:labelVisibilityMode="labeled"
+                app:menu="@menu/menu_navigation_home">
+
+            </com.google.android.material.bottomnavigation.BottomNavigationView>
+        </RelativeLayout>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
 
 
 </RelativeLayout>

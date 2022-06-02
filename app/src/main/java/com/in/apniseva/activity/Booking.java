@@ -6,12 +6,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,12 +23,26 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+import com.in.apniseva.AppURL.AppUrl;
 import com.in.apniseva.R;
 import com.in.apniseva.SharedPreference;
 import com.in.apniseva.adapter.BookingAdapter;
+import com.in.apniseva.adapter.CategorySpinerAdapter;
 import com.in.apniseva.modelclass.CartItem;
+import com.in.apniseva.modelclass.CategoryDetails_model;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -40,8 +56,11 @@ public class Booking extends AppCompatActivity {
     RecyclerView recyclerBooking;
     TextView subTotalPrice, TotalPrice,edit_Address;
     String str_TotalPrice, str_name, str_mobileno, str_workingcity, str_address;
+    Spinner Workingcity;
 
-    String[] Working_city = {"--Select Working_city--", "Bhubaneswar", "Cuttack", "Puri"};
+    //String[] Working_city = {"--Select Working_city--", "Bhubaneswar", "Cuttack", "Puri"};
+
+    ArrayList<CategoryDetails_model> Working_city = new ArrayList<>();
     ImageView imageviewback;
 
 
@@ -137,16 +156,36 @@ public class Booking extends AppCompatActivity {
         dialog.setContentView(R.layout.activity_booking);
         //dialog.setCancelable(false);
 
-        Spinner Workingcity = dialog.findViewById(R.id.Workingcity);
+        Workingcity = dialog.findViewById(R.id.Workingcity);
         EditText edit_fullname = dialog.findViewById(R.id.edit_fullname);
         EditText edit_MobileNumber = dialog.findViewById(R.id.edit_MobileNumber);
         EditText edit_CompleteAddress = dialog.findViewById(R.id.edit_CompleteAddress);
         Button btn_SaveAddress = dialog.findViewById(R.id.btn_SaveAddress);
 
-        ArrayAdapter WorkingCityadapter = new ArrayAdapter(this, R.layout.spinneritem, Working_city);
+        /*ArrayAdapter WorkingCityadapter = new ArrayAdapter(this, R.layout.spinneritem, Working_city);
         WorkingCityadapter.setDropDownViewResource(R.layout.spinnerdropdownitem);
         Workingcity.setAdapter(WorkingCityadapter);
-        Workingcity.setSelection(-1, true);
+        Workingcity.setSelection(-1, true);*/
+
+        getCity();
+
+        Workingcity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                CategoryDetails_model cate_data = (CategoryDetails_model) parent.getSelectedItem();
+
+                String city_Id = cate_data.getId();
+                str_workingcity = cate_data.getName();
+                Log.d("city_Id", str_workingcity);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         btn_SaveAddress.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -173,7 +212,7 @@ public class Booking extends AppCompatActivity {
                     str_name = edit_fullname.getText().toString().trim();
                     str_mobileno = edit_MobileNumber.getText().toString().trim();
                     str_address = edit_CompleteAddress.getText().toString().trim();
-                    str_workingcity =  Workingcity.getSelectedItem().toString();
+                    //str_workingcity =  Workingcity.getSelectedItem().toString();
 
                     edit_Address.setText(str_name+"\n"+str_mobileno+"\n"+str_workingcity+"\n"+str_address);
 
@@ -187,6 +226,73 @@ public class Booking extends AppCompatActivity {
         dialog.show();
         Window window = dialog.getWindow();
         window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+    }
+
+    public void getCity(){
+
+        Working_city.clear();
+
+        ProgressDialog progressDialog = new ProgressDialog(Booking.this);
+        progressDialog.setMessage("City Please wait...");
+        progressDialog.show();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, AppUrl.getmastercity, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                progressDialog.dismiss();
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+
+                    String status = jsonObject.getString("status");
+
+                    if(status.equals("OK")){
+
+                        String city = jsonObject.getString("city");
+                        JSONArray jsonArray_city = new JSONArray(city);
+
+                        for(int i=0; i<jsonArray_city.length(); i++){
+
+                            JSONObject jsonObject_City = jsonArray_city.getJSONObject(i);
+
+                            String id = jsonObject_City.getString("id");
+                            String city_name = jsonObject_City.getString("city_name");
+
+                            CategoryDetails_model categoryDetails_model = new CategoryDetails_model(
+
+                                    city_name,id
+                            );
+
+                            Working_city.add(categoryDetails_model);
+
+                        }
+
+                        CategorySpinerAdapter Working_city_adapter = new CategorySpinerAdapter(Booking.this,R.layout.spinnerdropdownitem,Working_city);
+                        Working_city_adapter.setDropDownViewResource(R.layout.spinnerdropdownitem);
+                        Workingcity.setAdapter(Working_city_adapter);
+                        Workingcity.setSelection(-1,true);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                progressDialog.dismiss();
+                error.printStackTrace();
+                Toast.makeText(Booking.this, "API no response, Facing Technical issues, Try again!", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(3000,1,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueue requestQueue = Volley.newRequestQueue(Booking.this);
+        requestQueue.add(stringRequest);
 
     }
 

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "580659055195",
+    "project_id": "apani-seva-87e59",
+    "storage_bucket": "apani-seva-87e59.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:580659055195:android:75ccc3765385659bf7cd7e",
+        "android_client_info": {
+          "package_name": "com.in.apniseva"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "580659055195-k9k6am7r3jcg55tqm07ems4q3857jv7s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRqEJ4xufg75LvFdCwi78gYFOxOQ2coR4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "580659055195-k9k6am7r3jcg55tqm07ems4q3857jv7s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

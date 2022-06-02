@@ -32,4 +32,8 @@ public class AppUrl {
 
     public static final String forgotPass = "https://apniseva.com/api/forgotPass";
 
+    public static final String givereview = "https://apniseva.com/api/givereview";
+
+    public static final String getmastercity = "https://apniseva.com/api/mastercity";;
+
 }

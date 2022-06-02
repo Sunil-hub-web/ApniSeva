@@ -26,12 +26,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ApniSeva"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        android:windowSoftInputMode="stateVisible|adjustResize">
+
         <activity
             android:name=".activity.ForgotPasswordActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
-
-
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden">
 
         </activity>
         <activity
@@ -121,8 +121,7 @@
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
         <activity
             android:name=".activity.SignUpPage"
-            android:theme="@style/Theme.ApniSeva.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
+            android:theme="@style/Theme.ApniSeva.NoActionBar"/>
         <activity
             android:name=".activity.LoginPage"
             android:theme="@style/Theme.ApniSeva.NoActionBar"

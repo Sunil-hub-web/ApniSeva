@@ -73,7 +73,7 @@ public class SubCategoryPriceDetails extends AppCompatActivity {
         image_back = findViewById(R.id.image_back);
 
         sessionManager = new SessionManager(SubCategoryPriceDetails.this);
-        //sharedPreference.clearDate(SubCategoryPriceDetails.this);
+        sharedPreference.clearDate(SubCategoryPriceDetails.this);
         servicesId.clear();
         servicesItem.clear();
 

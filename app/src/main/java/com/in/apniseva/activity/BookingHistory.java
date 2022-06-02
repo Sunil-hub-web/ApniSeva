@@ -1,6 +1,7 @@
 package com.in.apniseva.activity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
@@ -19,9 +20,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -71,11 +74,12 @@ public class BookingHistory extends AppCompatActivity {
     SharedPreference sharedPreference;*/
     String booking_id;
     TextView bookingid, totalAmount, text_Techniciansid, text_designation, text_TechnicianPin, text_allocatetechnician,
-            text_ShowWorkDetails, text_DeliveryAddress,text3,show_Payment,pay_Payment,text_orderConfirmed;
+            text_ShowWorkDetails, text_DeliveryAddress,text3,show_Payment,pay_Payment,text_orderConfirmed,
+            text_Submit,text_ShowMessage;
     private static final DecimalFormat df = new DecimalFormat("0.00");
     //ArrayList<OrderItem_ModelClass> orderitem;
     String booking = "BookingDetails", techmobile, techname, category, profile_img,str_Email,price,
-            str_mobileno;
+            str_mobileno,technicianid;
 
     View view_order_BookingConfirm, view_order_TechnicianAllocat, view_order_WorkInProgress, view_order_WorkCompleted,
             view_order_Payment;
@@ -90,7 +94,10 @@ public class BookingHistory extends AppCompatActivity {
     ShapeableImageView profile_image;
     CardView payment_card,card_reating;
     RelativeLayout rel_card2;
-    int amount;
+    int amount,noofstars;
+    RatingBar ratingbar;
+    float rating;
+    EditText edit_UserReview;
 
 
     @Override
@@ -143,17 +150,46 @@ public class BookingHistory extends AppCompatActivity {
         show_Payment = findViewById(R.id.show_Payment);
         pay_Payment = findViewById(R.id.pay_Payment);
         card_reating = findViewById(R.id.card_reating);
+        ratingbar = findViewById(R.id.ratingbar);
+        text_Submit = findViewById(R.id.text_Submit);
+        edit_UserReview = findViewById(R.id.edit_UserReview);
+        text_ShowMessage = findViewById(R.id.text_ShowMessage);
 
      /*   placed_divider.setProgress(100);
         placed_divider1.setProgress(100);
         placed_divider2.setProgress(100);
         placed_divider3.setProgress(100);*/
 
+        edit_UserReview.setFocusable(true);
+        edit_UserReview.setFocusable(true);
+        card_reating.setVisibility(View.GONE);
+
         Intent intent = getIntent();
         booking_id = intent.getStringExtra("booking_id");
 
         str_Email = SharedPrefManager.getInstance(BookingHistory.this).getUser().getEmailId();
         str_mobileno = SharedPrefManager.getInstance(BookingHistory.this).getUser().getMobileNo();
+
+        text_Submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(edit_UserReview.getText().toString().trim().equals("")){
+
+                    Toast.makeText(BookingHistory.this, "Fill the Review", Toast.LENGTH_SHORT).show();
+                }else{
+
+                    noofstars = ratingbar.getNumStars();
+                    rating = ratingbar.getRating();
+                    String str_rating = String.valueOf(rating);
+                    String review = edit_UserReview.getText().toString().trim();
+
+                    submitUserReview(str_rating,review,booking_id,technicianid);
+
+                }
+            }
+        });
+
 
         image_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -198,7 +234,7 @@ public class BookingHistory extends AppCompatActivity {
             }
         });
 
-        card_reating.setOnClickListener(new View.OnClickListener() {
+     /*   card_reating.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -208,7 +244,7 @@ public class BookingHistory extends AppCompatActivity {
 
 
             }
-        });
+        });*/
 
     }
 
@@ -261,8 +297,19 @@ public class BookingHistory extends AppCompatActivity {
                         String payment_status = jsonObject.getString("payment_status");
                         String pay_type = jsonObject.getString("pay_type");
                         String technician_details = jsonObject.getString("technician_details");
+                        String review = jsonObject.getString("review");
                         String deliaddress = address + "," + address1;
+/*
 
+                        if(review.equals("0")){
+
+                            card_reating.setVisibility(View.VISIBLE);
+
+                        }else{
+
+                            card_reating.setVisibility(View.GONE);
+                        }
+*/
 
                         //text_ShowWorkDetails.setText(work_details);
 
@@ -306,7 +353,7 @@ public class BookingHistory extends AppCompatActivity {
 
                                 JSONObject jsonObject_technician = jsonArray_technician_details.getJSONObject(i);
 
-                                String id = jsonObject_technician.getString("id");
+                                technicianid = jsonObject_technician.getString("id");
                                 techname = jsonObject_technician.getString("name");
                                 String email = jsonObject_technician.getString("email");
                                 techmobile = jsonObject_technician.getString("mobile");
@@ -358,6 +405,28 @@ public class BookingHistory extends AppCompatActivity {
                             placed_divider2.setBackgroundColor(ContextCompat.getColor(BookingHistory.this, R.color.button1));
 
 
+                        }else if(work_status.equals("Completed")){
+
+                            view_order_BookingConfirm.setBackgroundDrawable(ContextCompat.getDrawable(BookingHistory.this, R.drawable.check1));
+                            text_allocatetechnician.setVisibility(View.VISIBLE);
+                            placed_divider1.setBackgroundColor(ContextCompat.getColor(BookingHistory.this, R.color.button1));
+
+                            view_order_TechnicianAllocat.setBackgroundDrawable(ContextCompat.getDrawable(BookingHistory.this, R.drawable.check1));
+                            text_technicianDetails.setVisibility(View.VISIBLE);
+                            text3.setVisibility(View.VISIBLE);
+                            placed_divider.setBackgroundColor(ContextCompat.getColor(BookingHistory.this, R.color.button1));
+
+                            view_order_WorkInProgress.setBackgroundDrawable(ContextCompat.getDrawable(BookingHistory.this, R.drawable.check1));
+                            WorkInProgress.setVisibility(View.VISIBLE);
+                            placed_divider2.setBackgroundColor(ContextCompat.getColor(BookingHistory.this, R.color.button1));
+
+                            view_order_WorkCompleted.setBackgroundDrawable(ContextCompat.getDrawable(BookingHistory.this, R.drawable.check1));
+                            WorkCompleted.setVisibility(View.VISIBLE);
+                            payment_card.setVisibility(View.VISIBLE);
+                            placed_divider3.setBackgroundColor(ContextCompat.getColor(BookingHistory.this, R.color.button1));
+
+                            show_Payment.setText(price);
+
                         }else if(work_status.equals("Generated")){
 
                             view_order_BookingConfirm.setBackgroundDrawable(ContextCompat.getDrawable(BookingHistory.this, R.drawable.check1));
@@ -403,6 +472,15 @@ public class BookingHistory extends AppCompatActivity {
                             show_Payment.setText(price);
 
                             view_order_Payment.setBackgroundDrawable(ContextCompat.getDrawable(BookingHistory.this, R.drawable.check1));
+
+                            if(review.equals("0")){
+
+                                card_reating.setVisibility(View.VISIBLE);
+
+                            }else{
+
+                                card_reating.setVisibility(View.GONE);
+                            }
 
                         }
 
@@ -546,6 +624,75 @@ public class BookingHistory extends AppCompatActivity {
             Toast.makeText(activity, "Error in payment: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
+    }
+
+    public void submitUserReview(String rate,String review,String order_id,String technician_id){
+
+        ProgressDialog dialog = new ProgressDialog(BookingHistory.this);
+        dialog.setMessage("Update Review Wait..");
+        dialog.show();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppUrl.givereview, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                dialog.dismiss();
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+
+                    String status = jsonObject.getString("status");
+                    String message = jsonObject.getString("message");
+
+                    Toast.makeText(BookingHistory.this, message, Toast.LENGTH_SHORT).show();
+
+                    edit_UserReview.setFocusable(false);
+                    edit_UserReview.setFocusable(false);
+
+                    ratingbar.setVisibility(View.GONE);
+                    edit_UserReview.setVisibility(View.GONE);
+                    text_Submit.setVisibility(View.GONE);
+                    card_reating.setVisibility(View.GONE);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                dialog.dismiss();
+
+                error.printStackTrace();
+
+                Toast.makeText(BookingHistory.this, "Facing Technical issues, Try again!", Toast.LENGTH_SHORT).show();
+
+                Log.d("error", error.toString());
+            }
+        }){
+
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String,String> params = new HashMap<>();
+
+                params.put("rate",rate);
+                params.put("review",review);
+                params.put("order_id",order_id);
+                params.put("technician_id",technician_id);
+
+                return params;
+            }
+        };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(30000, 1, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueue requestQueue = Volley.newRequestQueue(BookingHistory.this);
+        requestQueue.add(stringRequest);
+
     }
 
 }

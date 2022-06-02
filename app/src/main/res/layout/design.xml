@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ScrollView
+   <!-- <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -412,7 +412,7 @@
                     android:layout_marginTop="10dp">
 
                 </TextView>
-                <!--
+                &lt;!&ndash;
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -425,7 +425,7 @@
                                     android:textSize="@dimen/twelve_size">
 
                                 </TextView>
-                -->
+                &ndash;&gt;
 
             </LinearLayout>
 
@@ -608,6 +608,100 @@
 
 
 
-    </ScrollView>
+    </ScrollView>-->
+
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_reating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/card2"
+        android:layout_marginLeft="@dimen/fifteen"
+        android:layout_marginTop="@dimen/five"
+        android:layout_marginRight="@dimen/fifteen"
+        android:layout_marginBottom="@dimen/ten"
+        app:cardCornerRadius="@dimen/five"
+        app:cardElevation="@dimen/five">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/twenty"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/fifteen"
+                android:layout_marginTop="@dimen/five"
+                android:layout_marginBottom="@dimen/ten"
+                android:drawableLeft="@drawable/rate"
+                android:drawablePadding="@dimen/fifteen"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="Don't forget to rate"
+                android:textColor="#717070"
+                android:textSize="@dimen/textsize">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/edit_CompleteAddress"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/eighty"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/box"
+                android:gravity="start"
+                android:hint="Write a Review"
+                android:paddingLeft="20dp"
+                android:paddingTop="@dimen/ten"
+                android:textColor="#25297A"
+                android:textSize="18dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal">
+
+                <RatingBar
+                    android:id="@+id/ratingbar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:rating="5"
+                    android:scaleX="0.7"
+                    android:scaleY="0.6"
+                    android:theme="@style/RatingBar" />
+
+                <TextView
+                    android:id="@+id/text_orderConfirmed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/thirty_five"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="right"
+                    android:gravity="center"
+                    android:layout_marginStart="@dimen/fifteen"
+                    android:layout_marginTop="@dimen/ten"
+                    android:layout_marginEnd="@dimen/fifteen"
+                    android:layout_marginBottom="@dimen/ten"
+                    android:background="@drawable/bookingbtn_bg"
+                    android:backgroundTint="#07B80E"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:padding="@dimen/ten"
+                    android:text="Submit"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/ten"
+                    android:textStyle="bold"></TextView>
+
+            </RelativeLayout>
+
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

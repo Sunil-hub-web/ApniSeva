@@ -43,7 +43,7 @@ import org.json.JSONObject;
 public class SignUpPage extends AppCompatActivity {
 
     Button btn_signup;
-    TextView text_SignIn,TermsofService;
+    TextView text_SignIn,TermsofService,text_PrivacyPolicy;
     EditText edit_fullname, edit_MobileNumber, edit_Email, edit_Password;
     String str_fullname, str_MobileNumber, str_Email, str_Password;
     boolean passwordVisiable;
@@ -72,6 +72,7 @@ public class SignUpPage extends AppCompatActivity {
         text_SignIn = findViewById(R.id.text_SignIn);
         btn_signup = findViewById(R.id.btn_signup);
         TermsofService = findViewById(R.id.TermsofService);
+        text_PrivacyPolicy = findViewById(R.id.text_PrivacyPolicy);
 
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
 
@@ -95,7 +96,7 @@ public class SignUpPage extends AppCompatActivity {
                         if (passwordVisiable) {
 
                             //set Drawable Image here
-                            edit_Password.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.password, 0, R.drawable.visibility, 0);
+                            edit_Password.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.password, 0, R.drawable.baseline_visibility_off, 0);
                             edit_Password.setCompoundDrawablePadding(30);
                             // for show Password
                             edit_Password.setTransformationMethod(PasswordTransformationMethod.getInstance());
@@ -104,7 +105,7 @@ public class SignUpPage extends AppCompatActivity {
                         } else {
 
                             //set Drawable Image here
-                            edit_Password.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.password, 0, R.drawable.visibility, 0);
+                            edit_Password.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.password, 0, R.drawable.baseline_visibility, 0);
                             edit_Password.setCompoundDrawablePadding(30);
                             // for show Password
                             edit_Password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
@@ -154,6 +155,16 @@ public class SignUpPage extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(SignUpPage.this, TermsofService.class);
+                startActivity(intent);
+
+            }
+        });
+
+        text_PrivacyPolicy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(SignUpPage.this, PrivacyPolicy.class);
                 startActivity(intent);
 
             }

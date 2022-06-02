@@ -28,6 +28,7 @@ public class SearchLocation extends AppCompatActivity {
     EditText edit_serach;
     Button btn_Yourlocation;
     String YourAddress;
+    public static final int REQUEST_CODE_PERMISSIONS = 101;
 
     TextView text1,text2,text3,text4,text5,text6,text7,text8,text9,text10;
 

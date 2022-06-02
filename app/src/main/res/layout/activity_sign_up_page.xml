@@ -116,7 +116,7 @@ tools:context="com.in.apniseva.activity.SignUpPage">
                 android:layout_marginRight="@dimen/twenty_five"
                 android:layout_marginBottom="@dimen/ten"
                 android:drawableLeft="@drawable/password"
-                android:drawableRight="@drawable/visibility1"
+                android:drawableRight="@drawable/baseline_visibility_off"
                 android:drawablePadding="@dimen/thirty"
                 android:ems="10"
                 android:hint="Password"
@@ -178,27 +178,25 @@ tools:context="com.in.apniseva.activity.SignUpPage">
                 android:id="@+id/TermsofService"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Terms of Service And Privacy Policy"
-                android:textStyle="bold"
-                android:textColor="#B203A9F4"
-                android:textSize="@dimen/textsize"
-                android:paddingLeft="18dp"
                 android:layout_below="@id/login1"
-                android:layout_centerInParent="true"
-                android:layout_centerHorizontal="true"
-                android:fontFamily="@font/avenir_lt_w01_55_roman"/>
-
-            <!--<TextView
-                android:id="@+id/log"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="gggggggggg"
-                android:textStyle="bold"
+                android:fontFamily="@font/avenir_lt_w01_55_roman"
+                android:paddingLeft="18dp"
+                android:text="Terms of Service "
                 android:textColor="#B203A9F4"
                 android:textSize="@dimen/edittextsize"
-                android:layout_below="@id/TermsofService"
-                android:layout_centerHorizontal="true"
-                android:fontFamily="@font/avenir_lt_w01_55_roman"/>-->
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/text_PrivacyPolicy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/login1"
+                android:layout_toRightOf="@+id/TermsofService"
+                android:fontFamily="@font/avenir_lt_w01_55_roman"
+                android:text="And Privacy Policy"
+                android:textColor="#B203A9F4"
+                android:textSize="@dimen/edittextsize"
+                android:textStyle="bold" />
 
 
         </RelativeLayout>

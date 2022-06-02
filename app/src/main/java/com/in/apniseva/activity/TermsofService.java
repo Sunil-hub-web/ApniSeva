@@ -1,9 +1,23 @@
 package com.in.apniseva.activity;
 
+import android.app.ProgressDialog;
+import android.app.UiModeManager;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
+import android.webkit.CookieSyncManager;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,27 +25,45 @@ import com.in.apniseva.R;
 
 public class TermsofService extends AppCompatActivity {
 
-    TextView text;
-    ImageView image_back;
+    //ImageView image_back;
+
+    WebView webView;
+    private Boolean exit = false;
+    private UiModeManager uiModeManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_termsof_service);
 
-        text = findViewById(R.id.text);
-        image_back = findViewById(R.id.image_back);
+
+
+       /* image_back = findViewById(R.id.image_back);
 
         image_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-              onBackPressed();
+                onBackPressed();
             }
-        });
+        });*/
 
-        text.setText("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.");
+        uiModeManager = (UiModeManager) getSystemService(UI_MODE_SERVICE);
+        uiModeManager.setNightMode(UiModeManager.MODE_NIGHT_NO);
+
+        webView = findViewById(R.id.webView);
+
+
+        String url = "https://apniseva.com/terms";
+        WebView  view=(WebView) this.findViewById(R.id.webView);
+        view.getSettings().setJavaScriptEnabled(true);
+        view.loadUrl(url);
+
+
     }
+
+
 
     @Override
     public void onBackPressed() {

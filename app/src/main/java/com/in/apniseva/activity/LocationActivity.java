@@ -43,6 +43,7 @@ public class LocationActivity extends AppCompatActivity {
     Double latitude,longitude;
     GoogleMap mMap;
     String address_txt;
+    public static final int REQUEST_CODE_PERMISSIONS = 101;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -65,7 +66,7 @@ public class LocationActivity extends AppCompatActivity {
         if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             //Write Function To enable gps
             locationPermission();
-            enableUserLocation();
+            requestLocationPermission();
 
         } else {
             //GPS is already On then
@@ -86,7 +87,8 @@ public class LocationActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(LocationActivity.this,MainActivity.class);
-                intent.putExtra("address_txt",address_txt);
+                intent.putExtra("YourAddress",address_txt);
+                intent.putExtra("Yourlocation","Yourlocation");
                 startActivity(intent);
 
             }
@@ -135,37 +137,78 @@ public class LocationActivity extends AppCompatActivity {
 
     }
 
-    private void enableUserLocation() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
-        } else {
-            //Ask for permission
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
-                //We need to show user a dialog for displaying why the permission is needed and then ask for the permission...
-                ActivityCompat.requestPermissions(this, new String[]
-                        {Manifest.permission.ACCESS_FINE_LOCATION}, FINE_LOCATION_ACCESS_REQUEST_CODE);
+    private void requestLocationPermission() {
+
+        boolean foreground = ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+
+        if (foreground) {
+            boolean background = ActivityCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED;
+
+            if (background) {
+                handleLocationUpdates();
             } else {
-                ActivityCompat.requestPermissions(this, new String[]
-                        {Manifest.permission.ACCESS_FINE_LOCATION}, FINE_LOCATION_ACCESS_REQUEST_CODE);
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_BACKGROUND_LOCATION}, REQUEST_CODE_PERMISSIONS);
             }
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
+                            Manifest.permission.ACCESS_BACKGROUND_LOCATION}, REQUEST_CODE_PERMISSIONS);
         }
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == FINE_LOCATION_ACCESS_REQUEST_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                //We have the permission
-                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission
-                        (this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    return;
+        if (requestCode == REQUEST_CODE_PERMISSIONS) {
+
+            boolean foreground = false, background = false;
+
+            for (int i = 0; i < permissions.length; i++) {
+                if (permissions[i].equalsIgnoreCase(Manifest.permission.ACCESS_COARSE_LOCATION)) {
+                    //foreground permission allowed
+                    if (grantResults[i] >= 0) {
+                        foreground = true;
+                        //Toast.makeText(getApplicationContext(), "Foreground location permission allowed", Toast.LENGTH_SHORT).show();
+                        continue;
+                    } else {
+                        //Toast.makeText(getApplicationContext(), "Location Permission denied", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
                 }
-            } else {
-                //We do not have the permission..
+
+                if (permissions[i].equalsIgnoreCase(Manifest.permission.ACCESS_BACKGROUND_LOCATION)) {
+                    if (grantResults[i] >= 0) {
+                        foreground = true;
+                        background = true;
+                        //Toast.makeText(getApplicationContext(), "Background location location permission allowed", Toast.LENGTH_SHORT).show();
+                    } else {
+                        //Toast.makeText(getApplicationContext(), "Background location location permission denied", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+            }
+
+            if (foreground) {
+                if (background) {
+                    handleLocationUpdates();
+                } else {
+                    handleForegroundLocationUpdates();
+                }
             }
         }
+    }
+
+    private void handleLocationUpdates() {
+        //foreground and background
+        //Toast.makeText(getApplicationContext(), "Start Foreground and Background Location Updates", Toast.LENGTH_SHORT).show();
+    }
+
+    private void handleForegroundLocationUpdates() {
+        //handleForeground Location Updates
+        //Toast.makeText(getApplicationContext(), "Start foreground location updates", Toast.LENGTH_SHORT).show();
     }
 
     public void locationPermission() {

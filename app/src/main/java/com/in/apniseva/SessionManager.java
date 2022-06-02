@@ -22,6 +22,7 @@ public class SessionManager {
     private static final String IS_LOGIN="islogin";
     private static final String IS_CATEGORYNAME="categoryname";
     private static final String IS_SUB_CATEGORYID="subcategoryid";
+    private static final String IS_Token="token";
 
 
     public SessionManager(Context context){
@@ -41,6 +42,18 @@ public class SessionManager {
     public String getUserOTP(){
 
         return  sharedprefernce.getString(User_OTP,"DEFAULT");
+    }
+
+    public void setUserToken(String token){
+
+        editor.putString(IS_Token,token);
+        editor.commit();
+
+    }
+
+    public String getUserToken(){
+
+        return  sharedprefernce.getString(IS_Token,"DEFAULT");
     }
 
     public void setuserEmail(String email){

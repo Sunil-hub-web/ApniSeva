@@ -140,7 +140,7 @@ public class ServicesPackageAdapter extends RecyclerView.Adapter<ServicesPackage
 
                         cartItem = new CartItem(str_name, str_price);
 
-                      /*  sharedPreference.addFavorite(context, cartItem);*/
+                        sharedPreference.addFavorite(context, cartItem);
 
                         servicesItem.add(cartItem);
                         servicesid.add(ac_services.getServicesId());
@@ -172,7 +172,7 @@ public class ServicesPackageAdapter extends RecyclerView.Adapter<ServicesPackage
 
                         servicesid.remove(index);
                         servicesItem.remove(index);
-                        //sharedPreference.removeFavorite(context,index);
+                        sharedPreference.removeFavorite(context,index);
 
                         Log.d("removearaylist",servicesid.toString());
 

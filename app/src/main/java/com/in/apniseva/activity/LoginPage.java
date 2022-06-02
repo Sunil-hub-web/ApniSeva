@@ -60,6 +60,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.in.apniseva.AppURL.AppUrl;
 import com.in.apniseva.R;
 import com.in.apniseva.SessionManager;
@@ -329,11 +330,11 @@ public class LoginPage extends AppCompatActivity {
 
                 if (edit_MobileNumber.getText().toString().trim().equals("")) {
 
-                    edit_MobileNumber.setError("Fill The Details");
+                    Toast.makeText(LoginPage.this, " "+"Fill The Details"+" ", Toast.LENGTH_SHORT).show();
 
                 } else if (edit_Password.getText().toString().trim().equals("")) {
 
-                    edit_Password.setError("Fill The Details");
+                    Toast.makeText(LoginPage.this, "  "+"Fill The Details"+"  ", Toast.LENGTH_SHORT).show();
 
                 } else {
 
@@ -345,18 +346,19 @@ public class LoginPage extends AppCompatActivity {
                         if (awesomeValidation.validate()) {
 
                             userlogin(str_MobileNumber, str_Password);
+
                         } else {
 
-                            edit_MobileNumber.setError("Enter Valid Mobile No");
+                            Toast.makeText(LoginPage.this, "  "+"Enter Valid Mobile No"+"  ", Toast.LENGTH_SHORT).show();
                         }
                     } else {
 
                         if (isValidEmail(str_MobileNumber)) {
 
                             userlogin(str_MobileNumber, str_Password);
+                            
                         } else {
-
-                            edit_MobileNumber.setError("Enter Valid EmailId");
+                            Toast.makeText(LoginPage.this, "  "+"Enter Valid EmailId"+"  ", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
@@ -370,7 +372,7 @@ public class LoginPage extends AppCompatActivity {
 
                 if (edit_MobileNumber.getText().toString().trim().equals("")) {
 
-                    edit_MobileNumber.setError("Fill The Field");
+                    Snackbar.make(findViewById(R.id.relativeLayout), "Fill The Details",Snackbar.LENGTH_LONG).show();
 
                 } else {
 
@@ -615,7 +617,7 @@ public class LoginPage extends AppCompatActivity {
 
                         SharedPrefManager.getInstance(LoginPage.this).userLogin(login_modelClass);
 
-                        Toast.makeText(LoginPage.this, "Login Successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginPage.this, "  "+"Login Successfully"+"  ", Toast.LENGTH_SHORT).show();
 
                         Intent intent1 = new Intent(LoginPage.this, MainActivity.class);
                         startActivity(intent1);
@@ -715,7 +717,7 @@ public class LoginPage extends AppCompatActivity {
                         Intent intent = new Intent(LoginPage.this, VerificationCode.class);
                         startActivity(intent);
 
-                        Toast.makeText(LoginPage.this, "Otp Send Successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginPage.this, "  "+"Otp Send Successfully"+"  ", Toast.LENGTH_SHORT).show();
 
                     }
                 } catch (JSONException e) {
@@ -799,7 +801,7 @@ public class LoginPage extends AppCompatActivity {
 
                         SharedPrefManager.getInstance(LoginPage.this).userLogin(login_modelClass);
 
-                        Toast.makeText(LoginPage.this, "Login Successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginPage.this, "  "+"Login Successfully"+"  ", Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent(LoginPage.this, MainActivity.class);
                         startActivity(intent);
