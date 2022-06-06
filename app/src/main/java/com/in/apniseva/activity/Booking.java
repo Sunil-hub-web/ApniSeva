@@ -191,7 +191,7 @@ public class Booking extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (Workingcity.getSelectedItem().toString().equals("--Select Working_city--")) {
+                if (str_workingcity.equals("Select City")) {
 
                     Toast.makeText(Booking.this, "Please Select Your City", Toast.LENGTH_SHORT).show();
 
@@ -252,7 +252,7 @@ public class Booking extends AppCompatActivity {
 
                         String city = jsonObject.getString("city");
                         JSONArray jsonArray_city = new JSONArray(city);
-
+                        CategoryDetails_model categoryDetails_model;
                         for(int i=0; i<jsonArray_city.length(); i++){
 
                             JSONObject jsonObject_City = jsonArray_city.getJSONObject(i);
@@ -260,7 +260,12 @@ public class Booking extends AppCompatActivity {
                             String id = jsonObject_City.getString("id");
                             String city_name = jsonObject_City.getString("city_name");
 
-                            CategoryDetails_model categoryDetails_model = new CategoryDetails_model(
+                            if(i==0){
+                                categoryDetails_model = new CategoryDetails_model("Select City","0");
+                                Working_city.add(categoryDetails_model);
+                            }
+
+                            categoryDetails_model = new CategoryDetails_model(
 
                                     city_name,id
                             );
@@ -269,10 +274,13 @@ public class Booking extends AppCompatActivity {
 
                         }
 
+
+
                         CategorySpinerAdapter Working_city_adapter = new CategorySpinerAdapter(Booking.this,R.layout.spinnerdropdownitem,Working_city);
                         Working_city_adapter.setDropDownViewResource(R.layout.spinnerdropdownitem);
                         Workingcity.setAdapter(Working_city_adapter);
                         Workingcity.setSelection(-1,true);
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -55,6 +55,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -74,11 +75,11 @@ public class BookingHistory extends AppCompatActivity {
     SharedPreference sharedPreference;*/
     String booking_id;
     TextView bookingid, totalAmount, text_Techniciansid, text_designation, text_TechnicianPin, text_allocatetechnician,
-            text_ShowWorkDetails, text_DeliveryAddress,text3,show_Payment,pay_Payment,text_orderConfirmed,
+            text_ShowWorkDetails, text_DeliveryAddress,text3,show_Payment,pay_Payment,text_orderConfirmed,text_Reating,
             text_Submit,text_ShowMessage;
     private static final DecimalFormat df = new DecimalFormat("0.00");
     //ArrayList<OrderItem_ModelClass> orderitem;
-    String booking = "BookingDetails", techmobile, techname, category, profile_img,str_Email,price,
+    String booking = "BookingDetails", techmobile, techname, category, profile_img,str_Email,price,extra_price,
             str_mobileno,technicianid;
 
     View view_order_BookingConfirm, view_order_TechnicianAllocat, view_order_WorkInProgress, view_order_WorkCompleted,
@@ -154,6 +155,7 @@ public class BookingHistory extends AppCompatActivity {
         text_Submit = findViewById(R.id.text_Submit);
         edit_UserReview = findViewById(R.id.edit_UserReview);
         text_ShowMessage = findViewById(R.id.text_ShowMessage);
+        text_Reating = findViewById(R.id.text_Reating);
 
      /*   placed_divider.setProgress(100);
         placed_divider1.setProgress(100);
@@ -298,6 +300,7 @@ public class BookingHistory extends AppCompatActivity {
                         String pay_type = jsonObject.getString("pay_type");
                         String technician_details = jsonObject.getString("technician_details");
                         String review = jsonObject.getString("review");
+                        extra_price = jsonObject.getString("extra_price");
                         String deliaddress = address + "," + address1;
 /*
 
@@ -336,8 +339,18 @@ public class BookingHistory extends AppCompatActivity {
                             text_TechnicianPin.setText(verification_pin);
                         }
 
+                        float d_price = Float.valueOf(price);
+                        float d_extraprice = Float.valueOf(extra_price);
+                        float total = d_price + d_extraprice;
+                        Log.d("valueoftotal", String.valueOf(total));
+                        NumberFormat formatter = new DecimalFormat("#0.00");
+                        //System.out.println("The Decimal Value is:"+formatter.format(amount));
+                        String totalAmount1 =  formatter.format(total);
+
+                       //totalAmount1 = String.format("%.3f", total);
+
                         bookingid.setText("#" + order_id);
-                        totalAmount.setText("Rs " + price + "0");
+                        totalAmount.setText("Rs " + totalAmount1);
                         text_DeliveryAddress.setText(deliaddress);
 
                         double int_price = Double.valueOf(price);
@@ -360,9 +373,11 @@ public class BookingHistory extends AppCompatActivity {
                                 profile_img = jsonObject_technician.getString("profile_img");
                                 category = jsonObject_technician.getString("category");
                                 String subcategory = jsonObject_technician.getString("subcategory");
+                                String review1 = jsonObject_technician.getString("review");
 
                                 text_Techniciansid.setText(techname);
                                 text_designation.setText(category);
+                                text_Reating.setText("Rating : "+" "+ review1);
                                 Picasso.with(BookingHistory.this).load(profile_img).placeholder(R.drawable.no_avatar).into(profile_image);
 
                             }
@@ -447,7 +462,14 @@ public class BookingHistory extends AppCompatActivity {
                             payment_card.setVisibility(View.VISIBLE);
                             placed_divider3.setBackgroundColor(ContextCompat.getColor(BookingHistory.this, R.color.button1));
 
-                            show_Payment.setText(price);
+                            double d_price1 = Double.valueOf(price);
+                            double d_extraprice1 = Double.valueOf(extra_price);
+                            double total1 = d_price1 + d_extraprice1;
+                            String totalAmount = String.valueOf(total1);
+
+                            show_Payment.setText(totalAmount);
+
+                            //show_Payment.setText(price);
 
                         }else if(work_status.equals("Payment_done")){
 
@@ -469,7 +491,12 @@ public class BookingHistory extends AppCompatActivity {
                             payment_card.setVisibility(View.GONE);
                             placed_divider3.setBackgroundColor(ContextCompat.getColor(BookingHistory.this, R.color.button1));
 
-                            show_Payment.setText(price);
+                            double d_price2 = Double.valueOf(price);
+                            double d_extraprice2 = Double.valueOf(extra_price);
+                            double total2 = d_price2 + d_extraprice2;
+                            String totalAmount = String.valueOf(total);
+
+                            show_Payment.setText(totalAmount);
 
                             view_order_Payment.setBackgroundDrawable(ContextCompat.getDrawable(BookingHistory.this, R.drawable.check1));
 

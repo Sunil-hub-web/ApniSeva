@@ -420,6 +420,14 @@ public class MainActivity extends AppCompatActivity {
                         customerReviewRecycler.setHasFixedSize(true);
                         customerReviewRecycler.setAdapter(customerReviewAdapter);
 
+                       /* final int height=customerReviewRecycler.getChildAt(0).getHeight();
+                        customerReviewRecycler.smoothScrollToPosition(height);
+                        customerReviewRecycler.postDelayed(new Runnable() {
+                            public void run() {
+                                customerReviewRecycler.smoothScrollToPosition(0);
+                            }
+                        },200);*/
+
 
                         homeBanner = new ArrayList<>();
                         JSONArray jsonArray_banner = new JSONArray(banner);

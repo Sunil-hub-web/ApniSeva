@@ -277,7 +277,8 @@ public class UserDetails extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
 
-        finish();
+        Intent intent = new Intent(UserDetails.this,MainActivity.class);
+        startActivity(intent);
     }
 
     public void profileImageUpload(final Bitmap bitmap) {
@@ -432,7 +433,7 @@ public class UserDetails extends AppCompatActivity {
                         String image = jsonObject.getString("image");
 
                         Picasso.with(UserDetails.this).load(image).
-                                 placeholder(R.drawable.profileimage)
+                                 placeholder(R.drawable.no_avatar)
                                 .into(profile_image);
 
                         text_UserName.setText(name);

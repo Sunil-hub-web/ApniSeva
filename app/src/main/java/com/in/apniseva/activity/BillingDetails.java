@@ -49,6 +49,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class BillingDetails extends AppCompatActivity implements PaymentResultListener {
@@ -143,8 +145,8 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
         subtotal = Float.valueOf(str_TotalPrice);
         total = (subtotal / 100) * 5;
         totalAmount = subtotal + total;
-        int_totalamount = String.valueOf(totalAmount);
-
+        NumberFormat formatter = new DecimalFormat("#0.00");
+        int_totalamount = formatter.format(totalAmount);
         btn_payvisit.setText("Pay On Visit"+" "+int_totalamount);
         btn_paynow.setText("Pay Now"+" "+str_TotalPrice);
 
@@ -385,9 +387,9 @@ public class BillingDetails extends AppCompatActivity implements PaymentResultLi
     @Override
     public void onPaymentError(int code, String response) {
 
-        order.clear();
-        sharedPreference.clearDate(BillingDetails.this);
-        services_Id = "";
+        //order.clear();
+        //sharedPreference.clearDate(BillingDetails.this);
+        //services_Id = "";
 
         try {
 

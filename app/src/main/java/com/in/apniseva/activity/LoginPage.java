@@ -250,7 +250,7 @@ public class LoginPage extends AppCompatActivity {
                 } else {
 
                     edit_MobileNumber.setBackgroundTintList(LoginPage.this.getResources().getColorStateList(R.color.Blue));
-                    edit_MobileNumber.setCompoundDrawablesWithIntrinsicBounds(R.drawable.group1102, 0, 0, 0);
+                    edit_MobileNumber.setCompoundDrawablesWithIntrinsicBounds(R.drawable.group1102, 0,0, 0);
                     edit_MobileNumber.setCompoundDrawablePadding(25);
 
                     if (edit_MobileNumber.getText().toString().trim().length() >= 10) {
@@ -282,15 +282,15 @@ public class LoginPage extends AppCompatActivity {
 
                     edit_Password.setBackgroundTintList(LoginPage.this.getResources().getColorStateList(R.color.text));
                     Drawable img = edit_Password.getContext().getResources().getDrawable(R.drawable.password);
-                    Drawable img1 = edit_Password.getContext().getResources().getDrawable(R.drawable.baseline_visibility);
-                    edit_Password.setCompoundDrawablesWithIntrinsicBounds(img, null, null, null);
+                    Drawable img1 = edit_Password.getContext().getResources().getDrawable(R.drawable.baseline_visibility_off);
+                    //edit_Password.setCompoundDrawablesWithIntrinsicBounds(img, null, img1, null);
                     edit_Password.setCompoundDrawablePadding(25);
 
 
                 } else {
 
                     edit_Password.setBackgroundTintList(LoginPage.this.getResources().getColorStateList(R.color.Blue));
-                    edit_Password.setCompoundDrawablesWithIntrinsicBounds(R.drawable.password1, 0, 0, 0);
+                    //edit_Password.setCompoundDrawablesWithIntrinsicBounds(R.drawable.password1, 0,  R.drawable.baseline_visibility_off, 0);
                     edit_Password.setCompoundDrawablePadding(25);
 
                 }
@@ -318,7 +318,7 @@ public class LoginPage extends AppCompatActivity {
                         if (passwordVisiable) {
 
                             //set Drawable Image here
-                            edit_Password.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.baseline_visibility, 0);
+                            edit_Password.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.password, 0, R.drawable.baseline_visibility_off, 0);
                             // for show Password
                             edit_Password.setTransformationMethod(PasswordTransformationMethod.getInstance());
                             passwordVisiable = false;
@@ -326,7 +326,7 @@ public class LoginPage extends AppCompatActivity {
                         } else {
 
                             //set Drawable Image here
-                            edit_Password.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.baseline_visibility_off, 0);
+                            edit_Password.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.password, 0, R.drawable.baseline_visibility, 0);
                             // for show Password
                             edit_Password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                             passwordVisiable = true;

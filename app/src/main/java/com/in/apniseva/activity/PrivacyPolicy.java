@@ -23,7 +23,7 @@ public class PrivacyPolicy extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         String url = "https://apniseva.com/privacypolicies";
-        WebView  view=(WebView) this.findViewById(R.id.webView);
+        WebView view=(WebView) this.findViewById(R.id.webView);
         view.getSettings().setJavaScriptEnabled(true);
         view.loadUrl(url);
 

@@ -29,6 +29,7 @@
         android:usesCleartextTraffic="true"
         android:windowSoftInputMode="stateVisible|adjustResize">
 
+        <activity android:name=".activity.PrivacyPolicy"></activity>
         <activity
             android:name=".activity.ForgotPasswordActivity"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden">
