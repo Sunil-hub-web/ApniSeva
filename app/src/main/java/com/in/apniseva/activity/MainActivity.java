@@ -25,6 +25,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -108,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
     public static FusedLocationProviderClient fusedLocationProviderClient;
     Double latitude, longitude;
     String YourAddress, username, password;
+    ScrollView scrollView;
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -132,6 +134,16 @@ public class MainActivity extends AppCompatActivity {
         //serach = findViewById(R.id.serach);
         text_location = findViewById(R.id.location);
         swipRefresh = findViewById(R.id.swipRefresh);
+        //scrollView = findViewById(R.id.scrollView);
+
+        swipRefresh.setColorScheme(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
+        /*scrollView.fullScroll(View.FOCUS_DOWN);
+        scrollView.setSmoothScrollingEnabled(true);*/
+
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -174,18 +186,26 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onRefresh() {
 
+                new Handler().postDelayed(new Runnable() {
+                    @Override public void run() {
 
-                    if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                        //Write Function To enable gps
-                        locationPermission();
-                        requestLocationPermission();
+                        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                            //Write Function To enable gps
+                            locationPermission();
+                            requestLocationPermission();
 
-                    } else {
-                        //GPS is already On then
-                        getLocation();
+                        } else {
+                            //GPS is already On then
+                            getLocation();
+                        }
+
+                        swipRefresh.setRefreshing(false);
+
                     }
+                }, 4000);
 
-                swipRefresh.setRefreshing(false);
+
+
             }
         });
 
@@ -509,8 +529,22 @@ public class MainActivity extends AppCompatActivity {
                         //set Longitude On Text View
                         longitude = addresses.get(0).getLongitude();
 
+                        String subLocality = addresses.get(0).getSubLocality();
+                        String locality = addresses.get(0).getLocality();
+
+                        if(subLocality.equals("null")){
+
+                            //set address On Text View
+                            text_location.setText(addresses.get(0).getLocality());
+
+                        }else{
+
+                            //set address On Text View
+                            text_location.setText(addresses.get(0).getSubLocality() + "," + addresses.get(0).getLocality());
+                        }
+
                         //set address On Text View
-                        text_location.setText(addresses.get(0).getSubLocality() + "," + addresses.get(0).getLocality());
+                        //text_location.setText(addresses.get(0).getSubLocality() + "," + addresses.get(0).getLocality());
 
 
                     } catch (IOException e) {
@@ -616,5 +650,29 @@ public class MainActivity extends AppCompatActivity {
         //handleForeground Location Updates
         //Toast.makeText(getApplicationContext(), "Start foreground location updates", Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+
+            if (exit) {
+                finish(); // finish activity
+            } else {
+                Toast.makeText(this, "Press Back again to Exit.",
+                        Toast.LENGTH_SHORT).show();
+                exit = true;
+                new Handler().postDelayed(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        // TODO Auto-generated method stub
+                        Intent a = new Intent(Intent.ACTION_MAIN);
+                        a.addCategory(Intent.CATEGORY_HOME);
+                        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(a);
+                    }
+                }, 4 * 1000);
+            }
+        }
 
 }
